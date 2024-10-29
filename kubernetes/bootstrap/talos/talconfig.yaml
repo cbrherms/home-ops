@@ -1,0 +1,144 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
+---
+# renovate: datasource=docker depName=ghcr.io/siderolabs/installer
+talosVersion: v1.8.1
+# renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
+kubernetesVersion: v1.31.2
+
+clusterName: "talos-home-ops"
+endpoint: https://192.168.0.170:6443
+clusterPodNets:
+  - "10.69.0.0/16"
+clusterSvcNets:
+  - "10.96.0.0/16"
+additionalApiServerCertSans: &sans
+  - "192.168.0.170"
+  - 127.0.0.1 # KubePrism
+additionalMachineCertSans: *sans
+
+# Disable built-in Flannel to use Cilium
+cniConfig:
+  name: none
+
+nodes:
+  - hostname: "talos-master-01"
+    ipAddress: "192.168.0.171"
+    installDisk: "/dev/sda"
+    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "4a:4f:2c:38:d5:5a"
+        dhcp: false
+        addresses:
+          - "192.168.0.171/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.0.1"
+        mtu: 1500
+        vip:
+          ip: "192.168.0.170"
+  - hostname: "talos-master-02"
+    ipAddress: "192.168.0.172"
+    installDisk: "/dev/sda"
+    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "c6:a2:70:ab:d4:63"
+        dhcp: false
+        addresses:
+          - "192.168.0.172/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.0.1"
+        mtu: 1500
+        vip:
+          ip: "192.168.0.170"
+  - hostname: "talos-master-03"
+    ipAddress: "192.168.0.173"
+    installDisk: "/dev/sda"
+    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "96:fb:6a:99:0c:13"
+        dhcp: false
+        addresses:
+          - "192.168.0.173/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.0.1"
+        mtu: 1500
+        vip:
+          ip: "192.168.0.170"
+  - hostname: "talos-worker-01"
+    ipAddress: "192.168.0.176"
+    installDisk: "/dev/sda"
+    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "0e:bd:24:5e:3b:b2"
+        dhcp: false
+        addresses:
+          - "192.168.0.176/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.0.1"
+        mtu: 1500
+  - hostname: "talos-worker-02"
+    ipAddress: "192.168.0.177"
+    installDisk: "/dev/sda"
+    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "1e:e5:85:a7:2b:3b"
+        dhcp: false
+        addresses:
+          - "192.168.0.177/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.0.1"
+        mtu: 1500
+  - hostname: "talos-worker-03"
+    ipAddress: "192.168.0.178"
+    installDisk: "/dev/sda"
+    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "1e:e5:85:a7:2b:3b"
+        dhcp: false
+        addresses:
+          - "192.168.0.178/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "192.168.0.1"
+        mtu: 1500
+
+# Global patches
+patches:
+  - # Force nameserver
+    |-
+    machine:
+      network:
+        nameservers:
+          - 192.168.0.1
+  - "@./patches/global/cluster-discovery.yaml"
+  - "@./patches/global/containerd.yaml"
+  - "@./patches/global/disable-search-domain.yaml"
+  - "@./patches/global/hostdns.yaml"
+  - "@./patches/global/kubelet.yaml"
+  - "@./patches/global/openebs-local.yaml"
+  - "@./patches/global/sysctl.yaml"
+
+# Controller patches
+controlPlane:
+  patches:
+    - "@./patches/controller/api-access.yaml"
+    - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/disable-admission-controller.yaml"
+    - "@./patches/controller/etcd.yaml"
+
