@@ -24,6 +24,10 @@ nodes:
   - hostname: "talos-master-01"
     ipAddress: "192.168.0.171"
     installDisk: "/dev/sda"
+    machineDisks:
+      - device: /dev/sdb
+        partitions:
+          - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
     controlPlane: true
     networkInterfaces:
@@ -41,6 +45,10 @@ nodes:
   - hostname: "talos-master-02"
     ipAddress: "192.168.0.172"
     installDisk: "/dev/sda"
+    machineDisks:
+      - device: /dev/sdb
+        partitions:
+          - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
     controlPlane: true
     networkInterfaces:
@@ -58,6 +66,10 @@ nodes:
   - hostname: "talos-master-03"
     ipAddress: "192.168.0.173"
     installDisk: "/dev/sda"
+    machineDisks:
+      - device: /dev/sdb
+        partitions:
+          - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
     controlPlane: true
     networkInterfaces:
@@ -75,6 +87,10 @@ nodes:
   - hostname: "talos-worker-01"
     ipAddress: "192.168.0.176"
     installDisk: "/dev/sda"
+    machineDisks:
+      - device: /dev/sdb
+        partitions:
+          - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
     controlPlane: false
     networkInterfaces:
@@ -90,6 +106,10 @@ nodes:
   - hostname: "talos-worker-02"
     ipAddress: "192.168.0.177"
     installDisk: "/dev/sda"
+    machineDisks:
+      - device: /dev/sdb
+        partitions:
+          - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
     controlPlane: false
     networkInterfaces:
@@ -105,6 +125,10 @@ nodes:
   - hostname: "talos-worker-03"
     ipAddress: "192.168.0.178"
     installDisk: "/dev/sda"
+    machineDisks:
+      - device: /dev/sdb
+        partitions:
+          - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
     controlPlane: false
     networkInterfaces:
@@ -133,6 +157,16 @@ patches:
   - "@./patches/global/kubelet.yaml"
   - "@./patches/global/openebs-local.yaml"
   - "@./patches/global/sysctl.yaml"
+
+  # Mount longhorn drives
+  - |
+    machine:
+      kubelet:
+        extraMounts:
+          - destination: /var/mnt/longhorn
+            type: bind
+            source: /var/mnt/longhorn
+            options: ["bind", "rshared", "rw"]
 
 # Controller patches
 controlPlane:
