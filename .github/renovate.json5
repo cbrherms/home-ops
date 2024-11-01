@@ -6,6 +6,7 @@
     ":disableRateLimiting",
     ":dependencyDashboard",
     ":semanticCommits",
+    ":timezone(Europe/London)",
     ":automergeBranch"
   ],
   "dependencyDashboard": true,
