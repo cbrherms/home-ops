@@ -6,13 +6,13 @@ talosVersion: v1.8.2
 kubernetesVersion: v1.31.2
 
 clusterName: "talos-home-ops"
-endpoint: https://192.168.0.170:6443
+endpoint: https://192.168.0.70:6443
 clusterPodNets:
   - "10.69.0.0/16"
 clusterSvcNets:
   - "10.96.0.0/16"
 additionalApiServerCertSans: &sans
-  - "192.168.0.170"
+  - "192.168.0.70"
   - 127.0.0.1 # KubePrism
 additionalMachineCertSans: *sans
 
@@ -22,7 +22,7 @@ cniConfig:
 
 nodes:
   - hostname: "talos-master-01"
-    ipAddress: "192.168.0.171"
+    ipAddress: "192.168.0.71"
     installDisk: "/dev/sda"
     machineDisks:
       - device: /dev/sdb
@@ -35,15 +35,15 @@ nodes:
           hardwareAddr: "4a:4f:2c:38:d5:5a"
         dhcp: false
         addresses:
-          - "192.168.0.171/24"
+          - "192.168.0.71/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.0.1"
         mtu: 1500
         vip:
-          ip: "192.168.0.170"
+          ip: "192.168.0.70"
   - hostname: "talos-master-02"
-    ipAddress: "192.168.0.172"
+    ipAddress: "192.168.0.72"
     installDisk: "/dev/sda"
     machineDisks:
       - device: /dev/sdb
@@ -56,15 +56,15 @@ nodes:
           hardwareAddr: "c6:a2:70:ab:d4:63"
         dhcp: false
         addresses:
-          - "192.168.0.172/24"
+          - "192.168.0.72/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.0.1"
         mtu: 1500
         vip:
-          ip: "192.168.0.170"
+          ip: "192.168.0.70"
   - hostname: "talos-master-03"
-    ipAddress: "192.168.0.173"
+    ipAddress: "192.168.0.73"
     installDisk: "/dev/sda"
     machineDisks:
       - device: /dev/sdb
@@ -77,15 +77,15 @@ nodes:
           hardwareAddr: "96:fb:6a:99:0c:13"
         dhcp: false
         addresses:
-          - "192.168.0.173/24"
+          - "192.168.0.73/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.0.1"
         mtu: 1500
         vip:
-          ip: "192.168.0.170"
+          ip: "192.168.0.70"
   - hostname: "talos-worker-01"
-    ipAddress: "192.168.0.176"
+    ipAddress: "192.168.0.76"
     installDisk: "/dev/sda"
     machineDisks:
       - device: /dev/sdb
@@ -98,13 +98,13 @@ nodes:
           hardwareAddr: "0e:bd:24:5e:3b:b2"
         dhcp: false
         addresses:
-          - "192.168.0.176/24"
+          - "192.168.0.76/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.0.1"
         mtu: 1500
   - hostname: "talos-worker-02"
-    ipAddress: "192.168.0.177"
+    ipAddress: "192.168.0.77"
     installDisk: "/dev/sda"
     machineDisks:
       - device: /dev/sdb
@@ -117,13 +117,13 @@ nodes:
           hardwareAddr: "1e:e5:85:a7:2b:3b"
         dhcp: false
         addresses:
-          - "192.168.0.177/24"
+          - "192.168.0.77/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.0.1"
         mtu: 1500
   - hostname: "talos-worker-03"
-    ipAddress: "192.168.0.178"
+    ipAddress: "192.168.0.78"
     installDisk: "/dev/sda"
     machineDisks:
       - device: /dev/sdb
@@ -136,7 +136,7 @@ nodes:
           hardwareAddr: "bc:24:11:84:3d:09"
         dhcp: false
         addresses:
-          - "192.168.0.178/24"
+          - "192.168.0.78/24"
         routes:
           - network: 0.0.0.0/0
             gateway: "192.168.0.1"
