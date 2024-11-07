@@ -46,3 +46,11 @@ spec:
       ingressClassName: internal
       host: longhorn.${SECRET_DOMAIN}
       tls: true
+      annotations:
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/description: Kubernetes Storage
+        gethomepage.dev/group: Storage
+        gethomepage.dev/icon: longhorn
+        gethomepage.dev/name: Longhorn
+        gethomepage.dev/href: https://longhorn.${SECRET_DOMAIN}/#/dashboard
+        gethomepage.dev/app: longhorn
