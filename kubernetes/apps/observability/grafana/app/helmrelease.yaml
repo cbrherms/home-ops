@@ -25,7 +25,9 @@ spec:
     keepHistory: false
   dependsOn:
     - name: kube-prometheus-stack
-      namespace: monitoring
+      namespace: observability
+    - name: longhorn
+      namespace: longhorn-system
   values:
     deploymentStrategy:
       type: Recreate
