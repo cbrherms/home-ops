@@ -18,3 +18,5 @@ resources:
   - ./longhorn.yaml
   - ./backube.yaml
   - ./piraeus.yaml
+  - ./kubernetes-dashboard.yaml
+  - ./grafana.yaml
