@@ -68,9 +68,17 @@ data:
       Home:
         style: column
         icon: mdi-home-analytics
+      Git:
+        style: column
+        icon: mdi-github
+      Automation:
+        style: column
+        icon: mdi-home-automation
       Network:
-        style: row
-        columns: 3
+        style: column
+        icon: mdi-vpn
+      Infrastructure:
+        style: column
         icon: mdi-server
       Observability:
         style: column
