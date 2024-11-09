@@ -38,7 +38,7 @@ data:
             widget:
               type: homeassistant
               url: http://192.168.0.43:8123
-              key: "{{HOMEPAGE_VAR_HA_TOKEN}}""
+              key: "{{HOMEPAGE_VAR_HA_TOKEN}}"
     - Infrastructure:
         - TrueNAS:
             href: https://192.168.0.12
