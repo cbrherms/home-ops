@@ -59,6 +59,7 @@ data:
                 username: {{HOMEPAGE_VAR_PFSENSE_USERNAME}}
                 password: {{HOMEPAGE_VAR_PFSENSE_PASSWORD}}
                 wan: igb0
+                version: 2
   settings.yaml: |
     title: Dashboard
     theme: dark
