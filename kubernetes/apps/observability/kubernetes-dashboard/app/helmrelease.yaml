@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -30,16 +31,14 @@ spec:
       - --disable-settings-authorizer
     ingress:
       enabled: true
-      className: internal
+      ingressClassName: internal
       annotations:
         gethomepage.dev/enabled: "true"
         gethomepage.dev/icon: kubernetes-dashboard.png
         gethomepage.dev/name: Kubernetes Dashboard
         gethomepage.dev/group: Observability
-      hosts:
-        - &host "kubernetes.${SECRET_DOMAIN}"
-      tls:
-        - hosts:
-            - *host
+      host:
+        - kubernetes.${SECRET_DOMAIN}
+      tls: true
     metricsScraper:
       enabled: true
