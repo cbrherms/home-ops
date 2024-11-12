@@ -38,8 +38,9 @@ spec:
               PGADMIN_CONFIG_ENABLE_PSQL: "True"
               PGADMIN_DISABLE_POSTFIX: "true"
               PGADMIN_LISTEN_PORT: &port 80
-              PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
-              PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
+            envFrom:
+              - secretRef:
+                  name: pgadmin-secret
             probes:
               liveness: &probes
                 enabled: true
