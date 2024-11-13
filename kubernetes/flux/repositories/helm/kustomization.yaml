@@ -21,3 +21,4 @@ resources:
   - ./kubernetes-dashboard.yaml
   - ./grafana.yaml
   - ./cloudnative-pg.yaml
+  - ./external-secrets.yaml
