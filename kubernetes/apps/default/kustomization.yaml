@@ -5,4 +5,4 @@ resources:
   - ./namespace.yaml
   - ./homepage/ks.yaml
   - ./spoolman/ks.yaml
-  # - ./overseerr/ks.yaml
+  - ./overseerr/ks.yaml
