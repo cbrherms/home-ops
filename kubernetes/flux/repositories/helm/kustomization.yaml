@@ -22,3 +22,4 @@ resources:
   - ./grafana.yaml
   - ./cloudnative-pg.yaml
   - ./external-secrets.yaml
+  - ./node-feature-discovery.yaml
