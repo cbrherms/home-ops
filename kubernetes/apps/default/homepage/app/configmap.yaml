@@ -69,6 +69,10 @@ data:
       Home:
         style: column
         icon: mdi-home-analytics
+      Media Management:
+        style: row
+        columns: 4
+        icon: mdi-movie-cog
       Git:
         style: column
         icon: mdi-github
