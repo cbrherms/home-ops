@@ -6,3 +6,4 @@ resources:
   - ./cloudnative-pg/ks.yaml
   - ./pgadmin/ks.yaml
   - ./moco/ks.yaml
+  - ./phpmyadmin/ks.yaml
