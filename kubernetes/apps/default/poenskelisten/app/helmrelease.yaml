@@ -32,6 +32,8 @@ spec:
             image:
               repository: ghcr.io/cbrherms/mysql-init
               tag: 11.4.4-r1
+            env:
+              DISABLE_SSL_VERIFICATION: "true"
             envFrom: &envFrom
               - secretRef:
                   name: poenskelisten-secret
