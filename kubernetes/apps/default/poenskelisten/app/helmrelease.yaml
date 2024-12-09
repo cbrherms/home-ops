@@ -30,8 +30,8 @@ spec:
         initContainers:
           init-db:
             image:
-              repository: ghcr.io/h3mul/mysql-init
-              tag: 10.11.10-r0
+              repository: ghcr.io/cbrherms/mysql-init
+              tag: 11.4.4-r1
             envFrom: &envFrom
               - secretRef:
                   name: poenskelisten-secret
