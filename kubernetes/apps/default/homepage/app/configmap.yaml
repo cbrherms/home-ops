@@ -86,7 +86,8 @@ data:
         style: column
         icon: mdi-server
       Observability:
-        style: column
+        style: row
+        columns: 4
         icon: mdi-chart-line
   widgets.yaml: |
     - resources:
