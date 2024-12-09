@@ -8,4 +8,4 @@ resources:
   - ./overseerr/ks.yaml
   - ./sonarr/ks.yaml
   - ./radarr/ks.yaml
-  - ./poenskelisten/ks.yaml
+#  - ./poenskelisten/ks.yaml
