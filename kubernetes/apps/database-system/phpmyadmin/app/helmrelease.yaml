@@ -60,10 +60,7 @@ spec:
           gethomepage.dev/description: MySQL Database Manager
           gethomepage.dev/group: Management
           gethomepage.dev/icon: si-phpmyadmin
-          gethomepage.dev/pod-selector: >-
-            app in (
-              phpmyadmin
-            )
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=phpmyadmin
         hosts:
           - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
