@@ -83,6 +83,7 @@ spec:
   #       value: minioa
   #     bucketConfig:
   #       bucketName: moco
+  #       region: us-east-1
   #       endpointURL: https://minio.lan.${SECRET_DOMAIN}:9000
   #       usePathStyle: true
   #     workVolume:
