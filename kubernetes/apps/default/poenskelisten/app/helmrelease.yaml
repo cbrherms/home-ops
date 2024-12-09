@@ -1,0 +1,112 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: poenskelisten
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      poenskelisten:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/h3mul/mysql-init
+              tag: 10.11.10-r0
+            envFrom: &envFrom
+              - secretRef:
+                  name: poenskelisten-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/aunefyren/poenskelisten
+              tag: v2.0.9
+            env:
+              timezone: Europe/London
+              port: 80
+              dbip: moco-moco-cluster-v0-primary.database-system.svc.cluster.local
+              dport: 3306
+              generateinvite: true
+              disablesmtp: false
+              smpthost: smtp.sendgrid.net
+              smtpport: 25
+              smtpusername: apikey
+            envFrom: *envFrom
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+            resources:
+              requests:
+                cpu: 25m
+                memory: 500M
+#            securityContext:
+#              allowPrivilegeEscalation: false
+#              readOnlyRootFilesystem: true
+#              capabilities: { drop: ["ALL"] }
+#    defaultPodOptions:
+#      securityContext:
+#        runAsNonRoot: true
+#        runAsUser: 568
+#        runAsGroup: 568
+#        fsGroup: 568
+#        fsGroupChangePolicy: OnRootMismatch
+#        supplementalGroups: [10000]
+#        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: poenskelisten
+        ports:
+          http:
+            port: 80
+    ingress:
+      app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Other
+          gethomepage.dev/name: Poenskelisten
+          gethomepage.dev/icon: mdi-gift-outline
+          gethomepage.dev/description: Wishlist Management
+        className: internal
+        hosts:
+          - host: &host wishlists.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        existingClaim: poenskelisten
+        globalMounts:
+          - path: /app/files/
