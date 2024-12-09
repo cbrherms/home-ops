@@ -36,7 +36,7 @@ spec:
               tag: 5.2.1-apache
             env:
               PMA_ARBITRARY: 1
-              PMA_HOST: moco-cluster-v0.database-system.svc.cluster.local
+              PMA_HOST: moco-moco-cluster-v0-primary.database-system.svc.cluster.local
               PMA_PORT: 3306
             resources:
               requests:
