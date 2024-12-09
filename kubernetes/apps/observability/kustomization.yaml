@@ -7,3 +7,4 @@ resources:
   - ./grafana/ks.yaml
   - ./gatus/ks.yaml
   - ./kromgo/ks.yaml
+  - ./headlamp/ks.yaml
