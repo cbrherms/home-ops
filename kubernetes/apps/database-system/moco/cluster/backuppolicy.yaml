@@ -12,7 +12,7 @@ spec:
 
     bucketConfig:
       bucketName: "moco"
-      endpointURL: https://minio.lan.${SECRET_DOMAIN}:9002
+      endpointURL: https://minio.lan.${SECRET_DOMAIN}:9000
       usePathStyle: true
     envFrom:
     - secretRef:
