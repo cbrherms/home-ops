@@ -44,12 +44,11 @@ spec:
               tag: v2.0.9
             env:
               timezone: Europe/London
-              port: 80
               dbip: moco-moco-cluster-v0-primary.database-system.svc.cluster.local
-              dport: 3306
+              dbport: 3306
               generateinvite: true
               disablesmtp: false
-              smpthost: smtp.sendgrid.net
+              smtphost: smtp.sendgrid.net
               smtpport: 25
               smtpusername: apikey
             envFrom: *envFrom
@@ -85,7 +84,7 @@ spec:
         controller: poenskelisten
         ports:
           http:
-            port: 80
+            port: 8080
     ingress:
       app:
         annotations:
