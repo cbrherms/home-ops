@@ -49,8 +49,7 @@ spec:
         hosts:
           - &host "kubernetes.${SECRET_DOMAIN}"
         tls:
-          - hosts:
-              - *host
+          enabled: true
       extras:
         serviceMonitor:
           enabled: true
