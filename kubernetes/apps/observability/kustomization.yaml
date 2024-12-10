@@ -10,3 +10,4 @@ resources:
   - ./headlamp/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   - ./loki/ks.yaml
+  - ./promtail/ks.yaml
