@@ -111,7 +111,6 @@ spec:
                 requests:
                   storage: 25Gi
     prometheus-node-exporter:
-      fullnameOverride: node-exporter
       prometheus:
         monitor:
           enabled: true
