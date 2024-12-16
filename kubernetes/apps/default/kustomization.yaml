@@ -10,4 +10,4 @@ resources:
   - ./radarr/ks.yaml
   - ./poenskelisten/ks.yaml
   - ./prowlarr/ks.yaml
-  - ./bazarr/ks.yaml
+#  - ./bazarr/ks.yaml
