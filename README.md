@@ -29,7 +29,7 @@ This repository is based on the [Flux Cluster Template](https://github.com/onedr
 
 ## Cluster Overview
 
-The cluster nodes are virtualised and running in my Proxmox environment, split across virtual hosts. They are running [Talos](https://www.talos.dev/), a modern, secure, and immutable operating system for Kubernetes. Talos is designed to provide a minimal and secure environment for running Kubernetes, with no SSH access and all configuration managed via API.
+The cluster nodes are virtualised and running in my Proxmox environment, split across multiple VM hosts to allow redundancy. They are running [Talos](https://www.talos.dev/), a modern, secure, and immutable operating system for Kubernetes. Talos is designed to provide a minimal and secure environment for running Kubernetes, with no SSH access and all configuration managed via API.
 
 The cluster includes:
 
@@ -74,7 +74,7 @@ While most of my infrastructure and workloads are self-hosted I do rely upon the
 | [Microsoft 365](https://microsoft.com/)     | Email Hosting (Don't judge me...)                              | ~£70/yr        |
 | [Pushover](https://pushover.net/)           | Kubernetes Alerts and application notifications                | $5             |
 | [Healthchecks.io](https://healthchecks.io/) | Heartbeat Monitoring for AlertManager and Internet             | Free           |
-|                                             |                                                                | Total: ~$10/mo |
+|                                             |                                                                | Total: ~£11/mo |
 ---
 
 ## 🌐 DNS
@@ -85,7 +85,7 @@ I am currently using [ExternalDNS](https://github.com/kubernetes-sigs/external-d
 
 ### Home DNS
 
-For my Home DNS I am using Pi-Hole (for now). Along with Pi-Hole I am utilizing the CoreDNS plugin, [k8s_gateway](https://github.com/ori-edge/k8s_gateway) to be able to automatically resolve internal dns using split DNS and dnsmasq.
+For my Home DNS I am using unbound built in to my pfSense router. Along with unbound I am utilizing the CoreDNS plugin, [k8s_gateway](https://github.com/ori-edge/k8s_gateway) to be able to automatically resolve internal dns using split DNS and dnsmasq. All DNS lookups involving my cluster's domain name are forwarded directly to the k8s gateway IP using an override within unbound.
 
 ---
 
