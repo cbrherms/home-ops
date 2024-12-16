@@ -14,5 +14,5 @@ if [[ -n "$section" ]]; then
         --data-urlencode "path=$(dirname "$1")" \
         --data-urlencode "X-Plex-Token=${PLEX_TOKEN}" \
         --no-progress-meter \
-            "http://plex.default.svc.cluster.local:32400/library/sections/${section}/refresh"
+            "http://192.168.0.10:32400/library/sections/${section}/refresh"
 fi
