@@ -138,6 +138,12 @@ spec:
         path: /mnt/user/data/Media
         globalMounts:
           - path: /media
+      backup:
+        type: nfs
+        server: truenas.lan.${SECRET_DOMAIN}
+        path: /mnt/BACKUPS/kubernetes/bazarr
+        globalMounts:
+          - path: /config/backup
       scripts:
         type: configMap
         name: bazarr-scripts
