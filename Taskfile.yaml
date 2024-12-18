@@ -15,6 +15,7 @@ vars:
 
 env:
   KUBECONFIG: '{{.ROOT_DIR}}/kubeconfig'
+  MINIJINJA_CONFIG_FILE: '{{.ROOT_DIR}}/.minijinja.toml'
   PYTHONDONTWRITEBYTECODE: '1'
   SOPS_AGE_KEY_FILE: '{{.ROOT_DIR}}/age.key'
   VIRTUAL_ENV: '{{.ROOT_DIR}}/.venv'
@@ -24,6 +25,7 @@ includes:
   kubernetes: .taskfiles/kubernetes
   op: .taskfiles/onepassword
   talos: .taskfiles/talos
+  volsync: .taskfiles/volsync
   workstation: .taskfiles/workstation
   user:
     taskfile: .taskfiles/User
