@@ -28,6 +28,8 @@ spec:
   values:
     controllers:
       bazarr:
+        labels:
+          nfsMount: "true"
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
