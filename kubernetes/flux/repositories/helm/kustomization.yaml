@@ -25,3 +25,4 @@ resources:
   - ./node-feature-discovery.yaml
   - ./moco.yaml
   - ./headlamp.yaml
+  - ./actions-runner-controller.yaml
