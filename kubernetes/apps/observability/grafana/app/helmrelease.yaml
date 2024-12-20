@@ -152,12 +152,12 @@ spec:
           datasource:
             - { name: DS_PROMETHEUS, value: Prometheus }
             - { name: VAR_REPLICATIONDESTNAME, value: .*-dst }
-        longhorn:
-          # renovate: depName="Longhorn"
-          gnetId: 16888
-          revision: 9
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
+#        longhorn:
+#          # renovate: depName="Longhorn"
+#          gnetId: 16888
+#          revision: 9
+#          datasource:
+#            - { name: DS_PROMETHEUS, value: Prometheus }
       flux:
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2-monitoring-example/main/monitoring/configs/dashboards/cluster.json
