@@ -141,6 +141,12 @@ spec:
         node-feature-discovery:
           url: https://raw.githubusercontent.com/kubernetes-sigs/node-feature-discovery/master/examples/grafana-dashboard.json
           datasource: Prometheus
+        proxmox-ve:
+          # renovate: depName="Proxmox via Prometheus"
+          gnetId: 10347
+          revision: 5
+          datasource:
+            - { name: DS_PROMETHEUS, value: Prometheus }
       data:
         external-secrets:
           url: https://raw.githubusercontent.com/external-secrets/external-secrets/main/docs/snippets/dashboard.json
