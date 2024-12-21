@@ -53,6 +53,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/default
+          - name: infrastructure
+            orgId: 1
+            folder: Infrastructure
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/infrastructure
           - name: data
             orgId: 1
             folder: Data
@@ -141,6 +149,7 @@ spec:
         node-feature-discovery:
           url: https://raw.githubusercontent.com/kubernetes-sigs/node-feature-discovery/master/examples/grafana-dashboard.json
           datasource: Prometheus
+      infrastructure:
         proxmox-ve:
           # renovate: depName="Proxmox via Prometheus"
           gnetId: 10347
