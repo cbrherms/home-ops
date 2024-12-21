@@ -13,3 +13,4 @@ resources:
   - ./loki/ks.yaml
   - ./promtail/ks.yaml
   - ./blackbox-exporter/ks.yaml
+  - ./pve-exporter/ks.yaml

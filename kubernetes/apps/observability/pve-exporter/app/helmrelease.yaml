@@ -1,0 +1,48 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pve-exporter
+  namespace: observability
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: prometheus-pve-exporter
+      version: "1.2.5"
+      sourceRef:
+        kind: HelmRepository
+        name: christianhuth
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: prompve/prometheus-pve-exporter
+      tag: 3.4.7
+    env:
+      pveAuthType: password
+      pveUser: prometheus@pve
+      pveExistingSecretName: pve-exporter-secret
+      pveVerifySsl: false
+    serviceMonitor:
+      enabled: true
+      namespace: observability
+      interval: 30s
+      metricRelabelings:
+        - sourceLabels: [__address__]
+          targetLabel: __param_target
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: __address__
+          replacement: pve-exporter-prometheus-pve-exporter:80
+      pveTargets:
+        - "pve-05.lan.${SECRET_DOMAIN}."
+        - "pve-06.lan.${SECRET_DOMAIN}."
+        - "pve-ha.lan.${SECRET_DOMAIN}."
+        - "pve-R330-01.lan.${SECRET_DOMAIN}."

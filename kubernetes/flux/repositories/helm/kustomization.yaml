@@ -26,3 +26,4 @@ resources:
   - ./moco.yaml
   - ./headlamp.yaml
   - ./actions-runner-controller.yaml
+  - ./christianhuth.yaml
