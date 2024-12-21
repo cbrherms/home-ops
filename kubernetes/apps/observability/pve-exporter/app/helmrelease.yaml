@@ -3,46 +3,47 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: pve-exporter
-  namespace: observability
+  name: prometheus-pve-exporter
 spec:
   interval: 30m
   chart:
     spec:
-      chart: prometheus-pve-exporter
-      version: "1.2.5"
+      chart: app-template
+      version: 3.1.0
       sourceRef:
         kind: HelmRepository
-        name: christianhuth
+        name: bjw-s
         namespace: flux-system
   install:
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    image:
-      repository: prompve/prometheus-pve-exporter
-      tag: 3.4.7
-    env:
-      pveAuthType: password
-      pveUser: prometheus@pve
-      pveExistingSecretName: pve-exporter-secret
-      pveVerifySsl: false
-    serviceMonitor:
-      enabled: true
-      namespace: observability
-      interval: 30s
-      metricRelabelings:
-        - sourceLabels: [__address__]
-          targetLabel: __param_target
-        - sourceLabels: [__param_target]
-          targetLabel: instance
-        - targetLabel: __address__
-          replacement: pve-exporter-prometheus-pve-exporter:80
-      pveTargets:
-        - "pve-05.lan.${SECRET_DOMAIN}."
-        - "pve-06.lan.${SECRET_DOMAIN}."
-        - "pve-ha.lan.${SECRET_DOMAIN}."
-        - "pve-R330-01.lan.${SECRET_DOMAIN}."
+    controllers:
+      prometheus-pve-exporter:
+        containers:
+          app:
+            image:
+              repository: prompve/prometheus-pve-exporter
+              tag: 3.4.7@sha256:75e8eaf7a1b00494ac60cbc6ee7abaa7b9c46ea6d08f35af985c177300bb2f53
+            envFrom:
+              - secretRef:
+                  name: pve-exporter-secret
+            env:
+              PVE_VERIFY_SSL: false
+              PVE_USER: "prometheus@pve"
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+    service:
+      app:
+        controller: prometheus-pve-exporter
+        ports:
+          http:
+            port: 9221

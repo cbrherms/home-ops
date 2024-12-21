@@ -1,0 +1,27 @@
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: prometheus-pve-exporter
+  namespace: obvervability
+  labels:
+    scrape: prometheus
+spec:
+  staticConfigs:
+    - targets:
+        - "pve-05.lan.${SECRET_DOMAIN}."
+        - "pve-06.lan.${SECRET_DOMAIN}."
+        - "pve-ha.lan.${SECRET_DOMAIN}."
+        - "pve-R330-01.lan.${SECRET_DOMAIN}."
+  metricsPath: /pve
+  params:
+    module: ["default"]
+    cluster: ["1"]
+    node: ["1"]
+  relabelings:
+    - sourceLabels: [__address__]
+      targetLabel: __param_target
+    - sourceLabels: [__param_target]
+      targetLabel: instance
+    - targetLabel: __address__
+      replacement: prometheus-pve-exporter:9221  # PVE exporter.
