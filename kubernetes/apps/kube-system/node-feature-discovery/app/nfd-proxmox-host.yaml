@@ -12,13 +12,22 @@ spec:
       labels:
         name: nfd-proxmox-host
     spec:
+      initContainers:
+        - name: copy-script
+          image: ghcr.io/onedr0p/kubanetics@sha256:ee207e744afe4b398c5a53542ce4905b8b1a1a3003f9549d25e2bbbc58a9f8d8
+          command: ["sh", "-c", "cp /config/proxmox-host.sh /scripts && chmod +x /scripts/proxmox-host.sh"]
+          volumeMounts:
+            - name: config-scripts
+              mountPath: /config
+            - name: scripts-tmp
+              mountPath: /scripts
       containers:
         - name: proxmox-host-sidecar
           image: ghcr.io/onedr0p/kubanetics@sha256:ee207e744afe4b398c5a53542ce4905b8b1a1a3003f9549d25e2bbbc58a9f8d8
           command: ["/bin/sh", "-c"]
           args:
-            - chmod +x /etc/custom-scripts/proxmox-host.sh && while true; do
-                /etc/custom-scripts/proxmox-host.sh;
+            - while true; do
+                /scripts/proxmox-host.sh;
                 sleep 300;
               done
           env:
@@ -27,16 +36,17 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
           volumeMounts:
-            - name: custom-scripts
-              mountPath: /etc/custom-scripts
-              readOnly: false
+            - name: scripts-tmp
+              mountPath: /scripts
             - name: features-d
               mountPath: /etc/kubernetes/node-feature-discovery/features.d
               readOnly: false
       volumes:
-        - name: custom-scripts
+        - name: config-scripts
           configMap:
             name: nfd-proxmox-host-script
+        - name: scripts-tmp
+          emptyDir: {}
         - name: features-d
           hostPath:
             path: /etc/kubernetes/node-feature-discovery/features.d
