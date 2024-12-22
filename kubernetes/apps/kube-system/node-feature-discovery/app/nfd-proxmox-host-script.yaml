@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nfd-proxmox-host-script
+  namespace: kube-system
+data:
+  proxmox-host.sh: |
+    #!/bin/bash
+
+    PROMETHEUS_URL="http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/query"
+    QUERY='pve_guest_info{name=~"talos-master-0[1-3]|talos-worker-0[1-3]"}'
+
+    response=$(curl -s -G --data-urlencode "query=$QUERY" $PROMETHEUS_URL)
+    node_name=$(hostname)
+    host=$(echo $response | jq -r ".data.result[] | select(.metric.name==\"$node_name\") | .metric.node")
+
+    if [[ -n $host ]]; then
+        echo "feature.node.kubernetes.io/proxmox-host=$host" > /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host
+        mv /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host /etc/kubernetes/node-feature-discovery/features.d/proxmox-host
+    else
+        echo "Error: Unable to determine Proxmox host for node $node_name" >&2
+        exit 1
+    fi

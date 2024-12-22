@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nfd-proxmox-host
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: nfd-proxmox-host
+  template:
+    metadata:
+      labels:
+        name: nfd-proxmox-host
+    spec:
+      containers:
+        - name: proxmox-host-sidecar
+          image: busybox
+          command: ["/bin/sh", "-c"]
+          args:
+            - while true; do
+                /etc/custom-scripts/proxmox-host.sh;
+                sleep 300;
+              done
+          volumeMounts:
+            - name: custom-scripts
+              mountPath: /etc/custom-scripts
+              readOnly: true
+            - name: features-d
+              mountPath: /etc/kubernetes/node-feature-discovery/features.d
+              readOnly: false
+      volumes:
+        - name: custom-scripts
+          configMap:
+            name: nfd-proxmox-host-script
+        - name: features-d
+          hostPath:
+            path: /etc/kubernetes/node-feature-discovery/features.d
+            type: DirectoryOrCreate
