@@ -14,12 +14,19 @@ data:
     response=$(curl -s -G --data-urlencode "query=$QUERY" $PROMETHEUS_URL)
     node_name=$${NODE_NAME}
     echo "node_name is $${node_name}"
-    host=$(echo $response | jq -r ".data.result[] | select(.metric.name==\"$node_name\") | .metric.node" | head -n 1)
 
-    if [[ -n $host ]]; then
-        echo "feature.node.kubernetes.io/proxmox-host=$host" > /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host
-        mv /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host /etc/kubernetes/node-feature-discovery/features.d/proxmox-host
+    host=$(echo "$response" | jq -r ".data.result[] | select(.metric.name==\"$node_name\") | .metric.node" | head -n 1)
+
+    if [[ -n "$host" ]]; then
+
+      echo "feature.node.kubernetes.io/proxmox-host=$host" \
+        > /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host
+      echo "topology.kubernetes.io/zone=$host" \
+        >> /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host
+
+      mv /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host \
+         /etc/kubernetes/node-feature-discovery/features.d/proxmox-host
     else
-        echo "Error: Unable to determine Proxmox host for node $node_name" >&2
-        exit 1
+      echo "Error: Unable to determine Proxmox host for node $node_name" >&2
+      exit 1
     fi
