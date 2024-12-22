@@ -12,6 +12,13 @@ spec:
       labels:
         name: nfd-proxmox-host
     spec:
+      initContainers:
+        - name: init-permissions
+          image: busybox
+          command: ["sh", "-c", "chmod +x /etc/custom-scripts/proxmox-host.sh"]
+          volumeMounts:
+            - name: custom-scripts
+              mountPath: /etc/custom-script
       containers:
         - name: proxmox-host-sidecar
           image: busybox
