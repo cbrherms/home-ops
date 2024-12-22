@@ -12,8 +12,8 @@ data:
     QUERY='pve_guest_info{name=~"talos-master-0[1-3]|talos-worker-0[1-3]"}'
 
     response=$(curl -s -G --data-urlencode "query=$QUERY" $PROMETHEUS_URL)
-    node_name=$(hostname)
-    host=$(echo $response | jq -r ".data.result[] | select(.metric.name==\"$node_name\") | .metric.node")
+    node_name=${NODE_NAME}
+    host=$(echo $response | jq -r ".data.result[] | select(.metric.name==\"$node_name\") | .metric.node" | head -n 1)
 
     if [[ -n $host ]]; then
         echo "feature.node.kubernetes.io/proxmox-host=$host" > /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host

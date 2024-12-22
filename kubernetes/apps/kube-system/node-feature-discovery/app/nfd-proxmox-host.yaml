@@ -12,26 +12,24 @@ spec:
       labels:
         name: nfd-proxmox-host
     spec:
-      initContainers:
-        - name: init-permissions
-          image: busybox
-          command: ["sh", "-c", "chmod +x /etc/custom-scripts/proxmox-host.sh"]
-          volumeMounts:
-            - name: custom-scripts
-              mountPath: /etc/custom-script
       containers:
         - name: proxmox-host-sidecar
-          image: busybox
+          image: ghcr.io/onedr0p/kubanetics@sha256:ee207e744afe4b398c5a53542ce4905b8b1a1a3003f9549d25e2bbbc58a9f8d8
           command: ["/bin/sh", "-c"]
           args:
-            - while true; do
+            - chmod +x /etc/custom-scripts/proxmox-host.sh && while true; do
                 /etc/custom-scripts/proxmox-host.sh;
                 sleep 300;
               done
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           volumeMounts:
             - name: custom-scripts
               mountPath: /etc/custom-scripts
-              readOnly: true
+              readOnly: false
             - name: features-d
               mountPath: /etc/kubernetes/node-feature-discovery/features.d
               readOnly: false
