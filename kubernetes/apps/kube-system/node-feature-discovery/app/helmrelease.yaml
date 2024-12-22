@@ -31,5 +31,6 @@ spec:
       config:
         core:
           labelSources: ["pci", "system", "usb", "local"]
+          extraLabelNs: "topology.kubernetes.io"
     prometheus:
       enable: true
