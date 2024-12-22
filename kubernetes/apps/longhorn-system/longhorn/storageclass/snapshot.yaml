@@ -10,7 +10,7 @@ parameters:
   replicaAutoBalance: best-effort
   staleReplicaTimeout: "30"
 allowVolumeExpansion: true
-volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
 metadata:
   name: longhorn-snapshot
 ---
@@ -25,6 +25,6 @@ parameters:
   replicaAutoBalance: best-effort
   staleReplicaTimeout: "30"
 allowVolumeExpansion: true
-volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate
 metadata:
   name: longhorn-cache
