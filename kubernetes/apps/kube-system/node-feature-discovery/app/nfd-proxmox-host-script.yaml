@@ -21,8 +21,6 @@ data:
 
       echo "feature.node.kubernetes.io/proxmox-host=$host" \
         > /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host
-      echo "topology.kubernetes.io/zone=$host" \
-        >> /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host
 
       mv /etc/kubernetes/node-feature-discovery/features.d/.proxmox-host \
          /etc/kubernetes/node-feature-discovery/features.d/proxmox-host
