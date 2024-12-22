@@ -13,6 +13,7 @@ data:
 
     response=$(curl -s -G --data-urlencode "query=$QUERY" $PROMETHEUS_URL)
     node_name=\${NODE_NAME}
+    echo "node_name is ${node_name}"
     host=$(echo $response | jq -r ".data.result[] | select(.metric.name==\"$node_name\") | .metric.node" | head -n 1)
 
     if [[ -n $host ]]; then
