@@ -5,6 +5,7 @@ kind: ScrapeConfig
 metadata:
   name: &name minio
 spec:
+  scheme: HTTPS
   metricsPath: /minio/v2/metrics/cluster
   relabelings:
     - action: replace
