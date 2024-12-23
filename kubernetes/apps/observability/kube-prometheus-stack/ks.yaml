@@ -31,16 +31,18 @@ metadata:
   name: &app kube-prometheus-stack-addons
   namespace: flux-system
 spec:
+  targetNamespace: observability
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: kube-prometheus-stack
-  interval: 30m
   path: ./kubernetes/apps/observability/kube-prometheus-stack/addons
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+  wait: false
+  interval: 30m
+  retryInterval: 1m
   timeout: 5m
-  wait: false # no flux ks dependents
