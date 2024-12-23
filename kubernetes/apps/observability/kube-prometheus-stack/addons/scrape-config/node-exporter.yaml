@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name node-exporter
+spec:
+  metricsPath: /metrics
+  relabelings:
+    - action: replace
+      replacement: *name
+      targetLabel: job
+  staticConfigs:
+    - targets:
+        - "192.168.0.43:9100"
+        - "truenas.lan.{$SECRET_DOMAIN}:9100"
