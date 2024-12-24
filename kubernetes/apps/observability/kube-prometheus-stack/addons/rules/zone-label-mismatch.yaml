@@ -30,4 +30,4 @@ spec:
             severity: critical
           annotations:
             summary: "Zone Label Mismatch Detected"
-            description: "Node {{ $labels.node }} has mismatched 'feature.node.kubernetes.io/proxmox-host' and 'topology.kubernetes.io/zone' labels."
+            description: "Node {{ $labels.node }} has mismatched 'proxmox-host' and 'zone' labels."
