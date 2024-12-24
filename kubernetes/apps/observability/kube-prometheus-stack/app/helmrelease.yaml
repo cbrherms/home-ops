@@ -126,6 +126,7 @@ spec:
         - "deployments=[*]"
         - "persistentvolumeclaims=[*]"
         - "pods=[*]"
+        - "nodes=[*]"
       prometheus:
         monitor:
           enabled: true
