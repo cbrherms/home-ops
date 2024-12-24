@@ -1,0 +1,33 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/prometheusrule_v1.json
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: zone-label-mismatch
+spec:
+  groups:
+    - name: zone-label-mismatch
+      rules:
+        - alert: ZoneLabelMismatch
+          expr: |
+            count by (node) (
+              kube_node_labels{label_feature_node_kubernetes_io_proxmox_host!=""}
+              UNLESS
+              (
+                label_replace(
+                  kube_node_labels{label_topology_kubernetes_io_zone!=""},
+                  "label_feature_node_kubernetes_io_proxmox_host",
+                  "$1",
+                  "label_topology_kubernetes_io_zone",
+                  "(.*)"
+                )
+                * on (node, label_feature_node_kubernetes_io_proxmox_host) group_left()
+                kube_node_labels{label_feature_node_kubernetes_io_proxmox_host!=""}
+              )
+            ) > 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Zone Label Mismatch Detected"
+            description: "Node {{ $labels.node }} has mismatched 'feature.node.kubernetes.io/proxmox-host' and 'topology.kubernetes.io/zone' labels."
