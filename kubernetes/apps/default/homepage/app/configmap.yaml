@@ -43,7 +43,7 @@ data:
         - TrueNAS:
             href: https://192.168.0.12
             icon: truenas.png
-            description: NAS
+            description: Backup NAS
             widget:
               type: truenas
               url: https://192.168.0.12
@@ -60,6 +60,34 @@ data:
                 password: {{HOMEPAGE_VAR_PFSENSE_PASSWORD}}
                 wan: igb0
                 version: 2
+        - Unraid:
+            icon: unraid.png
+            description: Media NAS
+            href: http://unraid.lan.${SECRET_DOMAIN}
+            widget:
+              type: customapi
+              url: http://unraid.lan.${SECRET_DOMAIN}:24940
+              method: GET # this doesn't matter
+              mappings:
+                - field:
+                    array_total: free
+                  label: array free
+                  format: number
+                  suffix: GiB
+                - field:
+                    array_total: free_percent
+                  label: percent
+                  format: percent
+                - field:
+                    network_total: rx_MiBs
+                  label: rx
+                  format: float
+                  suffix: MiB/s
+                - field:
+                    network_total: tx_MiBs
+                  label: tx
+                  format: float
+                  suffix: MiB/s
   settings.yaml: |
     title: Dashboard
     theme: dark
