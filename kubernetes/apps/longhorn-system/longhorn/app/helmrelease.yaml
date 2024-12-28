@@ -38,6 +38,10 @@ spec:
       guaranteedEngineManagerCPU: 20
       guaranteedReplicaManagerCPU: 20
       orphanAutoDeletion: true
+      replicaNodeLevelSoftAntiAffinity: true
+      replicaZoneLevelSoftAntiAffinity: true
+      defaultDataLocality: best-effort
+      replicaAutoBalance: best-effort
       concurrentAutomaticEngineUpgradePerNodeLimit: 3
       defaultLonghornStaticStorageClass: longhorn
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
