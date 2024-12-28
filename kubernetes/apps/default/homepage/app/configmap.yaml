@@ -40,26 +40,6 @@ data:
               url: http://192.168.0.43:8123
               key: "{{HOMEPAGE_VAR_HA_TOKEN}}"
     - Infrastructure:
-        - TrueNAS:
-            href: https://192.168.0.12
-            icon: truenas.png
-            description: Backup NAS
-            widget:
-              type: truenas
-              url: https://192.168.0.12
-              key: "{{HOMEPAGE_VAR_TRUENAS_API_KEY}}"
-        - pfSense:
-            href: https://192.168.0.1
-            icon: pfsense.png
-            description: pfSense
-            siteMonitor: https://192.168.0.1
-            widget:
-                type: pfsense
-                url: https://192.168.0.1
-                username: {{HOMEPAGE_VAR_PFSENSE_USERNAME}}
-                password: {{HOMEPAGE_VAR_PFSENSE_PASSWORD}}
-                wan: igb0
-                version: 2
         - Unraid:
             icon: unraid.png
             description: Media NAS
@@ -88,6 +68,26 @@ data:
                   label: tx
                   format: float
                   suffix: MiB/s
+        - TrueNAS:
+            href: https://192.168.0.12
+            icon: truenas.png
+            description: Backup NAS
+            widget:
+              type: truenas
+              url: https://192.168.0.12
+              key: "{{HOMEPAGE_VAR_TRUENAS_API_KEY}}"
+        - pfSense:
+            href: https://192.168.0.1
+            icon: pfsense.png
+            description: pfSense
+            siteMonitor: https://192.168.0.1
+            widget:
+                type: pfsense
+                url: https://192.168.0.1
+                username: {{HOMEPAGE_VAR_PFSENSE_USERNAME}}
+                password: {{HOMEPAGE_VAR_PFSENSE_PASSWORD}}
+                wan: igb0
+                version: 2
   settings.yaml: |
     title: Dashboard
     theme: dark
