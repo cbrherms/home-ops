@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/fallenbagel/jellyseerr
-              tag: develop@sha256:3fb9e6409c9a4d54630c72cc46c2f4eda6e66ca1753a093c734c7c7cd40c9a09
+              tag: develop@sha256:72e08315f03953c086e40570749e49d873ae1e095803ffa2789de65adcbed0de
             env:
               DB_TYPE: postgres
               LOG_LEVEL: "info"
