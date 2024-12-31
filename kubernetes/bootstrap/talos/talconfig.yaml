@@ -25,7 +25,7 @@ nodes:
     ipAddress: "192.168.0.71"
     installDisk: "/dev/sda"
     machineDisks:
-      - device: /dev/sdb
+      - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
@@ -46,7 +46,7 @@ nodes:
     ipAddress: "192.168.0.72"
     installDisk: "/dev/sda"
     machineDisks:
-      - device: /dev/sdb
+      - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
@@ -67,7 +67,7 @@ nodes:
     ipAddress: "192.168.0.73"
     installDisk: "/dev/sda"
     machineDisks:
-      - device: /dev/sdb
+      - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
@@ -88,7 +88,7 @@ nodes:
     ipAddress: "192.168.0.76"
     installDisk: "/dev/sda"
     machineDisks:
-      - device: /dev/sdb
+      - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
@@ -107,7 +107,7 @@ nodes:
     ipAddress: "192.168.0.77"
     installDisk: "/dev/sda"
     machineDisks:
-      - device: /dev/sdb
+      - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
@@ -126,7 +126,7 @@ nodes:
     ipAddress: "192.168.0.78"
     installDisk: "/dev/sda"
     machineDisks:
-      - device: /dev/sdb
+      - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
     talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
