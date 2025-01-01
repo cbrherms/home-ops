@@ -27,3 +27,4 @@ resources:
   - ./headlamp.yaml
   - ./actions-runner-controller.yaml
   - ./christianhuth.yaml
+  - ./authentik.yaml
