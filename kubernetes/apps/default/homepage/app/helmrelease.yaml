@@ -45,7 +45,7 @@ spec:
                 cpu: 500m
                 memory: 1097Mi
               limits:
-                memory: 1097Mi
+                memory: 2G
     service:
       main:
         controller: homepage
