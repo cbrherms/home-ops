@@ -52,8 +52,9 @@ data:
                 - field:
                     array_total: free
                   label: array free
-                  format: number
-                  suffix: GiB
+                  format: float
+                  scale: 0.001073741824
+                  suffix: TB
                 - field:
                     array_total: free_percent
                   label: percent
