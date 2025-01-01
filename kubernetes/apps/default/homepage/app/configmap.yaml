@@ -101,6 +101,10 @@ data:
         style: row
         columns: 4
         icon: mdi-movie-cog
+      Infrastructure:
+        style: row
+        columns: 4
+        icon: mdi-server
       Git:
         style: column
         icon: mdi-github
@@ -110,9 +114,6 @@ data:
       Network:
         style: column
         icon: mdi-vpn
-      Infrastructure:
-        style: column
-        icon: mdi-server
       Observability:
         style: row
         columns: 4
