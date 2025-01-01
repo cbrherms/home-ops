@@ -109,12 +109,12 @@ Note: 4 nodes not best practice, currently supported by quorum devices until HA 
 
 | Name            | Device       | CPU      | Cores  | RAM  | OS Disk  | Data Disk   | OS    | Purpose           |
 |-----------------|--------------|----------|--------|------|----------|-------------|-------|-------------------|
-| talos-master-01 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 500GB NVME  | Talos | k8s control-plane |
-| talos-master-02 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 500GB NVME  | Talos | k8s control-plane |
-| talos-master-03 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 500GB NVME  | Talos | k8s control-plane |
-| talos-worker-01 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 500GB NVME  | Talos | k8s worker        |
-| talos-worker-02 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 500GB NVME  | Talos | k8s worker        |
-| talos-worker-03 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 500GB NVME  | Talos | k8s worker        |
+| talos-master-01 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 1TB NVME  | Talos | k8s control-plane |
+| talos-master-02 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 1TB NVME  | Talos | k8s control-plane |
+| talos-master-03 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 1TB NVME  | Talos | k8s control-plane |
+| talos-worker-01 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 1TB NVME  | Talos | k8s worker        |
+| talos-worker-02 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 1TB NVME  | Talos | k8s worker        |
+| talos-worker-03 | Proxmox VM   | Virtual  | 6 vCPU | 16GB | 64GB SSD | 1TB NVME  | Talos | k8s worker        |
 
 Total CPU: 36 threads
 Total RAM: 96GB
