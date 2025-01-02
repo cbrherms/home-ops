@@ -27,6 +27,7 @@ spec:
     keepHistory: false
   values:
     controller:
+      replicaCount: 2
       volumeSnapshotClasses:
         - name: longhorn-snapclass
           annotations:
