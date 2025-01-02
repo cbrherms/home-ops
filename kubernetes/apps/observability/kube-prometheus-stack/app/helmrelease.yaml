@@ -109,14 +109,14 @@ spec:
         enableFeatures:
           - memory-snapshot-on-shutdown
         retention: 14d
-        retentionSize: 15GB
+        retentionSize: 50GB
         storageSpec:
           volumeClaimTemplate:
             spec:
               storageClassName: longhorn
               resources:
                 requests:
-                  storage: 25Gi
+                  storage: 50Gi
     prometheus-node-exporter:
       prometheus:
         monitor:
