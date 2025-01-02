@@ -67,6 +67,9 @@ spec:
       metrics:
         serviceMonitor:
           enabled: true
+      autoscaling:
+        enabled: true
+        minReplicas: 2
       ingress:
         enabled: true
         ingressClassName: external
@@ -84,6 +87,10 @@ spec:
         hosts:
           - auth.${SECRET_DOMAIN}
         https: false
+    worker:
+      autoscaling:
+        enabled: true
+        minReplicas: 2
     geoip:
       enabled: false
       existingSecret:
