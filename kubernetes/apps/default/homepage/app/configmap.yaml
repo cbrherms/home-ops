@@ -31,6 +31,14 @@ data:
               accountid: "{{HOMEPAGE_VAR_CLOUDFLARED_ACCOUNTID}}"
               tunnelid: "{{HOMEPAGE_VAR_CLOUDFLARED_TUNNELID}}"
               key: "{{HOMEPAGE_VAR_CLOUDFLARED_API_TOKEN}}"
+        - Zabbix:
+            href: https://zabbix.lan.${SECRET_DOMAIN}
+            icon: zabbix.png
+            description: Zabbix Monitoring
+            widget:
+              type: zabbix
+              url: https://zabbix.lan.${SECRET_DOMAIN}
+              key: "{{HOMEPAGE_VAR_ZABBIX_API_TOKEN}}"
     - Automation:
         - Home Assistant:
             href: http://192.168.0.43:8123
