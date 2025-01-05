@@ -28,3 +28,4 @@ resources:
   - ./actions-runner-controller.yaml
   - ./christianhuth.yaml
   - ./authentik.yaml
+  - ./intel.yaml
