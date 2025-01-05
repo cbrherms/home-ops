@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 ---
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.9.1
+talosVersion: v1.8.4
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.32.0
+kubernetesVersion: v1.31.4
 
 clusterName: "talos-home-ops"
 endpoint: https://192.168.0.70:6443
@@ -28,7 +28,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -49,7 +49,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -70,7 +70,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -91,7 +91,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -110,7 +110,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -129,7 +129,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b
+    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
