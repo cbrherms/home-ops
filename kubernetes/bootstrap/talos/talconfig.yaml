@@ -28,7 +28,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
+    talosImageURL: factory.talos.dev/installer/bc5b0083a6413a67c8b158cd6efd42ca710c62ebed568c35d42ef64891f94fc5
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -49,7 +49,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
+    talosImageURL: factory.talos.dev/installer/bc5b0083a6413a67c8b158cd6efd42ca710c62ebed568c35d42ef64891f94fc5
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -70,7 +70,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
+    talosImageURL: factory.talos.dev/installer/bc5b0083a6413a67c8b158cd6efd42ca710c62ebed568c35d42ef64891f94fc5
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -91,7 +91,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
+    talosImageURL: factory.talos.dev/installer/bc5b0083a6413a67c8b158cd6efd42ca710c62ebed568c35d42ef64891f94fc5
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -110,7 +110,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
+    talosImageURL: factory.talos.dev/installer/bc5b0083a6413a67c8b158cd6efd42ca710c62ebed568c35d42ef64891f94fc5
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -129,7 +129,7 @@ nodes:
       - device: /dev/nvme0n1
         partitions:
           - mountpoint: /var/mnt/longhorn
-    talosImageURL: factory.talos.dev/installer/1e12012785257a944d8a1a4f9c1c1db504430d2de7149fbdf85cdaa799e9b623
+    talosImageURL: factory.talos.dev/installer/bc5b0083a6413a67c8b158cd6efd42ca710c62ebed568c35d42ef64891f94fc5
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
