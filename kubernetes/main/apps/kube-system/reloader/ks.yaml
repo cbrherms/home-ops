@@ -10,7 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/main/apps/kube-system/reloader/app
-  prune: false # temporary for migration
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

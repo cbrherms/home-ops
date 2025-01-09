@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 30m
   path: ./kubernetes/main/apps
-  prune: false # temporary for migration
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

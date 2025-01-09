@@ -8,7 +8,7 @@ metadata:
 spec:
   targetNamespace: database-system
   path: ./kubernetes/main/apps/database-system/phpmyadmin/app
-  prune: false # temporary for migration
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

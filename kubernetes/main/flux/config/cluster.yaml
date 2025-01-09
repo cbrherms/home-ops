@@ -23,7 +23,7 @@ metadata:
 spec:
   interval: 30m
   path: ./kubernetes/main/flux
-  prune: false # temporary for migration
+  prune: true
   wait: false
   sourceRef:
     kind: GitRepository

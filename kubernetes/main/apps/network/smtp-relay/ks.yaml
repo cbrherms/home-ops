@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
   path: ./kubernetes/main/apps/network/smtp-relay/app
-  prune: false # temporary for migration
+  prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
