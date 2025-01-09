@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: longhorn
   path: ./kubernetes/apps/database-system/cloudnative-pg/app
-  prune: true
+  prune: false # temporary for migration
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -36,7 +36,7 @@ spec:
   dependsOn:
     - name: cloudnative-pg
   path: ./kubernetes/apps/database-system/cloudnative-pg/cluster
-  prune: true
+  prune: false # temporary for migration
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

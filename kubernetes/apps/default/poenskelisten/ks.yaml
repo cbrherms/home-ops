@@ -14,7 +14,7 @@ spec:
     - name: moco-cluster
     - name: volsync
   path: ./kubernetes/apps/default/poenskelisten/app
-  prune: true
+  prune: false # temporary for migration
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

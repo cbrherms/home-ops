@@ -13,7 +13,7 @@ spec:
     - name: cert-manager
     - name: metrics-server
   path: ./kubernetes/apps/observability/kubernetes-dashboard/app
-  prune: true
+  prune: false # temporary for migration
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
