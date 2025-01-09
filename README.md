@@ -43,7 +43,7 @@ The cluster includes:
 
 [Flux](https://fluxcd.io) watches my cluster in the Kubernetes folder and makes the changes to my cluster based on the state within my Git repository.
 
-The way Flux works for my cluster is by recursively searching the `kubernetes/apps` folder until it finds the top most `kustomization.yaml` per directory and then apply all resources listed within. The `kustomization.yaml` file will contain a namespace and one or more `ks.yaml` Flux kustomizations. Within those Flux kustomzations will be `HelmReleases` which dictate the resources that are applied for the specific application.
+The way Flux works for my cluster is by recursively searching the `kubernetes/*/apps` folder until it finds the top most `kustomization.yaml` per directory and then apply all resources listed within. The `kustomization.yaml` file will contain a namespace and one or more `ks.yaml` Flux kustomizations. Within those Flux kustomzations will be `HelmReleases` which dictate the resources that are applied for the specific application.
 
 [Renovate](https://github.com/renovatebot/renovate) watches everything within the repository looking for updates. Once an update is found it creates a Pull Request in Github, allowing me to review changes before merging them. Once these changes are merged, Flux picks them up and applies the changes.
 
