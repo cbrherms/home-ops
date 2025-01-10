@@ -8,7 +8,7 @@ on:
     paths: ["kubernetes/**"]
 
 env:
-  KUBERNETES_DIR: ./kubernetes
+  MAIN_CLUSTER_KUBERNETES_DIR: ./kubernetes/main
 
 jobs:
   kubeconform:
@@ -24,6 +24,6 @@ jobs:
       - name: Setup Workflow Tools
         run: brew install fluxcd/tap/flux kubeconform kustomize
 
-      - name: Run kubeconform
+      - name: Run kubeconform for main cluster
         shell: bash
-        run: bash ./scripts/kubeconform.sh ${{ env.KUBERNETES_DIR }}
+        run: bash ./scripts/kubeconform.sh ${{ env.MAIN_CLUSTER_KUBERNETES_DIR }}
