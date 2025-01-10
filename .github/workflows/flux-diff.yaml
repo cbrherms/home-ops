@@ -4,8 +4,11 @@ name: "Flux Diff"
 
 on:
   pull_request:
-    branches: ["main"]
-    paths: ["kubernetes/**"]
+    branches:
+      - main
+    paths:
+      - kubernetes/main/apps/**
+      - kubernetes/main/flux/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -20,10 +23,13 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        paths: ["kubernetes"]
-        resources: ["helmrelease", "kustomization"]
+        resources:
+          - helmrelease
+          - kustomization
+      max-parallel: 4
+      fail-fast: false
     steps:
-      - name: Checkout
+      - name: Checkout Pull Request Branch
         uses: actions/checkout@v4
         with:
           path: pull
@@ -35,13 +41,13 @@ jobs:
           path: default
 
       - name: Diff Resources
-        uses: docker://ghcr.io/allenporter/flux-local:v6.1.1
+        uses: docker://ghcr.io/allenporter/flux-local:v7.0.0
         with:
           args: >-
             diff ${{ matrix.resources }}
             --unified 6
-            --path /github/workspace/pull/${{ matrix.paths }}/flux
-            --path-orig /github/workspace/default/${{ matrix.paths }}/flux
+            --path /github/workspace/pull/kubernetes/main/flux/config
+            --path-orig /github/workspace/default/kubernetes/main/flux/config
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
@@ -51,18 +57,37 @@ jobs:
       - name: Generate Diff
         id: diff
         run: |
-          cat diff.patch
-          echo "diff<<EOF" >> $GITHUB_OUTPUT
-          cat diff.patch >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          cat diff.patch;
+          {
+              echo 'diff<<EOF'
+              cat diff.patch
+              echo EOF
+          } >> "$GITHUB_OUTPUT";
+          {
+              echo "### Diff"
+              echo '```diff'
+              cat diff.patch
+              echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add comment
         uses: mshick/add-pr-comment@v2
         with:
-          message-id: "${{ github.event.pull_request.number }}/${{ matrix.paths }}/${{ matrix.resources }}"
+          message-id: "${{ github.event.pull_request.number }}/main/${{ matrix.resources }}"
           message-failure: Diff was not successful
           message: |
             ```diff
             ${{ steps.diff.outputs.diff }}
+
+  flux-diff-success:
+    needs:
+      - flux-diff
+    if: ${{ always() }}
+    name: Flux Diff successful
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check matrix status
+        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        run: exit 1
             ```
