@@ -53,10 +53,14 @@ This Git repostories contains the following directories under [Kubernetes](https
 
 ```sh
 📁 kubernetes
-├── 📁 apps           # applications
-├── 📁 bootstrap      # bootstrap procedures
-├── 📁 flux           # core flux configuration
-└── 📁 templates      # re-useable components
+├── 📁 main            # main cluster
+│   ├── 📁 apps        # applications
+│   ├── 📁 bootstrap   # bootstrap procedures
+│   ├── 📁 flux        # core flux configuration
+├── 📁 shared          # shared cluster resources
+│   ├── 📁 repos       # shared repos
+│   ├── 📁 settings    # shared settings and secrets
+│   ├── 📁 templates   # re-usable compponents
 ```
 
 ---
@@ -123,7 +127,7 @@ Total RAM: 96GB
 
 | Name   | Device           | CPU           | OS Disk    | Data Disk  | RAM   | OS           | Purpose        |
 |--------|------------------|---------------|------------|------------|-------|--------------|----------------|
-| Unrad  | Custom rackmount | Ryzen 5 5600X | 32GB USB   | 1TB NVMe   | 64GB  | Unraid       | NAS/NFS/Backup |
+| Unraid  | Custom 3U | Ryzen 5 5600X | 32GB USB   | 1TB NVMe   | 64GB  | Unraid       | NAS/NFS/Backup |
 | DAS    | NetApp DS4246    | -             | -          | 132TB      | -     | -            | DAS w/ Parity  |
 
 ---
