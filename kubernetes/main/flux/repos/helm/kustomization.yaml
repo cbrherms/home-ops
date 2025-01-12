@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - ./longhorn.yaml
+  - ./cloudnative-pg.yaml
+  - ./node-feature-discovery.yaml
+  - ./moco.yaml
+  - ./actions-runner-controller.yaml
+  - ./authentik.yaml
