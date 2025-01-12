@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: longhorn
   path: ./kubernetes/main/apps/database-system/moco/app
-  prune: true
+  prune: false # revert to true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -36,7 +36,7 @@ spec:
   dependsOn:
     - name: moco
   path: ./kubernetes/main/apps/database-system/moco/cluster
-  prune: true
+  prune: false # revert to true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
