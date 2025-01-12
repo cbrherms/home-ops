@@ -6,6 +6,9 @@ set: [pipefail]
 shopt: [globstar]
 
 vars:
+  CLUSTER: '{{.CLUSTER | default "main"}}'
+  CLUSTER_DIR: '{{.ROOT_DIR}}/kubernetes/{{.CLUSTER}}'
+  TALOSCONFIG: '{{.CLUSTER_DIR}}/bootstrap/talos/clusterconfig/talosconfig'
   BOOTSTRAP_DIR: '{{.ROOT_DIR}}/bootstrap'
   KUBERNETES_DIR: '{{.ROOT_DIR}}/kubernetes'
   SCRIPTS_DIR: '{{.ROOT_DIR}}/scripts'
@@ -14,7 +17,7 @@ vars:
   SOPS_CONFIG_FILE: '{{.ROOT_DIR}}/.sops.yaml'
 
 env:
-  KUBECONFIG: '{{.ROOT_DIR}}/kubeconfig'
+  KUBECONFIG: '{{.CLUSTER_DIR}}/kubeconfig'
   MINIJINJA_CONFIG_FILE: '{{.ROOT_DIR}}/.minijinja.toml'
   PYTHONDONTWRITEBYTECODE: '1'
   SOPS_AGE_KEY_FILE: '{{.ROOT_DIR}}/age.key'
@@ -53,3 +56,9 @@ tasks:
       - task: bootstrap:template
       - task: bootstrap:secrets
       - task: kubernetes:kubeconform
+
+  # Ref: https://github.com/go-task/task/issues/608
+  noop:
+    internal: true
+    silent: true
+    cmd: noop() { :; }
