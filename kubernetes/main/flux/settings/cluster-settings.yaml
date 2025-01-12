@@ -6,4 +6,8 @@ metadata:
   namespace: flux-system
 data:
   ## Main
-  CLUSTER_NAME: main
+  CLUSTER: main
+  PVC_VOLSYNC_STORAGECLASS: longhorn
+  VOLSYNC_SNAPSHOTCLASS: longhorn-snapclass
+  VOLSYNC_CACHE_SNAPSHOTCLASS: longhorn-cache
+  VOLSYNC_STORAGECLASS: longhorn-snapshot
