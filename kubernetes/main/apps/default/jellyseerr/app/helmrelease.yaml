@@ -41,8 +41,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/fallenbagel/jellyseerr
-              tag: develop@sha256:48b0de57fb08274fe831114ec9b11a8730b41e9bc90ff6c8eeeb22229583e582
+              repository: docker.io/fallenbagel/jellyseerr
+              tag: 2.2.3@sha256:fa1adeee9e106a050d775ff77bcb823dae0185badd92fa88586618f6649d640c
             env:
               DB_TYPE: postgres
               LOG_LEVEL: "info"
