@@ -47,6 +47,15 @@ data:
               type: homeassistant
               url: http://192.168.0.43:8123
               key: "{{HOMEPAGE_VAR_HA_TOKEN}}"
+    - Media Management:
+        - Overseerr:
+            href: https://plexrequests.${SECRET_DOMAIN_ALT}
+            icon: overseerr.png
+            description: Media Request Management (Old)
+            widget:
+              type: overseerr
+              url: https://plexrequests.${SECRET_DOMAIN_ALT}
+              key: "{{HOMEPAGE_VAR_OVERSEERR_API_KEY}}"
     - Infrastructure:
         - Unraid:
             icon: unraid.png
