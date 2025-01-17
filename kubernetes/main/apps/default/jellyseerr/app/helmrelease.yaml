@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: docker.io/fallenbagel/jellyseerr
-              tag: 2.2.3@sha256:fa1adeee9e106a050d775ff77bcb823dae0185badd92fa88586618f6649d640c
+              tag: 2.3.0@sha256:df53a7b06006e9da117a7072a55cf5d8b2071a6272f6bb329d8ca62b6f5c08a6
             env:
               DB_TYPE: postgres
               LOG_LEVEL: "info"
