@@ -80,6 +80,14 @@ spec:
         className: internal
         annotations:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: Web Site Change Detection, Restock monitoring and notifications.
+          gethomepage.dev/group: Automation
+          gethomepage.dev/icon: changedetection-io.png
+          gethomepage.dev/name: ChangeDetection-io
+          gethomepage.dev/widget.type: changedetectionio
+          gethomepage.dev/widget.url: http://changedetection.default.svc:5000
+          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_CHANGEDETECTION_TOKEN}}` }}"
         hosts:
           - host: changedetection.${SECRET_DOMAIN}
             paths:
