@@ -83,7 +83,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/description: Web Site Change Detection, Restock monitoring and notifications.
           gethomepage.dev/group: Automation
-          gethomepage.dev/icon: changedetection-io.png
+          gethomepage.dev/icon: changedetection.png
           gethomepage.dev/name: ChangeDetection-io
           gethomepage.dev/widget.type: changedetectionio
           gethomepage.dev/widget.url: http://changedetection.default.svc:5000
