@@ -13,3 +13,4 @@ resources:
   - ./bazarr/ks.yaml
   - ./jellyseerr/ks.yaml
   - ./tautulli/ks.yaml
+  - ./changedetection/ks.yaml
