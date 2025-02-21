@@ -64,9 +64,13 @@ data:
                   scale: 0.001073741824
                   suffix: TB
                 - field:
-                    array_total: free_percent
-                  label: percent
-                  format: percent
+                    pools:
+                      0:
+                        total: free
+                  label: tank free
+                  format: float
+                  scale: 0.001073741824
+                  suffix: TB
                 - field:
                     network_total: rx_MiBs
                   label: rx
