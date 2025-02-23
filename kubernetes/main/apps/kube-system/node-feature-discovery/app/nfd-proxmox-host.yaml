@@ -14,7 +14,7 @@ spec:
     spec:
       initContainers:
         - name: copy-script
-          image: ghcr.io/onedr0p/kubanetics@sha256:e4a45a5ad0f538554dd8220542f27ec7a9306390f5de68cdebfb02b7a8311fc5
+          image: ghcr.io/onedr0p/kubanetics@sha256:b67cb37d80d2c700212d8361202e2099f86fb318afb77b1933a1b3d225e63af8
           command: ["sh", "-c", "cp /config/proxmox-host.sh /scripts && chmod +x /scripts/proxmox-host.sh"]
           volumeMounts:
             - name: config-scripts
@@ -23,7 +23,7 @@ spec:
               mountPath: /scripts
       containers:
         - name: proxmox-host-sidecar
-          image: ghcr.io/onedr0p/kubanetics@sha256:e4a45a5ad0f538554dd8220542f27ec7a9306390f5de68cdebfb02b7a8311fc5
+          image: ghcr.io/onedr0p/kubanetics@sha256:b67cb37d80d2c700212d8361202e2099f86fb318afb77b1933a1b3d225e63af8
           command: ["/bin/sh", "-c"]
           args:
             - while true; do
