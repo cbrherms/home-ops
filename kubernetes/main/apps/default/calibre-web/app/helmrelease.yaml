@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: crocodilestick/calibre-web-automated
-              tag: V2.1.2
+              tag: V3.0.4
             env:
               CACHE_DIR: /cache
               TZ: "${TIMEZONE}"
@@ -46,7 +46,7 @@ spec:
               DOCKER_MODS: >-
                 {{- $items := list
                   "// renovate: lsio-docker-mod"
-                  "ghcr.io/linuxserver/mods:universal-calibre-v7.16.0"
+                  "ghcr.io/linuxserver/mods:universal-calibre-v7.26.0"
                 -}}
                 {{- $filtered := list -}}
                 {{- range $item := $items -}}
