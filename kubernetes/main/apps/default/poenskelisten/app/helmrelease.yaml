@@ -41,7 +41,7 @@ spec:
           app:
             image:
               repository: ghcr.io/aunefyren/poenskelisten
-              tag: v2.1.1
+              tag: v2.1.4
             env:
               timezone: Europe/London
               dbip: moco-moco-cluster-v0-primary.database-system.svc.cluster.local
