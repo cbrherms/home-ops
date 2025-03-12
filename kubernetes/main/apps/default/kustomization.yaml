@@ -18,3 +18,4 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./qbittorrent/ks.yaml
   - ./calibre-web/ks.yaml
+  - ./autobrr/ks.yaml
