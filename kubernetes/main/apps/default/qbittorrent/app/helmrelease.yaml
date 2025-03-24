@@ -37,8 +37,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/qbittorrent
-              tag: 5.0.4@sha256:07292535a40bf019b00e94e04b0ff75449edb9c60aea3615324562115842369f
+              repository: ghcr.io/home-operations/qbittorrent
+              tag: 5.0.4@sha256:ffb02dfa7f017a55efc2718853689216ef2a85746b95981e575e29ef34234c75
             env:
               TZ: ${TIMEZONE}
               QBT_WEBUI_PORT: &port 80
