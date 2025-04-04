@@ -28,6 +28,7 @@ spec:
         type: cronjob
         cronjob:
           schedule: "0 12 * * *"
+          timeZone: ${TIMEZONE}
           backoffLimit: 0
           concurrencyPolicy: Forbid
           failedJobsHistory: 1
@@ -38,7 +39,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cbrherms/mam-scripts
-              tag: 2025.4.4@sha256:9612970bb34be675077ea952c0396412db274b3072e05cd43f45ddbd51d5e383
+              tag: 2025.4.4@sha256:461dd49b60a0a8ea7b9859a1997f1b6559bc87f268f2427294ba512e655e2375
             env:
               TZ: ${TIMEZONE}
               SCRIPT_NAME: "autodl.sh"
@@ -56,6 +57,7 @@ spec:
         type: cronjob
         cronjob:
           schedule: "0 22 * * *"
+          timeZone: ${TIMEZONE}
           backoffLimit: 0
           concurrencyPolicy: Forbid
           failedJobsHistory: 1
@@ -66,7 +68,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cbrherms/mam-scripts
-              tag: 2025.4.4@sha256:9612970bb34be675077ea952c0396412db274b3072e05cd43f45ddbd51d5e383
+              tag: 2025.4.4@sha256:461dd49b60a0a8ea7b9859a1997f1b6559bc87f268f2427294ba512e655e2375
             env:
               TZ: ${TIMEZONE}
               SCRIPT_NAME: "autospend.sh"
@@ -80,6 +82,7 @@ spec:
         type: cronjob
         cronjob:
           schedule: "*/15 * * * *"
+          timeZone: ${TIMEZONE}
           backoffLimit: 0
           concurrencyPolicy: Forbid
           failedJobsHistory: 1
@@ -90,7 +93,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cbrherms/mam-scripts
-              tag: 2025.4.4@sha256:9612970bb34be675077ea952c0396412db274b3072e05cd43f45ddbd51d5e383
+              tag: 2025.4.4@sha256:461dd49b60a0a8ea7b9859a1997f1b6559bc87f268f2427294ba512e655e2375
             env:
               TZ: ${TIMEZONE}
               SCRIPT_NAME: "seedbox-api.sh"
