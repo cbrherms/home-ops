@@ -1,0 +1,125 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app mam-scripts
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      autodl:
+        type: cronjob
+        cronjob:
+          schedule: "0 12 * * *"
+          backoffLimit: 0
+          concurrencyPolicy: Forbid
+          failedJobsHistory: 1
+          successfulJobsHistory: 4
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/cbrherms/mam-scripts
+              tag: 2025.4.4@sha256:ff875ca40d63dccc68aba72c7745d4c61d3dea073914117cc9295b924aab5bbc
+            env:
+              TZ: ${TIMEZONE}
+              SCRIPT_NAME: "autodl.sh"
+              MAX_DOWNLOADS: 45
+              SET_ASIDE: 10
+              DEBUG: 0
+              TORRENT_DIR: "/media/downloads/watched/myanonamouse/junk"
+              MAM_ID:
+                valueFrom:
+                  secretKeyRef:
+                    name: mam-scripts-secret
+                    key: MAM_ID_AUTODL
+
+      autospend:
+        type: cronjob
+        cronjob:
+          schedule: "0 22 * * *"
+          backoffLimit: 0
+          concurrencyPolicy: Forbid
+          failedJobsHistory: 1
+          successfulJobsHistory: 4
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/cbrherms/mam-scripts
+              tag: 2025.4.4@sha256:ff875ca40d63dccc68aba72c7745d4c61d3dea073914117cc9295b924aab5bbc
+            env:
+              TZ: ${TIMEZONE}
+              SCRIPT_NAME: "autospend.sh"
+              MAM_ID:
+                valueFrom:
+                  secretKeyRef:
+                    name: mam-scripts-secret
+                    key: MAM_ID_AUTOSPEND
+
+      seedbox:
+        type: cronjob
+        cronjob:
+          schedule: "*/15 * * * *"
+          backoffLimit: 0
+          concurrencyPolicy: Forbid
+          failedJobsHistory: 1
+          successfulJobsHistory: 4
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/cbrherms/mam-scripts
+              tag: 2025.4.4@sha256:ff875ca40d63dccc68aba72c7745d4c61d3dea073914117cc9295b924aab5bbc
+            env:
+              TZ: ${TIMEZONE}
+              SCRIPT_NAME: "seedbox-api.sh"
+              IPSOURCE: "ifconfigco"
+              MAM_ID:
+                valueFrom:
+                  secretKeyRef:
+                    name: mam-scripts-secret
+                    key: MAM_ID_SEEDBOX
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    persistence:
+      config:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /config
+      media:
+        type: nfs
+        server: unraid.lan.${SECRET_DOMAIN}
+        path: /mnt/user/data/Media
+        globalMounts:
+          - path: /media
+      tmp:
+        type: emptyDir
