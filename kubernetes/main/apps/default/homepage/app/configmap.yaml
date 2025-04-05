@@ -11,12 +11,12 @@ data:
         - kubesearch:
             - icon: kubernetes-dashboard.png
               href: https://kubesearch.dev
-        - flux-cluster-template:
-            - icon: github.png
-              href: https://github.com/onedr0p/flux-cluster-template
         - GitHub Repo (home-ops):
             - icon: github.png
               href: https://github.com/cbrherms/home-ops
+        - GitHub Repo (containers):
+            - icon: github.png
+              href: https://github.com/cbrherms/containers
   docker.yaml: ""
   kubernetes.yaml: |
     mode: cluster
