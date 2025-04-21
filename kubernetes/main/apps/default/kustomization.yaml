@@ -5,7 +5,6 @@ resources:
   - ./namespace.yaml
   - ./homepage/ks.yaml
   - ./spoolman/ks.yaml
-#  - ./overseerr/ks.yaml
   - ./sonarr/ks.yaml
   - ./radarr/ks.yaml
   - ./poenskelisten/ks.yaml
