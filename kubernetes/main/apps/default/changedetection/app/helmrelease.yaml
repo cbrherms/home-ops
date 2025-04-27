@@ -44,7 +44,7 @@ spec:
             #     memory: 250Mi
           browser:
             image:
-              pullPolicy: Always
+              pullPolicy: IfNotPresent
               repository: docker.io/browserless/chrome
               tag: "1-chrome-stable"
             env:
