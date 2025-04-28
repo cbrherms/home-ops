@@ -39,7 +39,6 @@
         "ghcr.io/fallenbagel/jellyseerr",
         "ghcr.io/home-operations/bazarr",
         "ghcr.io/home-operations/prowlarr",
-        "ghcr.io/home-operations/qbittorrent",
         "ghcr.io/home-operations/radarr",
         "ghcr.io/home-operations/sabnzbd",
         "ghcr.io/home-operations/sonarr",
