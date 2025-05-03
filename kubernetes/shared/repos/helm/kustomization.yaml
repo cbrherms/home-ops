@@ -21,6 +21,5 @@ resources:
   - ./kubernetes-dashboard.yaml
   - ./grafana.yaml
   - ./external-secrets.yaml
-  - ./headlamp.yaml
   - ./christianhuth.yaml
   - ./intel.yaml
