@@ -13,3 +13,4 @@ resources:
   - ./promtail/ks.yaml
   - ./blackbox-exporter/ks.yaml
   - ./pve-exporter/ks.yaml
+  - ./drl-exporter/ks.yaml

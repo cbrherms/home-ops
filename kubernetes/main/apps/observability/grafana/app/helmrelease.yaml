@@ -110,6 +110,14 @@ spec:
             allowUiUpdates: true
             options:
               path: /var/lib/grafana/dashboards/system
+          - name: container-registry
+            orgId: 1
+            folder: "Container Registry"
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/container_registry
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -265,6 +273,10 @@ spec:
           datasource:
             - name: DS_PROMETHEUS
               value: Prometheus
+      container-registry:
+        drl-exporter:
+          url: https://raw.githubusercontent.com/kha7iq/drl-exporter/master/deploy/docker-compose/example-data/dashboards/docker-hub-rate-limits-dashboard.json
+          datasource: Prometheus
     sidecar:
       dashboards:
         enabled: true
