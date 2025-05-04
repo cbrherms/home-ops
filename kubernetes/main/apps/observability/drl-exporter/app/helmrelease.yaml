@@ -25,7 +25,8 @@ spec:
   values:
     fullnameOverride: *app
     image:
-      repository: ghcr.io/kha7iq/drl-exporter
+      name: kha7iq/drl-exporter
+      repository: ghcr.io
       tag: v2.1.3
       pullPolicy: IfNotPresent
     serviceMonitor:
