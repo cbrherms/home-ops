@@ -45,8 +45,8 @@ spec:
               tag: v1.4.7
             env:
               TZ: "${TIMEZONE}"
-              LC_ALL: "en_GB.UTF-8"
-              LANG: "en_GB.UTF-8"
+              LC_ALL: "en_GB"
+              LANG: "en_GB"
               LUBELOGGER_ALLOWED_FILE_EXTENSIONS: "*"
             envFrom: *envFrom
             resources:
