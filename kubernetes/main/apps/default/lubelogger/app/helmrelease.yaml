@@ -48,6 +48,7 @@ spec:
               LC_ALL: "en_GB"
               LANG: "en_GB"
               LUBELOGGER_ALLOWED_FILE_EXTENSIONS: "*"
+              LUBELOGGER_DOMAIN: "lubelogger.${SECRET_DOMAIN}"
             envFrom: *envFrom
             resources:
               requests:
