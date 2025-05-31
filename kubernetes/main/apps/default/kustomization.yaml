@@ -19,3 +19,4 @@ resources:
   - ./calibre-web/ks.yaml
   - ./autobrr/ks.yaml
   - ./lubelogger/ks.yaml
+  - ./plex/ks.yaml
