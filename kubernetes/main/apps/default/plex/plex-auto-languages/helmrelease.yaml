@@ -38,6 +38,7 @@ spec:
             env:
               TZ: "${TIMEZONE}"
               PLEX_URL: "http://192.168.0.10:32400"
+              UPDATE_STRATEGY: "all"
             envFrom:
               - secretRef:
                   name: plex-secret
@@ -47,3 +48,11 @@ spec:
                 memory: 300M
               limits:
                 memory: 1Gi
+    persistence:
+      config:
+        enabled: true
+        type: emptyDir
+      local:
+        type: emptyDir
+        globalMounts:
+          - path: /.local
