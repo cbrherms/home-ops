@@ -101,7 +101,7 @@ collections:
   Avant Garde:
     template: { name: Anime, mal_id: 5, poster: 240144}
   Award Winning:
-    template: { name: Anime, mal_id: 46, poster: }
+    template: { name: Anime, mal_id: 46, poster: 400254}
   Boys Love:
     template: { name: Anime, mal_id: 28, poster: 240145}
   Comedy:
@@ -213,29 +213,29 @@ collections:
   Samurai:
     template: { name: Anime, mal_id: 21, poster: 213669}
   School:
-    template: { name: Anime, mal_id: 23, poster: }
+    template: { name: Anime, mal_id: 23, poster: 433022}
   Showbiz:
-    template: { name: Anime, mal_id: 75, poster: }
+    template: { name: Anime, mal_id: 75, poster: 391688}
   Space:
     template: { name: Anime, mal_id: 29, poster: 213661}
   Strategy Game:
-    template: { name: Anime, mal_id: 11, poster: }
+    template: { name: Anime, mal_id: 11, poster: 433025}
   Super Power:
     template: { name: Anime, mal_id: 31, poster: 213659}
   Survival:
-    template: { name: Anime, mal_id: 76, poster: }
+    template: { name: Anime, mal_id: 76, poster: 391739}
   Team Sports:
-    template: { name: Anime, mal_id: 77, poster: }
+    template: { name: Anime, mal_id: 77, poster: 391747}
   Time Travel:
-    template: { name: Anime, mal_id: 78, poster: }
+    template: { name: Anime, mal_id: 78, poster: 433026}
   Vampire:
     template: { name: Anime, mal_id: 32, poster: 213671}
   Video Game:
     template: { name: Anime, mal_id: 79, poster: 213657}
   Visual Arts:
-    template: { name: Anime, mal_id: 80, poster: }
+    template: { name: Anime, mal_id: 80, poster: 433024}
   Workplace:
-    template: { name: Anime, mal_id: 48, poster: }
+    template: { name: Anime, mal_id: 48, poster: 391745}
   Josei:
     template: { name: Anime, mal_id: 43, poster: 240858}
   Kids:
