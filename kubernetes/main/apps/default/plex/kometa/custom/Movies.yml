@@ -266,13 +266,6 @@ collections:
   Dance:
     template: {name: Custom}
     imdb_list: https://www.imdb.com/list/ls057029570                    # List by cala708
-  Disney Parks:
-    template: {name: Custom}
-    imdb_list: https://www.imdb.com/list/ls560201046
-    plex_search:
-      any:
-        title:
-          - Ultimate Walt Disney World                                  # It got removed for some reason while on the IMDb list
   Epidemics and Pandemics:
     template: {name: Custom}
     imdb_list: https://www.imdb.com/list/ls505219442
@@ -285,24 +278,6 @@ collections:
       - https://www.imdb.com/list/ls068224634                           # List by tariquldipu
       - https://www.imdb.com/list/ls009794682                           # List by dormerjam-1
       - https://www.imdb.com/list/ls059928685                           # List by skmediadreams
-  Historical Black Movies:
-    template: {name: Custom}
-    imdb_list: https://www.imdb.com/list/ls560237349
-    schedule: range(02/01-02/28)
-    visible_home: range(02/01-02/28)
-    visible_shared: range(02/01-02/28)
-  Black History Month:
-    sort_title: "ZZZ_<<collection_name>>"
-    smart_filter:
-      all:
-        collection: Historical Black Movies
-      sort_by: random
-    collection_mode: hide
-    schedule: range(02/01-02/28)
-    delete_not_scheduled: true
-    visible_library: range(02/01-02/28)
-    visible_home: range(02/01-02/28)
-    visible_shared: range(02/01-02/28)
   Inspirational & Heart Warming:
     template: {name: Custom}
     imdb_list:
@@ -313,15 +288,6 @@ collections:
       - 227306  # Unbroken
       - 14292   # Miracle
       - 14534   # Rudy
-  LGBT:
-    template: {name: Custom}
-    collection: Rotten Tomatoes - Best LGBT
-    tmdb_movie:
-      - 79837   # End of Love
-      - 365126  # Jess & James
-      - 48650   # Room in Rome
-      - 261776  # The Third One
-      - 342672  # 4th Man Out
   Mindfuck:
     template: {name: Custom}
     imdb_list: https://www.imdb.com/list/ls084006834
@@ -340,10 +306,6 @@ collections:
     tmdb_movie:
       - 424694  # Bohemian Rhapsody
       - 614934  # Elvis
-  My Favorites:
-    template: {name: Custom}
-    imdb_list: https://www.imdb.com/list/ls550502260
-    summary: Obviously, I need to update this.
   Natural Disasters:
     template: {name: Custom}
     imdb_list: https://www.imdb.com/list/ls505219626
@@ -353,15 +315,6 @@ collections:
     template: {name: Custom}
     imdb_list: https://www.imdb.com/list/ls088925450
     mdblist_list: https://mdblist.com/lists/hdlists/top-50-parody-movies-of-all-time
-  Pride Month:
-    template: {name: Custom}
-    collection: LGBT
-    collection_order: random
-    schedule: range(06/01-06/30)
-    delete_not_scheduled: true
-    visible_library: false
-    visible_home: range(06/01-06/30)
-    visible_shared: range(06/01-06/30)
   Prison:
     template: {name: Custom}
     imdb_list:
@@ -375,31 +328,12 @@ collections:
       - 51620   # Death Race 2
       - 156717  # Death Race: Inferno
       - 401478  # Death Race: Beyond Anarchy
-  Rock Climbing:
-    template: {name: Custom}
-    imdb_list: https://www.imdb.com/list/ls084590179
-    plex_search:
-      any:
-        title:
-          - Dosage I                                                    # It got removed for some reason while on the IMDb list
-          - Dosage II                                                   # It got removed for some reason while on the IMDb list
-          - Dosage III                                                  # It got removed for some reason while on the IMDb list
-          - Dosage IV                                                   # It got removed for some reason while on the IMDb list
-          - Dosage V                                                    # It got removed for some reason while on the IMDb list
   Space Masterpieces:
     template: {name: Custom}
     imdb_list: https://www.imdb.com/list/ls084547446
   Spy & Agent:
     template: {name: Custom}
     imdb_list: https://www.imdb.com/list/ls021488235                    # List by ivandjordjevic-43807
-  Stand-up Comedy:
-    template: {name: Custom}
-    imdb_list: https://www.imdb.com/list/ls088617302
-#   imdb_list: https://www.imdb.com/list/ls041728102                    # List by sandrikoti. I would rather use my list above
-    plex_search:
-      any:
-        title:
-          - "Dave Chappelle: Sticks & Stones: Epilogue: The Punchline"
   Time Travel:
     template: {name: Custom}
     imdb_list: https://www.imdb.com/list/ls068617191                    # List by rlhron
@@ -747,56 +681,6 @@ collections:
     plex_all: true
     filters:
       filepath: TrueHD Atmos
-
-############################
-#          RANDOM          #
-############################
-
-  Random Movies:
-    sort_title: "!15_! Random Movies"
-    smart_filter:
-      all:
-        year.gte: 1980
-      sort_by: random
-      limit: 5
-    collection_mode: hide
-    summary: Random movies every time it loads.
-    visible_library: true
-    visible_home: true
-    visible_shared: true
-    schedule: never                                                     # Not scheduled to run because it only needs to run once
-  Random Action:
-    template: {name: Random, genre: Action}
-  Random Animation:
-    template: {name: Random, genre: Animation}
-  Random Biography:
-    template: {name: Random, genre: Biography}
-  Random Comedy:
-    template: {name: Random, genre: Comedy}
-  Random Crime:
-    template: {name: Random, genre: Crime}
-  Random Documentary:
-    template: {name: Random, genre: Documentary}
-  Random Drama:
-    template: {name: Random, genre: Drama}
-  Random Fantasy:
-    template: {name: Random, genre: Fantasy}
-  Random History:
-    template: {name: Random, genre: History}
-  Random Horror:
-    template: {name: Random, genre: Horror}
-  Random Mystery:
-    template: {name: Random, genre: Mystery}
-  Random Romance:
-    template: {name: Random, genre: Romance}
-  Random Romantic Comedy:
-    template: {name: Random, genre: Romance, Comedy}
-  Random Science Fiction:
-    template: {name: Random, genre: Science Fiction}
-  Random Thriller:
-    template: {name: Random, genre: Thriller}
-  Random Western:
-    template: {name: Random, genre: Western}
 
 ############################
 #          ACTORS          #

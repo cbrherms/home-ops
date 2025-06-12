@@ -193,20 +193,9 @@ collections:
 #          CUSTOM          #
 ############################
 
-  Baking:
-    template: {name: Custom}
-    tmdb_list: https://www.themoviedb.org/list/8168660
-    tvdb_show:
-      - 407030  # Bake Squad                                            # This is needed because it gives this error: [Convert Error: No TVDb ID Found for TMDb ID:]
   Classic Cartoons:
     template: {name: Custom}
     tmdb_list: https://www.themoviedb.org/list/7088117
-  Disney Parks:
-    template: {name: Custom}
-    tmdb_list: https://www.themoviedb.org/list/8221551
-  My Favorites:
-    template: {name: Custom}
-    tmdb_list: https://www.themoviedb.org/list/7111217
   Nature Documentary:
     template: {name: Custom}
     tmdb_list: https://www.themoviedb.org/list/7087971
@@ -393,34 +382,29 @@ collections:
     plex_search:
       all:
         year: 2022
+  2023 Shows:
+    template: {name: Years}
+    plex_search:
+      all:
+        year: 2023
+  2024 Shows:
+    template: {name: Years}
+    plex_search:
+      all:
+        year: 2024
+  2025 Shows:
+    template: {name: Years}
+    plex_search:
+      all:
+        year: 2025
 
 ############################
 #          AUDIO           #
 ############################
 
 ############################
-#          RANDOM          #
-############################
-
-  Random 30 Rock:
-    template: {name: Random, show: 30 Rock}
-  Random Becker:
-    template: {name: Random, show: Becker}
-  Random Impractical Jokers:
-    template: {name: Random, show: Impractical Jokers}
-  Random Malcolm in the Middle:
-    template: {name: Random, show: Malcolm in the Middle}
-  Random Seinfeld:
-    template: {name: Random, show: Seinfeld}
-  Random Superstore:
-    template: {name: Random, show: Superstore}
-
-############################
 #          ACTORS          #
 ############################
-
-  Jason Bateman:
-    template: {name: Actors, person: 23532}
 
 ############################
 #        DIRECTORS         #
