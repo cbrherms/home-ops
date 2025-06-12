@@ -139,7 +139,7 @@ spec:
             access: proxy
             url: http://loki-headless.observability.svc.cluster.local:3100
             jsonData:
-              maxLines: 250
+              maxLines: 5000
     dashboards:
       default:
         cloudflared:
