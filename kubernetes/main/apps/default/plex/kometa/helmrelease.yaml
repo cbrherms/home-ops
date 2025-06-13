@@ -43,6 +43,7 @@ spec:
           schedule: "0 5 * * *"
           timeZone: "${TIMEZONE}"
           concurrencyPolicy: Forbid
+          startingDeadlineSeconds: 300
           successfulJobsHistory: 1
           failedJobsHistory: 1
         containers:
