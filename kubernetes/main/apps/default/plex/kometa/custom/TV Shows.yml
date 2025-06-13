@@ -15,37 +15,41 @@ templates:
     sync_mode: sync
     collection_order: release.desc
     collection_mode: hide
-    schedule: yearly(03/01)
+#    schedule: yearly(03/01)
+    schedule: monthly(14)
   AFI's 100:
     sort_title: "!03_<<collection_name>>"
     sync_mode: sync
     collection_order: custom
     collection_mode: hide
-    schedule: yearly(03/01)
+#    schedule: yearly(03/01)
+    schedule: monthly(14)
   Best Of - Rotten Tomatoes - Years:
     sort_title: "!04_<<collection_name>>"
     sync_mode: sync
     collection_order: custom
     collection_mode: hide
-    schedule: yearly(03/01)
+#    schedule: yearly(03/01)
+    schedule: monthly(14)
   Best Of - Rotten Tomatoes - Genres:
     sort_title: "!05_<<collection_name>>"
     sync_mode: sync
     collection_order: custom
     collection_mode: hide
-    schedule: yearly(03/01)
+#    schedule: yearly(03/01)
+    schedule: monthly(14)
   Custom:
     sort_title: "!06_<<collection_name>>"
     sync_mode: sync
     collection_order: alpha
     collection_mode: hide
-    schedule: monthly(10)
+    schedule: monthly(14)
   Regular:
     sort_title: "!07_<<collection_name>>"
     sync_mode: sync
     collection_order: release
     collection_mode: hide
-    schedule: monthly(10)
+    schedule: monthly(14)
   Genres:
     sort_title: "!08_<<collection_name>>"
     sync_mode: sync
