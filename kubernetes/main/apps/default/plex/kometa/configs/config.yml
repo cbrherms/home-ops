@@ -31,10 +31,14 @@ libraries:
       - overlays
     collection_files:
       # - file: config/Pre-rolls.yml #Mounted by Kustomization
-      - repo: Movies.yml
       - repo: Movies - Holidays by Drazzizzi.yml
       - default: basic
       - default: imdb
+      - default: streaming
+      - default: universe
+      - default: network
+      - default: decade
+      - repo: Movies.yml
     overlay_files:
       - remove_overlays: false
     operations:
