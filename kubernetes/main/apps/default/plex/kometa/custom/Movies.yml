@@ -668,21 +668,6 @@ collections:
         year: 2025
 
 ############################
-#          AUDIO           #
-############################
-
-  DTS-HD Master Audio:
-    template: {name: Audio}
-    plex_all: true
-    filters:
-      filepath: DTS-HD MA
-  TrueHD Atmos:
-    template: {name: Audio}
-    plex_all: true
-    filters:
-      filepath: TrueHD Atmos
-
-############################
 #          ACTORS          #
 ############################
 
@@ -787,17 +772,3 @@ collections:
     template: {name: Directors, person: 291263}
   Quentin Tarantino:
     template: {name: Directors, person: 138}
-
-############################
-#          DOLBY           #
-############################
-
-# Dolby Atmos:
-#   template: {name: Dolby}
-#   mdblist_list: https://mdblist.com/lists/blisskodi/dolby-atmos-film
-# Dolby Atmos & Dolby Vision:
-#   template: {name: Dolby}
-#   mdblist_list: https://mdblist.com/lists/blisskodi/dolby-atmos-dolby-vision-film
-# Dolby Vision:
-#   template: {name: Dolby}
-#   mdblist_list: https://mdblist.com/lists/blisskodi/dolby-vision-film
