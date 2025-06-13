@@ -35,8 +35,8 @@ libraries:
       - default: basic
       - default: imdb
       - default: streaming
-      - default: universe
       - default: network
+      - default: universe
       - default: decade
       - repo: Movies.yml
     overlay_files:
@@ -57,9 +57,13 @@ libraries:
       - operations
       - overlays
     collection_files:
+      - default: basic
+      - default: imdb
+      - default: streaming
+      - default: network
+      - default: franchise
+      - default: universe
       - repo: TV Shows.yml
-      - pmm: basic
-      - pmm: imdb
     overlay_files:
       - remove_overlays: false
     operations:
