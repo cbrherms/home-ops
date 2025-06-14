@@ -75,6 +75,20 @@ libraries:
     template_variables:
       sep_style: gold
 
+playlist_files:
+- default: playlist
+  template_variables:
+    libraries: Movies, TV Shows
+    use_arrow: true
+    use_dcau: false
+    use_dragonball: false
+    use_mcu: true
+    use_pokemon: false
+    use_startrek: false
+    use_starwars: false
+    use_clonewars: true
+    use_xmen: false
+
 settings:
   cache: true
   cache_expiration: 60
