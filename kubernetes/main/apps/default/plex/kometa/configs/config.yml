@@ -60,7 +60,6 @@ libraries:
       - default: basic
       - default: imdb
       - default: streaming
-      - default: network
       - default: franchise
       - default: universe
       - repo: TV Shows.yml
