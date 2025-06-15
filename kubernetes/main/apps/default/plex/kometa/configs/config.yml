@@ -37,6 +37,10 @@ libraries:
       - default: streaming
       - default: network
       - default: universe
+        template_variables:
+          append_data:
+            monster: MonsterVerse
+          trakt_list_monster: https://trakt.tv/users/rzepkowski/lists/monsterverse-movies
       - default: decade
       - repo: Movies.yml
     overlay_files:
