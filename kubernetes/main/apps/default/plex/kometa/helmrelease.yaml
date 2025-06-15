@@ -63,6 +63,10 @@ spec:
                 echo "Starting Kometa run for Anime library..."
                 python3 kometa.py --run --read-only-config --run-libraries "Anime"
                 echo "Completed Kometa run for Anime library."
+                # Run Kometa for playlists only across all libraries
+                echo "Starting Kometa run for Playlists..."
+                python3 kometa.py --run --read-only-config --playlists-only
+                echo "Completed Kometa run for Playlists."
             env:
               TZ: "${TIMEZONE}"
             envFrom:
