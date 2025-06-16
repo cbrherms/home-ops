@@ -41,6 +41,7 @@ libraries:
           append_data:
             monster: MonsterVerse
           trakt_list_monster: https://trakt.tv/users/rzepkowski/lists/monsterverse-movies
+          url_poster_monster: https://raw.githubusercontent.com/Kometa-Team/Default-Images/master/universe/monsterverse.jpg
       - default: decade
       - repo: Movies.yml
     overlay_files:
