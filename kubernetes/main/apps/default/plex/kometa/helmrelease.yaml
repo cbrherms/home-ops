@@ -54,19 +54,46 @@ spec:
               - -c
             args:
               - |
+                # Copy config.yml to a writable location
+                cp /config-readonly/config.yml /config/config.yml
+                chmod 644 /config/config.yml
+
+                # Install Python packages
+                pip3 install --no-cache-dir pyyaml
+
+                # Install 1Password CLI
+                curl -sSfo /tmp/op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.23.0/op_linux_amd64_v2.23.0.zip
+                unzip -o /tmp/op.zip -d /tmp
+                mv /tmp/op /usr/local/bin/
+                chmod +x /usr/local/bin/op
+                rm -f /tmp/op.zip
+
+                # Run Kometa processes
                 echo "Starting Kometa run for Movies library..."
-                python3 kometa.py --run --read-only-config --run-libraries "Movies"
+                python3 kometa.py --run --run-libraries "Movies"
                 echo "Completed Kometa run for Movies library."
+
                 echo "Starting Kometa run for TV Shows library..."
-                python3 kometa.py --run --read-only-config --run-libraries "TV Shows"
+                python3 kometa.py --run --run-libraries "TV Shows"
                 echo "Completed Kometa run for TV Shows library."
+
                 echo "Starting Kometa run for Anime library..."
-                python3 kometa.py --run --read-only-config --run-libraries "Anime"
+                python3 kometa.py --run --run-libraries "Anime"
                 echo "Completed Kometa run for Anime library."
+
                 # Run Kometa for playlists only across all libraries
                 echo "Starting Kometa run for Playlists..."
-                python3 kometa.py --run --read-only-config --playlists-only
+                python3 kometa.py --run --playlists-only
                 echo "Completed Kometa run for Playlists."
+
+                # Update tokens in 1Password
+                echo "Updating authorization tokens in 1Password..."
+                if [ -f /scripts/update-auth-tokens.py ]; then
+                  python3 /scripts/update-auth-tokens.py
+                  echo "Token update complete."
+                else
+                  echo "Token update script not found."
+                fi
             env:
               TZ: "${TIMEZONE}"
             envFrom:
@@ -80,7 +107,7 @@ spec:
                 memory: 8192M
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities:
                 drop: ["ALL"]
     defaultPodOptions:
@@ -99,10 +126,13 @@ spec:
         type: configMap
         name: kometa-configmap
         globalMounts:
-          - path: /config/config.yml
-            subPath: config.yml
-            readOnly: true
+          - path: /config-readonly
       logs:
         type: emptyDir
         globalMounts:
           - path: /config/logs
+      token-updater-script:
+        type: configMap
+        name: kometa-token-updater
+        globalMounts:
+          - path: /scripts

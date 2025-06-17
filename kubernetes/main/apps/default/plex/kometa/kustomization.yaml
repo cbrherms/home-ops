@@ -10,5 +10,8 @@ configMapGenerator:
   - name: kometa-configmap
     files:
       - ./configs/config.yml
+  - name: kometa-token-updater
+    files:
+      - ./configs/update-auth-tokens.py
 generatorOptions:
   disableNameSuffixHash: true
