@@ -57,6 +57,7 @@ spec:
                 chown 568:568 /config/config.yml
                 chmod 644 /config/config.yml
             securityContext:
+              runAsNonRoot: false
               runAsUser: 0
         containers:
           app:
