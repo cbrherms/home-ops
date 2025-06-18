@@ -44,6 +44,20 @@ spec:
           startingDeadlineSeconds: 300
           successfulJobsHistory: 1
           failedJobsHistory: 1
+        initContainers:
+          prepare-config:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - sh
+              - -c
+              - |
+                cp /config-readonly/config.yml /config/config.yml
+                chown 568:568 /config/config.yml
+                chmod 644 /config/config.yml
+            securityContext:
+              runAsUser: 0
         containers:
           app:
             image:
@@ -54,11 +68,6 @@ spec:
               - -c
             args:
               - |
-                # Copy config.yml to a writable location
-                cp /config-readonly/config.yml /config/config.yml
-                chmod 644 /config/config.yml
-                ls -alh /config
-
                 # Run Kometa processes
                 echo "Starting Kometa run for Movies library..."
                 python3 kometa.py --run --run-libraries "Movies"
