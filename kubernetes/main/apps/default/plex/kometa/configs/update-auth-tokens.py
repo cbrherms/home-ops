@@ -13,6 +13,8 @@ logging.basicConfig(
 logger = logging.getLogger('token-updater')
 
 CONFIG_PATH = "/config/config.yml"
+OP_VAULT_NAME = os.getenv("OP_VAULT", "kubernetes")
+OP_ITEM_NAME = os.getenv("OP_ITEM", "kometa")
 
 def read_config():
     """Read the Kometa config file"""
@@ -66,7 +68,7 @@ def main():
 
         if valid_mal_updates:
             logger.info(f"Found {len(valid_mal_updates)} valid MyAnimeList tokens to update in 1Password...")
-            update_1password("kubernetes", "kometa", valid_mal_updates)
+            update_1password(OP_VAULT_NAME, OP_ITEM_NAME, valid_mal_updates)
     else:
         logger.info("No MyAnimeList authorization data found in config")
 
@@ -91,7 +93,7 @@ def main():
 
         if valid_trakt_updates:
             logger.info(f"Found {len(valid_trakt_updates)} valid Trakt tokens to update in 1Password...")
-            update_1password("kubernetes", "kometa", valid_trakt_updates)
+            update_1password(OP_VAULT_NAME, OP_ITEM_NAME, valid_trakt_updates)
     else:
         logger.info("No Trakt authorization data found in config")
 
