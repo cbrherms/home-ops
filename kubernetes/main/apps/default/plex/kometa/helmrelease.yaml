@@ -47,8 +47,8 @@ spec:
         containers:
           app:
             image:
-              repository: kometateam/kometa
-              tag: v2.2.0@sha256:e8bf350bcdf7e16fc3ab0f128e2ef43a447bd1c4d3352a2f521fcf2b3b421d39
+              repository: ghcr.io/cbrherms/kometa
+              tag: 2.2.0@sha256:52856d8a9ce8a4a0ba3e1bb0d17e4d42f418b6b6db4633fd34df66ee4e444195
             command:
               - /bin/sh
               - -c
@@ -57,16 +57,7 @@ spec:
                 # Copy config.yml to a writable location
                 cp /config-readonly/config.yml /config/config.yml
                 chmod 644 /config/config.yml
-
-                # Install Python packages
-                pip3 install --no-cache-dir pyyaml
-
-                # Install 1Password CLI
-                curl -sSfo /tmp/op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.23.0/op_linux_amd64_v2.23.0.zip
-                unzip -o /tmp/op.zip -d /tmp
-                mv /tmp/op /usr/local/bin/
-                chmod +x /usr/local/bin/op
-                rm -f /tmp/op.zip
+                ls -alh /config
 
                 # Run Kometa processes
                 echo "Starting Kometa run for Movies library..."
