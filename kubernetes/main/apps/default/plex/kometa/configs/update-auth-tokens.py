@@ -31,15 +31,23 @@ def update_1password(vault, item, fields_to_update):
     try:
         edit_cmd = ["op", "item", "edit", item, "--vault", vault]
         for field_name, field_value in fields_to_update.items():
-            edit_cmd.extend(["--field", f"{field_name}={field_value}"])
+            edit_cmd.append(f"{field_name}={field_value}")
+
+        safe_edit_cmd = ["op", "item", "edit", item, "--vault", vault]
+        for field_name in fields_to_update.keys():
+            safe_edit_cmd.append(f"{field_name}=<<REDACTED>>")
+
+        logger.info(f"Executing 1Password update for {len(fields_to_update)} fields in item '{item}'.")
 
         result = subprocess.run(edit_cmd, capture_output=True, text=True, check=True)
-        logger.info(f"Successfully updated {len(fields_to_update)} fields in {item}")
+        logger.info(f"Successfully updated {len(fields_to_update)} fields in '{item}'.")
         return True
     except subprocess.CalledProcessError as e:
-        logger.error(f"Error updating 1Password: {e}")
+        logger.error(f"Error updating 1Password. The 'op' command failed for item '{item}'.")
+        logger.error(f"Command (redacted): {' '.join(safe_edit_cmd)}")
+        logger.error(f"Return Code: {e.returncode}")
         if e.stderr:
-            logger.error(f"Error details: {e.stderr}")
+            logger.error(f"Error details from op CLI: {e.stderr.strip()}")
         return False
 
 def main():
