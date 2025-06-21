@@ -31,7 +31,7 @@ spec:
           init-db:
             image:
               repository: ghcr.io/cbrherms/mysql-init
-              tag: rolling@sha256:ab87e05f8b6ecb85d6a18557a3e8b588fcf3a8779d5d2bd9201231d257a1c988
+              tag: rolling@sha256:386d124e56292f7d748859e82f7a0c58ad8666a1618ff0dc14c79c84dee793bf
             env:
               DISABLE_SSL_VERIFICATION: "true"
             envFrom: &envFrom
