@@ -27,9 +27,6 @@ spec:
     global:
       image:
         pullPolicy: Always
-        # https://github.com/goauthentik/authentik/issues/12464
-        repository: ghcr.io/goauthentik/dev-server
-        tag: gh-version-2024.12
       deploymentAnnotations:
         secret.reloader.stakater.com/reload: "authentik-secret"
       env:
