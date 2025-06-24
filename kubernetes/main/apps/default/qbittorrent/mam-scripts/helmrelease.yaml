@@ -25,6 +25,7 @@ spec:
   values:
     controllers:
       autodl:
+        enabled: true
         type: cronjob
         cronjob:
           schedule: "0 12 * * *"
@@ -43,7 +44,7 @@ spec:
             env:
               TZ: ${TIMEZONE}
               SCRIPT_NAME: "autodl.sh"
-              MAX_DOWNLOADS: 45
+              MAX_DOWNLOADS: 10
               SET_ASIDE: 10
               DEBUG: 0
               TORRENT_DIR: "/media/downloads/watched/myanonamouse/junk"
@@ -54,6 +55,7 @@ spec:
                     key: MAM_ID_AUTODL
 
       autospend:
+        enabled: true
         type: cronjob
         cronjob:
           schedule: "0 22 * * *"
@@ -79,6 +81,7 @@ spec:
                     key: MAM_ID_AUTOSPEND
 
       seedbox:
+        enabled: true
         type: cronjob
         cronjob:
           schedule: "*/15 * * * *"
