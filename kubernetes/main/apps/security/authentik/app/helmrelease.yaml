@@ -70,6 +70,16 @@ spec:
       resources:
         requests:
           cpu: 200m
+      startupProbe:
+        enabled: true
+        failureThreshold: 30
+        periodSeconds: 10
+      livenessProbe:
+        enabled: true
+        initialDelaySeconds: 30
+      readinessProbe:
+        enabled: true
+        initialDelaySeconds: 30
       ingress:
         enabled: true
         ingressClassName: external
@@ -94,6 +104,16 @@ spec:
       resources:
         requests:
           cpu: 200m
+      startupProbe:
+        enabled: true
+        failureThreshold: 30
+        periodSeconds: 10
+      livenessProbe:
+        enabled: true
+        initialDelaySeconds: 30
+      readinessProbe:
+        enabled: true
+        initialDelaySeconds: 30
     geoip:
       enabled: false
       existingSecret:
