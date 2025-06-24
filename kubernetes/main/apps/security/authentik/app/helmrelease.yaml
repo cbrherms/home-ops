@@ -65,14 +65,15 @@ spec:
         serviceMonitor:
           enabled: true
       autoscaling:
-        enabled: true
-        minReplicas: 2
+        enabled: false # Temporarily disabled due to upgrade issues
+        # minReplicas: 2
+      replicas: 1 # Temporary due to upgrade issues
       resources:
         requests:
           cpu: 200m
       startupProbe:
         enabled: true
-        failureThreshold: 30
+        failureThreshold: 90
         periodSeconds: 10
       livenessProbe:
         enabled: true
@@ -99,14 +100,15 @@ spec:
         https: false
     worker:
       autoscaling:
-        enabled: true
-        minReplicas: 2
+        enabled: false # Temporarily disabled due to upgrade issues
+        # minReplicas: 2
+      replicas: 1 # Temporary due to upgrade issues
       resources:
         requests:
           cpu: 200m
       startupProbe:
         enabled: true
-        failureThreshold: 30
+        failureThreshold: 90
         periodSeconds: 10
       livenessProbe:
         enabled: true
