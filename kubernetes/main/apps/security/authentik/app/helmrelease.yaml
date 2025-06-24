@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -65,22 +65,12 @@ spec:
         serviceMonitor:
           enabled: true
       autoscaling:
-        enabled: false # Temporarily disabled due to upgrade issues
-        # minReplicas: 2
-      replicas: 1 # Temporary due to upgrade issues
+        enabled: true
+        minReplicas: 1
+        maxReplicas: 3
       resources:
         requests:
           cpu: 200m
-      startupProbe:
-        enabled: true
-        failureThreshold: 90
-        periodSeconds: 10
-      livenessProbe:
-        enabled: true
-        initialDelaySeconds: 30
-      readinessProbe:
-        enabled: true
-        initialDelaySeconds: 30
       ingress:
         enabled: true
         ingressClassName: external
@@ -100,22 +90,12 @@ spec:
         https: false
     worker:
       autoscaling:
-        enabled: false # Temporarily disabled due to upgrade issues
-        # minReplicas: 2
-      replicas: 1 # Temporary due to upgrade issues
+        enabled: true
+        minReplicas: 1
+        maxReplicas: 3
       resources:
         requests:
           cpu: 200m
-      startupProbe:
-        enabled: true
-        failureThreshold: 90
-        periodSeconds: 10
-      livenessProbe:
-        enabled: true
-        initialDelaySeconds: 30
-      readinessProbe:
-        enabled: true
-        initialDelaySeconds: 30
     geoip:
       enabled: false
       existingSecret:
