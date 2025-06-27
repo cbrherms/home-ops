@@ -35,7 +35,6 @@ libraries:
       - default: basic
       - default: imdb
       - default: streaming
-      - default: network
       - default: universe
         template_variables:
           append_data:
