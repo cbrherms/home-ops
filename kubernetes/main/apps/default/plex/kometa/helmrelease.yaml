@@ -54,8 +54,22 @@ spec:
               - -c
               - |
                 cp /config-readonly/config.yml /config/config.yml
+
+                 if [ ! -d "/config/.config" ]; then
+                  echo "Creating /config/.config directory..."
+                  mkdir -p /config/.config
+                fi
+
+                if [ "$(stat -c %a /config/.config)" != "700" ]; then
+                  echo "Permissions for /config/.config are not 700, setting them now..."
+                  chmod 700 /config/.config
+                fi
+                chmod g-s /config/.config
+
+                echo "Ensuring correct ownership for /config and /tmp..."
                 chown -R 1000:1000 /config
                 chown 1000:1000 /tmp
+
                 chmod 644 /config/config.yml
             securityContext:
               runAsNonRoot: false
