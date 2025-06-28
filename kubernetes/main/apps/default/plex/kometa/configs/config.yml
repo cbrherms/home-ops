@@ -12,6 +12,7 @@ libraries:
       - default: anilist
     overlay_files:
       - remove_overlays: false
+      - repo: Anime - Overlays - Filler.yml
     operations:
       mass_genre_update: tmdb
       mass_content_rating_update: omdb
