@@ -1,0 +1,25 @@
+plex_library_name: "Anime"
+
+plex_shows:
+  - plex_name: "Bleach"
+    sonarr_id: 2
+    animefillerlist_slug: "bleach"
+  - plex_name: "Full Metal Alchemist: Brotherhood"
+    sonarr_id: 7
+    animefillerlist_slug: "fullmetal-alchemist-brotherhood"
+  - plex_name: "One Piece"
+    sonarr_id: 15
+    animefillerlist_slug: "one-piece"
+  - plex_name: "Naruto Shippuden"
+    sonarr_id: 13
+    animefillerlist_slug: "naruto-shippuden"
+  - plex_name: "Naruto"
+    sonarr_id: 177
+    animefillerlist_slug: "naruto"
+  - plex_name: "Boruto: Naruto Next Generations"
+    sonarr_id: 605
+    animefillerlist_slug: "boruto-naruto-next-generations"
+  - plex_name: "My Hero Academia"
+    sonarr_id: 12
+    animefillerlist_slug: "my-hero-academia"
+

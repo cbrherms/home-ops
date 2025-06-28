@@ -1,0 +1,69 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app plex-filler-tagger
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: external-secrets
+      namespace: external-secrets
+  values:
+    controllers:
+      plex-filler-tagger:
+        type: cronjob
+        cronjob:
+          schedule: "0 1 * * *"
+          timeZone: "${TIMEZONE}"
+          concurrencyPolicy: Forbid
+          startingDeadlineSeconds: 300
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/cbrherms/plex-filler-tagger
+              tag: 1.1.1@sha256:6ef1b17c3d6b91cae8c27aafb5ec3431d3c87b01cc3908a10a4ac892625c8f26
+            env:
+              TZ: "${TIMEZONE}"
+              PLEX_URL: "http://192.168.0.10:32400"
+              SONARR_URL: "http://sonarr.default.svc.cluster.local"
+            envFrom:
+              - secretRef:
+                  name: plex-filler-tagger-secret
+            resources:
+              requests:
+                cpu: 75m
+                memory: 300M
+              limits:
+                memory: 1Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    persistence:
+      config:
+        type: configMap
+        name: plex-filler-tagger-configmap
+        globalMounts:
+          - path: /config/config.yaml
