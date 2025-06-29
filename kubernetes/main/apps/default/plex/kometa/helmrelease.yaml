@@ -60,11 +60,9 @@ spec:
                   mkdir -p /config/.config
                 fi
 
-                if [ "$(stat -c %a /config/.config)" != "700" ]; then
-                  echo "Permissions for /config/.config are not 700, setting them now..."
-                  chmod 700 /config/.config
-                fi
-                chmod g-s /config/.config
+                # Because fsgroup will overwrite permissions, set them again
+                chmod -R 700 /config/.config
+                chmod -R g-s /config/.config
 
                 echo "Ensuring correct ownership for /config and /tmp..."
                 chown -R 1000:1000 /config
@@ -138,6 +136,11 @@ spec:
         existingClaim: *app
         globalMounts:
           - path: /config
+      assets:
+        type: persistentVolumeClaim
+        existingClaim: kometa-assets
+        globalMounts:
+          - path: /config/assets
       config-file:
         type: configMap
         name: kometa-configmap

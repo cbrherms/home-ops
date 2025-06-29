@@ -22,6 +22,8 @@ libraries:
       root_folder_path: /media/Anime
       quality_profile: HD-1080p
       series_type: anime
+    settings:
+      asset_directory: config/assets/anime
 
   Movies:
     run_order:
@@ -52,6 +54,8 @@ libraries:
       mass_critic_rating_update: mdb_metacritic
     template_variables:
       sep_style: gold
+    settings:
+      asset_directory: config/assets/movies
 
   TV Shows:
     run_order:
@@ -75,6 +79,8 @@ libraries:
       mass_critic_rating_update: mdb_metacritic
     template_variables:
       sep_style: gold
+    settings:
+      asset_directory: config/assets/tv-shows
 
 playlist_files:
   - default: playlist
@@ -93,9 +99,9 @@ settings:
   cache: true
   cache_expiration: 60
   asset_directory: config/assets
-  asset_folders: false
-  asset_depth: 0
-  create_asset_folders: false
+  asset_folders: true
+  asset_depth: 2
+  create_asset_folders: true
   prioritize_assets: false
   dimensional_asset_rename: false
   download_url_assets: true
