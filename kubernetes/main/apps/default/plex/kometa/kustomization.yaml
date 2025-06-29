@@ -7,11 +7,8 @@ resources:
   - ./helmrelease.yaml
   - ../../../../../shared/templates/volsync
 configMapGenerator:
-  - name: kometa-configmap
-    files:
-      - ./configs/config.yml
   - name: kometa-token-updater
     files:
-      - ./configs/update-auth-tokens.py
+      - ./resources/update-auth-tokens.py
 generatorOptions:
   disableNameSuffixHash: true
