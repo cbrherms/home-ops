@@ -1,0 +1,5 @@
+---
+apiVersion: kustomize.config.k8s.ioio/v1beta1
+kind: Kustomization
+resources:
+  - ../../../../../shared/templates/volsync
