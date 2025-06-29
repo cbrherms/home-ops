@@ -25,3 +25,5 @@ Brewfile.lock.json
 wiki
 # Bootstrap
 /config.yaml
+# Local tooling and temporary manifests
+/.local
