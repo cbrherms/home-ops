@@ -11,7 +11,7 @@ overlays:
       font: config/fonts/Juventus-Fans-Bold.ttf
       back_width: 1920
       back_height: 125
-      back_color: "#262626"
+      back_color: "#262626A6"
     plex_search:
       all:
         episode_label: Filler
@@ -28,7 +28,7 @@ overlays:
       font: config/fonts/Juventus-Fans-Bold.ttf
       back_width: 1920
       back_height: 125
-      back_color: "#262626"
+      back_color: "#262626A6"
     plex_search:
       all:
         episode_label: AnimeCanon
@@ -45,7 +45,7 @@ overlays:
       font: config/fonts/Juventus-Fans-Bold.ttf
       back_width: 1920
       back_height: 125
-      back_color: "#262626"
+      back_color: "#262626A6"
     plex_search:
       all:
         episode_label: MangaCanon
@@ -62,7 +62,7 @@ overlays:
       font: config/fonts/Juventus-Fans-Bold.ttf
       back_width: 1920
       back_height: 125
-      back_color: "#262626"
+      back_color: "#262626A6"
     plex_search:
       all:
         episode_label: Mixed
