@@ -63,7 +63,13 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     persistence:
       config:
+        type: emptyDir
+        globalMounts:
+          - path: /config
+      config-file:
         type: configMap
         name: plex-filler-tagger-configmap
         globalMounts:
           - path: /config/config.yaml
+            subPath: config.yaml
+            readOnly: true
