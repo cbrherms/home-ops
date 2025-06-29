@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cbrherms/plex-filler-tagger
-              tag: 1.2.2@sha256:f2a5c204d738aa4fde41ad6e71a45acd21cd0a36d78328d5ba41e4ad27e4c13f
+              tag: 1.2.3@sha256:29a3aa976106a8bbf644b7e317ee3f5d8b637d82d6b7c5ef1fd817027f9a6255
             env:
               TZ: "${TIMEZONE}"
               PLEX_URL: "http://192.168.0.10:32400"
