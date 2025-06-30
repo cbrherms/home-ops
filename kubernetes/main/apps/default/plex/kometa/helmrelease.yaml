@@ -160,7 +160,9 @@ spec:
         globalMounts:
           - path: /scripts
       logs:
-        type: emptyDir
+        type: nfs
+        server: truenas.lan.${SECRET_DOMAIN}
+        path: /mnt/BACKUPS/kubernetes/kometa
         globalMounts:
           - path: /config/logs
       git:
