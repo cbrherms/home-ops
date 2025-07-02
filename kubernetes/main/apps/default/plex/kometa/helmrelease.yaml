@@ -66,22 +66,33 @@ spec:
               - sh
               - -c
               - |
-                cp /git/kometa-config/config.yml /config/config.yml
+                echo "Copying config.yml from git repo..."
+                if [ -f /git/kometa-config/config.yml ]; then
+                  cp /git/kometa-config/config.yml /config/config.yml
+                else
+                  echo "ERROR: /git/kometa-config/config.yml not found!"
+                  exit 1
+                fi
 
-                 if [ ! -d "/config/.config" ]; then
+                echo "Setting permissions for config.yml..."
+                chmod 644 /config/config.yml
+
+                if [ ! -d "/config/.config" ]; then
                   echo "Creating /config/.config directory..."
                   mkdir -p /config/.config
                 fi
 
-                # Because fsgroup will overwrite permissions, set them again
-                chmod -R 700 /config/.config
+                echo "Setting ownership and permissions for 1Password config..."
+                chown -R 1000:1000 /config/.config
+                # Because fsgroup will overwrite op's config permissions, set them again
+                find /config/.config -type d -exec chmod 700 {} \;
+                find /config/.config -type f -exec chmod 600 {} \;
                 chmod -R g-s /config/.config
 
-                echo "Ensuring correct ownership for /config and /tmp..."
-                chown -R 1000:1000 /config
+                echo "Setting ownership for /tmp..."
                 chown 1000:1000 /tmp
 
-                chmod 644 /config/config.yml
+                echo "  - Configuration file copied and permissions set"
             securityContext:
               runAsNonRoot: false
               runAsUser: 0
