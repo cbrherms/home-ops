@@ -69,13 +69,13 @@ spec:
                 echo "Copying config.yml from git repo..."
                 if [ -f /git/kometa-config/config.yml ]; then
                   cp /git/kometa-config/config.yml /config/config.yml
+                  echo "Setting permissions for config.yml..."
+                  chmod 644 /config/config.yml
+                  chown 1000:1000 /config/config.yml
                 else
                   echo "ERROR: /git/kometa-config/config.yml not found!"
                   exit 1
                 fi
-
-                echo "Setting permissions for config.yml..."
-                chmod 644 /config/config.yml
 
                 if [ ! -d "/config/.config" ]; then
                   echo "Creating /config/.config directory..."
