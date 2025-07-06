@@ -15,7 +15,7 @@ spec:
       ignoreUpdates: true
   nodeSelector:
     matchExpressions:
-      - key: kubernetes.io/hostname
+      - key: node-role.kubernetes.io/control-plane
         operator: Exists
   tolerations:
     - key: "CriticalAddonsOnly"
