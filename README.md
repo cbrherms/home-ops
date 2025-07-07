@@ -105,7 +105,7 @@ For my Home DNS I am using unbound built in to my pfSense router. Along with unb
 | PVE-HA      | Gigabyte NUC | i5-4200U     | 4 Cores  | 16GB  | PVE8.x | Homeassistant host |
 
 Total CPU: 124 Cores
-Total RAM: 96GB
+Total RAM: 448GB
 
 Note: 4 nodes not best practice, currently supported by quorum devices until HA is migrated to another node and PVE-HA decommissioned
 
