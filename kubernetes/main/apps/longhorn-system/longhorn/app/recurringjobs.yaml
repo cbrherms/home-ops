@@ -1,0 +1,16 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/longhorn.io/recurringjob_v1beta2.json
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: daily-volume-trim
+  namespace: longhorn-system
+spec:
+  name: daily-volume-trim
+  task: filesystem-trim
+  retain: 0
+  concurrency: 1
+  cron: "0 4 * * *"
+  groups:
+    - default
+  labels: {}
