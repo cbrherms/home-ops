@@ -28,6 +28,13 @@ spec:
     metrics:
       serviceMonitor:
         enabled: true
+    # Hotfix for 1.90 https://longhorn.io/docs/1.9.0/important-notes/#warning
+    preUpgradeChecker:
+      upgradeVersionCheck: false # Remove this on next chart update
+    image:
+      longhorn:
+        manager:
+          tag: v1.9.0-hotfix-1 # Remove this on next chart update
     defaultSettings:
       defaultReplicaCount: 3
       backupstorePollInterval: 0
