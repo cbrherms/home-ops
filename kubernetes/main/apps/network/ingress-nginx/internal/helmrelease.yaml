@@ -60,6 +60,8 @@ spec:
           "http_user_agent": "$http_user_agent"}
         proxy-body-size: 0
         proxy-buffer-size: 16k
+        # temp fix for https://github.com/kubernetes/ingress-nginx/issues/13598
+        proxy-busy-buffers-size: 16k
         ssl-protocols: TLSv1.3 TLSv1.2
       metrics:
         enabled: true
