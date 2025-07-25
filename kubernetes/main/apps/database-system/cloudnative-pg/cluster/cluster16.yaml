@@ -11,7 +11,7 @@ spec:
   stopDelay: 300
   primaryUpdateStrategy: unsupervised
   storage:
-    size: 20Gi
+    size: 40Gi
     storageClass: longhorn
   superuserSecret:
     name: cloudnative-pg-secret
