@@ -97,12 +97,14 @@
         'helm',
       ],
       commitMessageTopic: 'chart {{depName}}',
+      separateMinorPatch: true,
     },
     {
       matchDatasources: [
         'docker',
       ],
       commitMessageTopic: 'image {{depName}}',
+      separateMinorPatch: true,
     },
     {
       matchDatasources: [
