@@ -13,7 +13,7 @@ jobs:
     runs-on: ["gha-runner-scale-set"]
     steps:
       - name: Get Secrets
-        uses: 1password/load-secrets-action@v2
+        uses: 1password/load-secrets-action@v3
         with:
           export-env: true
         env:
