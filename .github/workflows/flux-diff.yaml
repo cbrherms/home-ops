@@ -21,12 +21,12 @@ jobs:
       matrix: ${{ steps.changed-clusters.outputs.all_changed_and_modified_files }}
     steps:
       - name: Configure 1password
-        uses: 1password/load-secrets-action/configure@v2
+        uses: 1password/load-secrets-action/configure@v3
         with:
           service-account-token: ${{ secrets.ONEPASS_SA_TOKEN }}
 
       - name: Get Secrets
-        uses: 1password/load-secrets-action@v2
+        uses: 1password/load-secrets-action@v3
         with:
           export-env: true
         env:
@@ -73,12 +73,12 @@ jobs:
       fail-fast: false
     steps:
       - name: Configure 1password
-        uses: 1password/load-secrets-action/configure@v2
+        uses: 1password/load-secrets-action/configure@v3
         with:
           service-account-token: ${{ secrets.ONEPASS_SA_TOKEN }}
 
       - name: Get Secrets
-        uses: 1password/load-secrets-action@v2
+        uses: 1password/load-secrets-action@v3
         with:
           export-env: true
         env:
