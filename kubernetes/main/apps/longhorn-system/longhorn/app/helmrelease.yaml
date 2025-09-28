@@ -36,20 +36,20 @@ spec:
         manager:
           tag: v1.9.0-hotfix-1 # Remove this on next chart update
     defaultSettings:
-      defaultReplicaCount: 3
-      backupstorePollInterval: 0
+      defaultReplicaCount: "3"
+      backupstorePollInterval: "0"
       createDefaultDiskLabeledNodes: true
       restoreVolumeRecurringJobs: true
-      storageOverProvisioningPercentage: 100
-      storageMinimalAvailablePercentage: 1
-      guaranteedEngineManagerCPU: 20
-      guaranteedReplicaManagerCPU: 20
+      storageOverProvisioningPercentage: "100"
+      storageMinimalAvailablePercentage: "1"
+      guaranteedEngineManagerCPU: "20"
+      guaranteedReplicaManagerCPU: "20"
       orphanAutoDeletion: true
       replicaNodeLevelSoftAntiAffinity: true
       replicaZoneLevelSoftAntiAffinity: true
       defaultDataLocality: best-effort
       replicaAutoBalance: best-effort
-      concurrentAutomaticEngineUpgradePerNodeLimit: 3
+      concurrentAutomaticEngineUpgradePerNodeLimit: "3"
       defaultLonghornStaticStorageClass: longhorn
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       defaultDataPath: "/var/mnt/longhorn"
