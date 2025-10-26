@@ -120,14 +120,31 @@ spec:
                 service:
                   identifier: app
                   port: http
+    configMaps:
+      config:
+        data:
+          .qbt.toml: |-
+            [qbittorrent]
+            addr = "http://localhost:80"
     persistence:
       config:
         existingClaim: *app
-      downloads:
+      config-file:
+        type: configMap
+        identifier: config
+        globalMounts:
+          - path: /config/.qbt.toml
+            subPath: .qbt.toml
+      media:
         type: nfs
         server: unraid.lan.${SECRET_DOMAIN}
         path: /mnt/user/data/Media
         globalMounts:
           - path: /media
+      qbrr:
+        type: image
+        image: ghcr.io/buroa/qbrr:0.1.1@sha256:fe4a1d100ba896999253a5122d9c77cc4920779d618c23f765458cb6ec7383ca
+        globalMounts:
+          - readOnly: true
       tmp:
         type: emptyDir
