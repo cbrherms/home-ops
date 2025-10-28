@@ -6,3 +6,5 @@ resources:
   - ./minio.yaml
   - ./node-exporter.yaml
   - ./smartctl-exporter.yaml
+  - ./octoprint.yaml
+  - ./externalsecret.yaml

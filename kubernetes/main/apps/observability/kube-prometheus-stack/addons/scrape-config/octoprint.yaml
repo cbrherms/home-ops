@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: &name octoprint
+spec:
+  metricsPath: /plugin/prometheus_exporter/metrics
+  authorization:
+    type: Bearer
+    credentials:
+      name: scrape-config-secret
+      key: octoprint-api-key
+  relabelings:
+    - action: replace
+      replacement: *name
+      targetLabel: job
+  staticConfigs:
+    - targets:
+        - "voronv2pi.local:5000"
