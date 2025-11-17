@@ -61,6 +61,7 @@ spec:
           envFrom:
             - secretRef:
                 name: authentik-secret
+      serviceAccountName: authentik
       metrics:
         serviceMonitor:
           enabled: true
@@ -89,6 +90,7 @@ spec:
           - auth.${SECRET_DOMAIN}
         https: false
     worker:
+      serviceAccountName: authentik
       autoscaling:
         enabled: true
         minReplicas: 1
