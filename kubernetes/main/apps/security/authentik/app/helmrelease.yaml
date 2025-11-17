@@ -53,6 +53,9 @@ spec:
       # https://github.com/goauthentik/authentik/issues/1285
       redis:
         host: "dragonfly.database-system.svc.cluster.local"
+    serviceAccount:
+      create: true
+      fullnameOverride: authentik
     server:
       initContainers:
         - name: init-db
@@ -61,7 +64,6 @@ spec:
           envFrom:
             - secretRef:
                 name: authentik-secret
-      serviceAccountName: authentik
       metrics:
         serviceMonitor:
           enabled: true
@@ -90,7 +92,6 @@ spec:
           - auth.${SECRET_DOMAIN}
         https: false
     worker:
-      serviceAccountName: authentik
       autoscaling:
         enabled: true
         minReplicas: 1
