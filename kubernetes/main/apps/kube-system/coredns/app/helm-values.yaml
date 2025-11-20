@@ -29,8 +29,12 @@ servers:
         configBlock: |-
           pods insecure
           fallthrough in-addr.arpa ip6.arpa
+          ttl 30
       - name: forward
         parameters: . /etc/resolv.conf
+        configBlock: |-
+          except cluster.local in-addr.arpa ip6.arpa
+          policy sequential
       - name: cache
         parameters: 30
       - name: loop
