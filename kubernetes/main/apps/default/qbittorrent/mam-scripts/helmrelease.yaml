@@ -40,7 +40,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cbrherms/mam-scripts
-              tag: 2025.6.23@sha256:7dfdad4a908ee17ec3134402dbb78c11a280c97f6b3a436bc6f006a0104536ca
+              tag: 2025.11.24@sha256:7afaeddf9ffcf92f8d7e794278111fd12708ea49ad681bde4d4bbd0697e718fc
             env:
               TZ: ${TIMEZONE}
               SCRIPT_NAME: "autodl.sh"
@@ -70,7 +70,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cbrherms/mam-scripts
-              tag: 2025.6.23@sha256:7dfdad4a908ee17ec3134402dbb78c11a280c97f6b3a436bc6f006a0104536ca
+              tag: 2025.11.24@sha256:7afaeddf9ffcf92f8d7e794278111fd12708ea49ad681bde4d4bbd0697e718fc
             env:
               TZ: ${TIMEZONE}
               SCRIPT_NAME: "autospend.sh"
@@ -96,7 +96,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cbrherms/mam-scripts
-              tag: 2025.6.23@sha256:7dfdad4a908ee17ec3134402dbb78c11a280c97f6b3a436bc6f006a0104536ca
+              tag: 2025.11.24@sha256:7afaeddf9ffcf92f8d7e794278111fd12708ea49ad681bde4d4bbd0697e718fc
             env:
               TZ: ${TIMEZONE}
               SCRIPT_NAME: "seedbox-api.sh"
