@@ -39,7 +39,9 @@ spec:
             dependsOn: init-db
             image:
               repository: ghcr.io/kiwigrid/k8s-sidecar
-              tag: 2.1.2@sha256:5304aa2b45f80a19f84a5e9dfb139c9caeaeecf1f9e507d0bdb9bc1cdb87a58a
+              tag: 1.30.9@sha256:8c06e1ba643a4625de14b2db65c356f5db6b1482a25fce4754380a2936207338
+              # Issue with 2.x.x causing high RAM usage
+              # Issue with 1.30.10+ https://github.com/kiwigrid/k8s-sidecar/issues/431
             env:
               FOLDER: /config
               LABEL: gatus.io/enabled
