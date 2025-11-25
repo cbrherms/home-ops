@@ -1,0 +1,101 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tqm
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
+    - name: qbittorrent
+      namespace: default
+  values:
+    controllers:
+      tqm:
+        labels:
+          nfsMount: "true"
+        type: cronjob
+        annotations:
+          reloader.stakater.com/auto: "true"
+        cronjob: &cronJobSpec
+          schedule: "@hourly"
+          backoffLimit: 0
+          concurrencyPolicy: Forbid
+          failedJobsHistory: 1
+          successfulJobsHistory: 5
+          ttlSecondsAfterFinished: 3600
+        initContainers:
+          retag: &container
+            image:
+              repository: ghcr.io/home-operations/tqm
+              tag: 1.17.0@sha256:05b62239063ad1e884f2254532e3dc9b60cff08870112dca244af328d761be0d
+            args:
+              - retag
+              - qb
+            env:
+              TZ: "${TIMEZONE}"
+            resources:
+              requests:
+                cpu: 25m
+              limits:
+                memory: 256Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+        containers:
+          clean:
+            <<: *container
+            args:
+              - clean
+              - qb
+              - --dry-run
+        pod:
+          restartPolicy: Never
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+    persistence:
+      config:
+        type: emptyDir
+        globalMounts:
+          - path: /.config/tqm
+      config-file:
+        type: configMap
+        name: tqm-configmap
+        globalMounts:
+          - path: /.config/tqm/config.yaml
+            subPath: config.yaml
+            readOnly: true
+      media:
+        type: nfs
+        server: unraid.lan.${SECRET_DOMAIN}
+        path: /mnt/user/data/Media
+        globalMounts:
+          - path: /media/downloads/qbittorrent
+            subPath: downloads/qbittorrent
+            readOnly: true
