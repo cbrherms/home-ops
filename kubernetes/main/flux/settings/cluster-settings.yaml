@@ -10,4 +10,4 @@ data:
   PVC_VOLSYNC_STORAGECLASS: longhorn
   VOLSYNC_SNAPSHOTCLASS: longhorn-snapclass
   VOLSYNC_CACHE_SNAPSHOTCLASS: openebs-hostpath
-  VOLSYNC_STORAGECLASS: longhorn-snapshot
+  VOLSYNC_STORAGECLASS: longhorn
