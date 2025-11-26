@@ -56,6 +56,7 @@ filters:
       - { name: site:MTV,      update: ['TrackerName == "morethantv.me"'] }
       - { name: site:NBL,      update: ['TrackerName == "nebulance.io"'] }
       - { name: site:OE,       update: ['TrackerName == "onlyencodes.cc"'] }
+      - { name: site:OTW,      update: ['TrackerName == "oldtoons.world"'] }
       - { name: site:PHD,      update: ['TrackerName == "privatehd.to"'] }
       - { name: site:PTP,      update: ['TrackerName == "passthepopcorn.me"'] }
       - { name: site:RFX,      update: ['TrackerName == "reelflix.xyz"'] }
