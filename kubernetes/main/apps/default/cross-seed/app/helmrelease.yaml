@@ -46,16 +46,16 @@ spec:
             args: ["daemon"]
             probes:
               liveness: &probes
-                enabled: false
-#                custom: true
-#                spec:
-#                  httpGet:
-#                    path: /api/ping
-#                    port: *port
-#                  initialDelaySeconds: 30
-#                  periodSeconds: 10
-#                  timeoutSeconds: 5
-#                  failureThreshold: 3
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/ping
+                    port: *port
+                  initialDelaySeconds: 60
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
               readiness: *probes
             securityContext:
               runAsUser: 568
