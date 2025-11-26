@@ -7,6 +7,7 @@ resources:
   - ./bazarr/ks.yaml
   - ./calibre-web/ks.yaml
   - ./changedetection/ks.yaml
+  - ./cross-seed/ks.yaml
   - ./flaresolverr/ks.yaml
   - ./homepage/ks.yaml
   - ./jellyseerr/ks.yaml
