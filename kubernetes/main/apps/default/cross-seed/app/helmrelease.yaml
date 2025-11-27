@@ -46,7 +46,7 @@ spec:
             args: ["daemon"]
             probes:
               liveness: &probes
-                enabled: true
+                enabled: false # temporarily disabled due to long initial indexing process
                 custom: true
                 spec:
                   httpGet:
