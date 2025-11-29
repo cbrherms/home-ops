@@ -44,10 +44,13 @@ spec:
             env:
               TZ: "${TIMEZONE}"
               CROSS_SEED_PORT: &port 80
-            args: ["daemon"]
+            args:
+              - daemon
+              - -v
+            # may not recover properly when crashing during search because api server locks up
             probes:
               startup:
-                enabled: false # doesn't recover properly when crashing during search because api server locks up
+                enabled: true
                 custom: true
                 spec:
                   httpGet:
@@ -58,15 +61,15 @@ spec:
                   failureThreshold: 60
                   timeoutSeconds: 5
               liveness: &probes
-                enabled: false # doesn't recover properly when crashing during search because api server locks up
+                enabled: true
                 custom: true
                 spec:
                   httpGet:
                     path: /api/ping
                     port: *port
                   periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
+                  timeoutSeconds: 5 # was 1
+                  failureThreshold: 6 # was 3
               readiness: *probes
             securityContext:
               runAsUser: 568
