@@ -47,7 +47,7 @@ spec:
             args: ["daemon"]
             probes:
               startup:
-                enabled: true
+                enabled: false # doesn't recover properly when crashing during search because api server locks up
                 custom: true
                 spec:
                   httpGet:
@@ -58,7 +58,7 @@ spec:
                   failureThreshold: 60
                   timeoutSeconds: 5
               liveness: &probes
-                enabled: true
+                enabled: false # doesn't recover properly when crashing during search because api server locks up
                 custom: true
                 spec:
                   httpGet:
