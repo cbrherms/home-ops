@@ -67,6 +67,11 @@ filters:
       - { name: site:TL,       update: ['TrackerName in ["tleechreload.org", "torrentleech.org"]'] }
       - { name: site:UHD,      update: ['TrackerName == "uhdbits.org"'] }
       - { name: site:ULCX,     update: ['TrackerName == "upload.cx"'] }
-      - { name: cross-seed,    update: ['Label == "cross-seed"'] }
       - { name: tracker-down,  update: ['IsTrackerDown()'] }
       - { name: unregistered,  update: ['IsUnregistered()'] }
+      - { name: cross-seed,    update: ['Label == "cross-seed"'] }
+      - {
+          name: cross-seed:partial,
+          mode: add,
+          update: ['Downloaded == false && Label == "cross-seed"']
+        }
