@@ -1,0 +1,145 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app qbit-02
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+  - name: longhorn
+    namespace: longhorn-system
+  - name: volsync
+    namespace: volsync-system
+  values:
+    controllers:
+      qbit-02:
+        labels:
+          nfsMount: "true"
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/home-operations/qbittorrent
+              tag: 5.1.2@sha256:31ac39705e31f7cdcc04dc46c1c0b0cdf8dc6f9865d4894efc097a33adc41524
+            env:
+              TZ: ${TIMEZONE}
+              QBT_WEBUI_PORT: &port 80
+              QBT_TORRENTING_PORT: &torrentPort 50414
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 25m
+                memory: 1Gi
+              limits:
+                memory: 8Gi
+    defaultPodOptions:
+      terminationGracePeriodSeconds: 120
+#      affinity:
+#        podAntiAffinity:
+#          preferredDuringSchedulingIgnoredDuringExecution:
+#            - weight: 100
+#              podAffinityTerm:
+#                labelSelector:
+#                  matchExpressions:
+#                    - key: app.kubernetes.io/name
+#                      operator: In
+#                      values: ["sabnzbd"]
+#                topologyKey: kubernetes.io/hostname
+    service:
+      app:
+        controller: *app
+        nameOverride: *app
+        ports:
+          http:
+            port: *port
+      bittorrent:
+        controller: *app
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: "192.168.0.88"
+        ports:
+          bittorrent:
+            enabled: true
+            port: *torrentPort
+            protocol: TCP
+    ingress:
+      app:
+        className: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Media Management
+          gethomepage.dev/name: qBit-02
+          gethomepage.dev/icon: qbittorrent.png
+          gethomepage.dev/description: Torrent Client
+          gethomepage.dev/widget.type: qbittorrent
+          gethomepage.dev/widget.url: http://qbit-02.default.svc.cluster.local
+          gethomepage.dev/widget.username: "{{ `{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}` }}"
+          gethomepage.dev/widget.password: "{{ `{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}` }}"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_hide_header "x-webkit-csp";
+            proxy_hide_header "content-security-policy";
+            proxy_hide_header "X-Frame-Options";
+        hosts:
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    configMaps:
+      config:
+        data:
+          .qbt.toml: |-
+            [qbittorrent]
+            addr = "http://localhost:80"
+    persistence:
+      config:
+        existingClaim: *app
+      config-file:
+        type: configMap
+        identifier: config
+        globalMounts:
+          - path: /config/.qbt.toml
+            subPath: .qbt.toml
+      media:
+        type: nfs
+        server: unraid.lan.${SECRET_DOMAIN}
+        path: /mnt/user/data/Media
+        globalMounts:
+          - path: /media
+      tmp:
+        type: emptyDir
