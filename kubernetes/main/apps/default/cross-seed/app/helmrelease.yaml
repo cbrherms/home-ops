@@ -68,8 +68,8 @@ spec:
                     path: /api/ping
                     port: *port
                   periodSeconds: 10
-                  timeoutSeconds: 5 # was 1
-                  failureThreshold: 6 # was 3
+                  timeoutSeconds: 60 # was 1
+                  failureThreshold: 5 # was 3
               readiness: *probes
             securityContext:
               runAsUser: 568
