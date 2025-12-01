@@ -117,11 +117,10 @@ spec:
         existingClaim: sonarr
       scripts:
         type: configMap
-        name: sonarr-configmap
+        name: sonarr-scripts
         defaultMode: 0775
         globalMounts:
-          - path: /scripts/refresh-series.sh
-            subPath: refresh-series.sh
+          - path: /scripts
             readOnly: true
       tmp:
         type: emptyDir

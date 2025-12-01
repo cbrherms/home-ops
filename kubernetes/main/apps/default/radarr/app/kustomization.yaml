@@ -7,3 +7,11 @@ resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
   - ../../../../../shared/templates/gatus/guarded
+configMapGenerator:
+  - name: radarr-scripts
+    files:
+      - xseed.sh=./resources/xseed.sh
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

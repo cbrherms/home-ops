@@ -8,9 +8,10 @@ resources:
   - ./helmrelease.yaml
   - ../../../../../shared/templates/gatus/guarded
 configMapGenerator:
-  - name: sonarr-configmap
+  - name: sonarr-scripts
     files:
       - refresh-series.sh=./resources/refresh-series.sh
+      - xseed.sh=./resources/xseed.sh
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
