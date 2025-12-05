@@ -47,7 +47,7 @@ spec:
               MAX_DOWNLOADS: 10
               SET_ASIDE: 10
               DEBUG: 0
-              TORRENT_DIR: "/media/downloads/watched/myanonamouse/ratio"
+              TORRENT_DIR: "/media/downloads/qbittorrent-02/watched/myanonamouse/ratio"
               MAM_ID:
                 valueFrom:
                   secretKeyRef:
