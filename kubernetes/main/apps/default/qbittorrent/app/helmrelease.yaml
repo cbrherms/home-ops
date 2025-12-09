@@ -102,7 +102,7 @@ spec:
         annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media Management
-          gethomepage.dev/name: qBittorrent
+          gethomepage.dev/name: qBit-01
           gethomepage.dev/icon: qbittorrent.png
           gethomepage.dev/description: Torrent Client
           gethomepage.dev/widget.type: qbittorrent
