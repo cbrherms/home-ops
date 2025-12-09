@@ -84,6 +84,13 @@ spec:
     ingress:
       app:
         className: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Media Management
+          gethomepage.dev/name: qui
+          gethomepage.dev/href: "https://qui.${SECRET_DOMAIN}"
+          gethomepage.dev/icon: "https://raw.githubusercontent.com/autobrr/qui/refs/heads/main/web/public/qui.png"
+          gethomepage.dev/description: Multi Instance qBittorrent WebUI
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
