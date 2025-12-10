@@ -46,8 +46,9 @@ spec:
               timezone: Europe/London
               environment: production
               disablesmtp: false
-              smtphost: smtp-relay.network.svc.cluster.local
+              smtphost: smtp.sendgrid.net
               smtpport: 25
+              smtpusername: apikey
               smtpfrom: "wishlists@noreply.${SECRET_DOMAIN}"
             envFrom: *envFrom
             probes:
