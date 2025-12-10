@@ -45,7 +45,6 @@ spec:
               externalurl: "https://wishlists.${SECRET_DOMAIN}"
               timezone: Europe/London
               environment: production
-              generateinvite: true
               disablesmtp: false
               smtphost: smtp-relay.network.svc.cluster.local
               smtpport: 25
