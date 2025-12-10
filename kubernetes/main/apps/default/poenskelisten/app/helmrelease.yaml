@@ -43,6 +43,7 @@ spec:
             env:
               port: &port 80
               externalurl: "https://wishlists.${SECRET_DOMAIN}"
+              name: "Wishlists"
               timezone: Europe/London
               environment: production
               disablesmtp: false
