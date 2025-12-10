@@ -37,8 +37,8 @@ spec:
             env:
               SMTP_RELAY_SMTP_PORT: &port 25
               SMTP_RELAY_METRICS_PORT: &metricsPort 8080
-              SMTP_RELAY_SERVER_PORT: 465
-              SMTP_SERVER: smtp.sendgrid.net
+              SMTP_RELAY_SERVER_PORT: 2525
+              SMTP_SERVER: mail-eu.smtp2go.com
             envFrom:
               - secretRef:
                   name: smtp-relay-secret
