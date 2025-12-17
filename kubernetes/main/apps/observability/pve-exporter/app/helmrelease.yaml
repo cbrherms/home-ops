@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: ghcr.io/prometheus-pve/prometheus-pve-exporter
-              tag: 3.5.5@sha256:79a5598906697b1a5a006d09f0200528a77c6ff1568faf018539ac65824454df
+              tag: 3.7.0@sha256:f5266117e8b3db1fcf1cb3f9206cf7822d9db82fc1740b8f33f3140c9f24cca9
             envFrom:
               - secretRef:
                   name: pve-exporter-secret
