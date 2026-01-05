@@ -35,7 +35,7 @@ spec:
             image:
               repository: ghcr.io/autobrr/qui
               # renovate: datasource=docker depName=ghcr.io/autobrr/qui
-              tag: v1.10.0@sha256:8f0917e66df1aa9935d79d525df95009a3d0a07c520de117ef519c49e1f120f4
+              tag: v1.12.0@sha256:b3b18f82f340642fc19ffb8935c112673008e7e6ae0ead5b6e8bb39c9b4462a3
             env:
               QUI__HOST: 0.0.0.0
               QUI__PORT: &port 80
