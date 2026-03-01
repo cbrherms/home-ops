@@ -23,6 +23,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_SUBDOMAIN: seerr
+      GATUS_SUBDOMAIN: plexrequests
       GATUS_PATH: /api/v1/status
       VOLSYNC_CAPACITY: 5Gi
