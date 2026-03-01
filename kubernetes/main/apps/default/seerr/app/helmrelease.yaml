@@ -99,7 +99,7 @@ spec:
           gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_SEERR_TOKEN}}` }}"
         className: external
         hosts:
-          - host: seerr.${SECRET_DOMAIN}
+          - host: plexrequests.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:

@@ -10,7 +10,7 @@ resources:
   - ./cross-seed/ks.yaml
   - ./flaresolverr/ks.yaml
   - ./homepage/ks.yaml
-  - ./jellyseerr/ks.yaml
+#  - ./jellyseerr/ks.yaml
   - ./lubelogger/ks.yaml
   - ./plex/ks.yaml
   - ./poenskelisten/ks.yaml
