@@ -39,7 +39,7 @@ spec:
           app:
             image:
               repository: ghcr.io/aunefyren/poenskelisten
-              tag: v2.2.1
+              tag: v2.3.0
             env:
               port: &port 80
               externalurl: "https://wishlists.${SECRET_DOMAIN}"
