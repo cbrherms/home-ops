@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/autobrr/autobrr
-              tag: v1.74.0@sha256:6f37217bbc0496fff0c7ffb4264545036bf735775e484188b80b31f21daa06e2
+              tag: v1.77.1@sha256:26796bb64ad4cd5956def3e171d485daf7353e952b603f9602d44836e4c9b314
             env:
               TZ: ${TIMEZONE}
               AUTOBRR__CHECK_FOR_UPDATES: "false"
