@@ -1,0 +1,47 @@
+[env]
+_.python.venv = { path = "{{config_root}}/.venv", create = true }
+KUBECONFIG = "{{config_root}}/kubernetes/main/kubeconfig"
+TALOSCONFIG = "{{config_root}}/kubernetes/main/bootstrap/talos/clusterconfig/talosconfig"
+SOPS_CONFIG = "{{config_root}}/.sops.yaml"
+SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
+MINIJINJA_CONFIG_FILE = "{{config_root}}/.minijinja.toml"
+JUST_UNSTABLE = "1"
+LEFTHOOK_OUTPUT = "true"
+TASK_X_ENV_PRECEDENCE = "1"
+TASK_X_MAP_VARIABLES = "0"
+
+_.file = [
+  "{{config_root}}/.secrets.env",
+]
+
+[tools]
+python = "3.14.5"
+"uv" = "0.11.16"
+"pipx:makejinja" = "2.8.2"
+"pipx:flux-local" = "8.2.0"
+"aqua:budimanjojo/talhelper" = "3.1.10"
+"aqua:charmbracelet/gum" = "0.17.0"
+"aqua:cilium/cilium-cli" = "0.19.4"
+"aqua:cli/cli" = "2.93.0"
+"aqua:cloudflare/cloudflared" = "2026.5.2"
+"aqua:FiloSottile/age" = "1.3.1"
+"aqua:fluxcd/flux2" = "2.8.8"
+"aqua:go-task/task" = "3.51.1"
+"aqua:google/yamlfmt" = "0.21.0"
+"aqua:evilmartians/lefthook" = "2.1.8"
+"aqua:helmfile/helmfile" = "1.5.2"
+"aqua:jqlang/jq" = "1.8.1"
+"aqua:koalaman/shellcheck" = "0.11.0"
+"aqua:kubernetes/kubectl" = "1.33.6"            # pinned to match cluster
+"aqua:kubernetes-sigs/kustomize" = "5.7.1"
+"aqua:mikefarah/yq" = "4.53.2"
+"aqua:casey/just" = "1.51.0"
+"aqua:helm/helm" = "4.2.0"
+"aqua:mitsuhiko/minijinja" = "2.20.0"
+"aqua:getsops/sops" = "3.13.1"
+"aqua:siderolabs/talos" = "1.10.7"              # pinned to match cluster
+"aqua:yannh/kubeconform" = "0.7.0"
+"aqua:zizmorcore/zizmor" = "1.25.2"
+
+[hooks]
+postinstall = "lefthook install"
