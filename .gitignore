@@ -28,3 +28,5 @@ wiki
 /config.yaml
 # Local tooling and temporary manifests
 /.local
+# Mise
+.mise.local.toml
