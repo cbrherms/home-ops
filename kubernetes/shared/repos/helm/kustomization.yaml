@@ -18,7 +18,6 @@ resources:
   - ./k8s-gateway.yaml
   - ./backube.yaml
   - ./piraeus.yaml
-  - ./kubernetes-dashboard.yaml
   - ./grafana.yaml
   - ./external-secrets.yaml
   - ./christianhuth.yaml
