@@ -3,7 +3,8 @@
 - { name: "area/bootstrap",          color: "0e8a16" }
 - { name: "area/github",             color: "0e8a16" }
 - { name: "area/kubernetes",         color: "0e8a16" }
-- { name: "area/taskfile",           color: "0e8a16" }
+- { name: "area/mise",               color: "0e8a16" }
+- { name: "area/justfile",           color: "0e8a16" }
 # Clusters
 - { name: "cluster/main",            color: "ffc300" }
 # Distro
