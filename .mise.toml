@@ -39,6 +39,7 @@ python = "3.14.5"
 "aqua:siderolabs/talos" = "1.10.7"              # pinned to match cluster
 "aqua:yannh/kubeconform" = "0.7.0"
 "aqua:zizmorcore/zizmor" = "1.25.2"
+"aqua:BurntSushi/ripgrep" = "15.1.0"
 
 [hooks]
 postinstall = "lefthook install"
