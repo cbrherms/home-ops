@@ -2,52 +2,55 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
-      "description": ["Auto-merge container digests updates for trusted containers"],
+      "description": "Auto-merge container digests for trusted containers",
       "matchDatasources": ["docker"],
       "automerge": true,
       "automergeType": "branch",
       "matchUpdateTypes": ["digest"],
-      "ignoretests": false,
-      "matchPackagePatterns": [
+      "ignoreTests": true,
+      "matchPackagePrefixes": [
         "ghcr.io/bjw-s",
         "ghcr.io/onedr0p",
         "ghcr.io/home-operations"
       ]
     },
     {
-      "description": ["Auto-merge GitHub Actions"],
-      "matchManagers": ["github-actions"],
-      "matchDatasources": ["github-tags"],
+      "description": "Auto-merge Mise tools",
+      "matchManagers": ["mise"],
       "automerge": true,
       "automergeType": "branch",
-      "matchUpdateTypes": ["minor", "patch", "digest"],
-      "minimumReleaseAge": "3 days"
+      "matchUpdateTypes": ["minor", "patch"],
+      "ignoreTests": true,
+      "matchPackageNames": [
+        "!aqua:siderolabs/talos",
+        "!aqua:kubernetes/kubectl"
+      ]
     },
     {
-      "matchDatasources": [
-        "docker",
-        "github-actions",
-        "github-releases",
-        "github-tags",
-        "helm"
-      ],
+      "description": "Auto-merge GitHub Actions",
+      "matchManagers": ["github-actions"],
       "automerge": true,
       "automergeType": "branch",
-      "ignoretests": false,
       "matchUpdateTypes": ["minor", "patch", "digest"],
-      "matchDepNames": [
-        "ghcr.io/fallenbagel/jellyseerr",
+      "minimumReleaseAge": "3 days",
+      "ignoreTests": true
+    },
+    {
+      "description": "Auto-merge trusted container and helm minor/patch updates",
+      "matchDatasources": ["docker", "helm"],
+      "automerge": true,
+      "automergeType": "branch",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "ghcr.io/seerr-team/seerr",
         "ghcr.io/home-operations/bazarr",
         "ghcr.io/home-operations/prowlarr",
         "ghcr.io/home-operations/radarr",
-        "ghcr.io/home-operations/sabnzbd",
         "ghcr.io/home-operations/sonarr",
+        "ghcr.io/home-operations/sabnzbd",
         "ghcr.io/home-operations/tautulli",
-        "ghcr.io/twin/gatus",
-        "grafana"
-      ],
-      "schedule": ["after 2am and before 6am"],
-      "stabilityDays": 1
+        "ghcr.io/twin/gatus"
+      ]
     }
   ]
 }
