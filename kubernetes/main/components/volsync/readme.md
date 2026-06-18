@@ -1,4 +1,4 @@
-# VolSync Template
+# VolSync Component
 
 Because I will most definitely forget.......
 
@@ -20,14 +20,18 @@ spec:
       VOLSYNC_CAPACITY: 5Gi
 ```
 
-and then call the template in your applications `kustomization.yaml`
+and then reference the component in the Flux Kustomization's `ks.yaml`
 
 ```yaml
-apiVersion: kustomize.config.k8s.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
-resources:
+metadata:
+  name: &app plex
+  namespace: flux-system
+spec:
   # ...
-  ../../../../../shared/templates/volsync
+  components:
+    - ../../../../components/volsync
 ```
 
 ## Required `postBuild` vars:
