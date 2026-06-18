@@ -43,12 +43,16 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": [
         "ghcr.io/seerr-team/seerr",
+        "ghcr.io/autobrr/autobrr",
+        "ghcr.io/autobrr/qui",
+        "ghcr.io/hargata/lubelogger",
         "ghcr.io/home-operations/bazarr",
         "ghcr.io/home-operations/prowlarr",
         "ghcr.io/home-operations/radarr",
         "ghcr.io/home-operations/sonarr",
         "ghcr.io/home-operations/sabnzbd",
         "ghcr.io/home-operations/tautulli",
+        "ghcr.io/home-operations/tqm",
         "ghcr.io/twin/gatus"
       ]
     }
