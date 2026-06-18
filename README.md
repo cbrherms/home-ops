@@ -56,11 +56,11 @@ This Git repostories contains the following directories under [Kubernetes](https
 ├── 📁 main            # main cluster
 │   ├── 📁 apps        # applications
 │   ├── 📁 bootstrap   # bootstrap procedures
+│   ├── 📁 components  # reusable components
 │   ├── 📁 flux        # core flux configuration
 ├── 📁 shared          # shared cluster resources
 │   ├── 📁 repos       # shared repos
 │   ├── 📁 settings    # shared settings and secrets
-│   ├── 📁 templates   # re-usable compponents
 ```
 
 ---

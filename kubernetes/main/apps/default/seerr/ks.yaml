@@ -14,6 +14,9 @@ spec:
     - name: volsync
   path: ./kubernetes/main/apps/default/seerr/app
   prune: true
+  components:
+    - ../../../../components/gatus/external
+    - ../../../../components/volsync
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

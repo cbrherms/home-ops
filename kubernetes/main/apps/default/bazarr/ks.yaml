@@ -15,6 +15,9 @@ spec:
     - name: volsync
   path: ./kubernetes/main/apps/default/bazarr/app
   prune: true
+  components:
+    - ../../../../components/gatus/guarded
+    - ../../../../components/volsync
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
