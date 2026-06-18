@@ -14,6 +14,9 @@ spec:
     - name: volsync
   path: ./kubernetes/main/apps/default/qbittorrent/app
   prune: true
+  components:
+    - ../../../../components/gatus/guarded
+    - ../../../../components/volsync
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -41,6 +44,9 @@ spec:
     - name: volsync
   path: ./kubernetes/main/apps/default/qbittorrent/qbit-02
   prune: true
+  components:
+    - ../../../../components/gatus/guarded
+    - ../../../../components/volsync
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -67,6 +73,8 @@ spec:
     - name: volsync
   path: ./kubernetes/main/apps/default/qbittorrent/mam-scripts
   prune: true
+  components:
+    - ../../../../components/volsync
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

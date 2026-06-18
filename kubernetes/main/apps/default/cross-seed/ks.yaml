@@ -12,6 +12,8 @@ spec:
       app.kubernetes.io/name: *app
   path: ./kubernetes/main/apps/default/cross-seed/app
   prune: true
+  components:
+    - ../../../../components/volsync
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

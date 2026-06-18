@@ -9,6 +9,8 @@ spec:
   targetNamespace: database-system
   path: ./kubernetes/main/apps/database-system/phpmyadmin/app
   prune: true
+  components:
+    - ../../../../components/gatus/guarded
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

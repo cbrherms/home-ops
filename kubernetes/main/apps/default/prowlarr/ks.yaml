@@ -15,6 +15,8 @@ spec:
     - name: external-secrets-stores
   path: ./kubernetes/main/apps/default/prowlarr/app
   prune: true
+  components:
+    - ../../../../components/gatus/guarded
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

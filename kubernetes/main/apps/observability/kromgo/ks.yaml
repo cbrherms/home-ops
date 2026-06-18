@@ -12,6 +12,8 @@ spec:
       app.kubernetes.io/name: *app
   path: ./kubernetes/main/apps/observability/kromgo/app
   prune: true
+  components:
+    - ../../../../components/gatus/external
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
