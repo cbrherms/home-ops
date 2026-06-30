@@ -43,7 +43,7 @@ jobs:
 
       - name: Write kubeconfig
         id: kubeconfig
-        uses: timheuer/base64-to-file@v1
+        uses: timheuer/base64-to-file@v2
         with:
           encodedString: ${{ env.KUBECONFIG }}
           fileName: kubeconfig
