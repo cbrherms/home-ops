@@ -15,12 +15,14 @@ default:
 # TODO: add 'just volsync volsync suspend' here once volsync module is verified
 [private]
 _down:
+    echo "Waiting for all cluster jobs to complete..."
     until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
 
 # Wait for all cluster jobs to settle after a disruptive operation
 # TODO: add 'just volsync volsync resume' here once volsync module is verified
 [private]
 _up:
+    echo "Waiting for cluster to settle..."
     until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
 
 [doc('Show current TALOSCONFIG path')]
