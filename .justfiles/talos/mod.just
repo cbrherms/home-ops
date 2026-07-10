@@ -15,14 +15,14 @@ default:
 # TODO: add 'just volsync volsync suspend' here once volsync module is verified
 [private]
 _down:
-    echo "Waiting for all cluster jobs to complete..."
+    echo "==> Waiting for all cluster jobs to complete..."
     until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
 
 # Wait for all cluster jobs to settle after a disruptive operation
 # TODO: add 'just volsync volsync resume' here once volsync module is verified
 [private]
 _up:
-    echo "Waiting for cluster to settle..."
+    echo "==> Waiting for cluster to settle..."
     until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
 
 [doc('Show current TALOSCONFIG path')]
@@ -71,19 +71,19 @@ reboot-node node: _down
         node_ip=$(yq '.nodes[] | select(.hostname == "{{ node }}") | .ipAddress' {{ _talos_dir }}/talconfig.yaml)
         [[ -z "$node_ip" ]] && { echo "Error: no IP found for hostname $node_name in talconfig.yaml"; exit 1; }
     fi
-    echo "Cordoning ${node_name}..."
+    echo "==> Cordoning ${node_name}..."
     kubectl cordon "${node_name}"
-    echo "Draining ${node_name}..."
+    echo "==> Draining ${node_name}..."
     kubectl drain "${node_name}" \
         --ignore-daemonsets \
         --delete-emptydir-data \
         --timeout=300s
-    echo "Rebooting ${node_name} (${node_ip})..."
+    echo "==> Rebooting ${node_name} (${node_ip})..."
     talosctl --nodes "${node_ip}" reboot
     sleep 15
-    echo "Waiting for ${node_name} to become healthy..."
+    echo "==> Waiting for ${node_name} to become healthy..."
     talosctl --nodes "${node_ip}" health --wait-timeout=10m --server=false
-    echo "Uncordoning ${node_name}..."
+    echo "==> Uncordoning ${node_name}..."
     kubectl uncordon "${node_name}"
     just talos _up
 
