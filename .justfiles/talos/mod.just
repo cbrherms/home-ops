@@ -2,7 +2,9 @@ set quiet
 set script-interpreter := ['bash', '-euo', 'pipefail']
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
+[private]
 _cluster_dir := justfile_directory() + "/kubernetes/main"
+[private]
 _talos_dir := justfile_directory() + "/kubernetes/main/bootstrap/talos"
 
 [private]
@@ -55,6 +57,34 @@ upgrade-node hostname: _down
     talosctl --nodes {{ hostname }} health --wait-timeout=10m --server=false
     just talos _up
 
+[doc('Cleanly reboot a single Talos node - hostname or IP')]
+[script]
+reboot-node node: _down
+    if [[ "{{ node }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        node_ip="{{ node }}"
+        node_name=$(kubectl get nodes -o wide --no-headers | awk -v ip="$node_ip" '$6 == ip {print $1}')
+        [[ -z "$node_name" ]] && { echo "Error: no node found with IP $node_ip"; exit 1; }
+    else
+        node_name="{{ node }}"
+        node_ip=$(yq '.nodes[] | select(.hostname == "{{ node }}") | .ipAddress' {{ _talos_dir }}/talconfig.yaml)
+        [[ -z "$node_ip" ]] && { echo "Error: no IP found for hostname $node_name in talconfig.yaml"; exit 1; }
+    fi
+    echo "Cordoning ${node_name}..."
+    kubectl cordon "${node_name}"
+    echo "Draining ${node_name}..."
+    kubectl drain "${node_name}" \
+        --ignore-daemonsets \
+        --delete-emptydir-data \
+        --timeout=300s
+    echo "Rebooting ${node_name} (${node_ip})..."
+    talosctl --nodes "${node_ip}" reboot
+    sleep 15
+    echo "Waiting for ${node_name} to become healthy..."
+    talosctl --nodes "${node_ip}" health --wait-timeout=10m --server=false
+    echo "Uncordoning ${node_name}..."
+    kubectl uncordon "${node_name}"
+    just talos _up
+
 [doc('Upgrade Kubernetes across the cluster')]
 [script]
 upgrade-k8s:
@@ -62,8 +92,8 @@ upgrade-k8s:
     k8s_version=$(yq '.kubernetesVersion' {{ _talos_dir }}/talconfig.yaml)
     talosctl --nodes "$controller" upgrade-k8s --to "$k8s_version"
 
-[doc('Reset nodes back to maintenance mode (destructive)')]
 [confirm('This will destroy your cluster and reset nodes to maintenance mode. Continue?')]
+[doc('Reset nodes back to maintenance mode (destructive)')]
 reset:
     talhelper gencommand reset \
         --config-file {{ _talos_dir }}/talconfig.yaml \
