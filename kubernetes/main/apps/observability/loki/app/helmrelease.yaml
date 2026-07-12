@@ -62,7 +62,7 @@ spec:
       persistence:
         enabled: true
         storageClass: longhorn
-        size: 50Gi
+        size: 100Gi
     gateway:
       replicas: 0
     backend:
