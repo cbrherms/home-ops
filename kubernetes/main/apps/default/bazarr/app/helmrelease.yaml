@@ -46,6 +46,7 @@ spec:
               repository: ghcr.io/home-operations/bazarr
               tag: 1.6.0@sha256:cd63bbd0986c93e238eb8b9442604d249f0d4080099b389f822abe2062044417
             env:
+              BAZARR__PORT: &port 80
               TZ: Europe/London
             envFrom:
               - secretRef:
@@ -63,7 +64,7 @@ spec:
                 spec:
                   httpGet:
                     path: /api/system/ping
-                    port: &port 6767
+                    port: *port
                   periodSeconds: 10
                   timeoutSeconds: 5
                   failureThreshold: 5
@@ -120,7 +121,7 @@ spec:
           gethomepage.dev/icon: bazarr.png
           gethomepage.dev/name: Bazarr
           gethomepage.dev/widget.type: bazarr
-          gethomepage.dev/widget.url: http://bazarr.default.svc.cluster.local:6767
+          gethomepage.dev/widget.url: http://bazarr.default.svc.cluster.local
           gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_BAZARR_TOKEN}}` }}"
         className: internal
         hosts:
