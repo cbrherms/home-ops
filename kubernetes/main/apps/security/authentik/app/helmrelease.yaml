@@ -86,6 +86,7 @@ spec:
           gethomepage.dev/app: authentik
           gethomepage.dev/description: OIDC User Management
           gethomepage.dev/widget.type: authentik
+          gethomepage.dev/widget.version: "2"
           gethomepage.dev/widget.url: http://authentik-server.security.svc.cluster.local
           gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_AUTHENTIK_TOKEN}}"
         hosts:
