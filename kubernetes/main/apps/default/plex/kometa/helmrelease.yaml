@@ -100,7 +100,7 @@ spec:
           app:
             image:
               repository: ghcr.io/cbrherms/kometa
-              tag: v2.4.4@sha256:ebd3321c2f964b1c7303ff2ddad91e3cf0e7640a59682afb54350428ccfc246d
+              tag: v2.4.6@sha256:4a2e9db6f6dc955cbbc6a49f30b9f9e615e5a80865a4833680d58be2b11fdbf8
             command:
               - /bin/sh
               - -c
