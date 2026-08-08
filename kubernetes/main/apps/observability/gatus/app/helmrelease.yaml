@@ -39,7 +39,7 @@ spec:
             dependsOn: init-db
             image:
               repository: ghcr.io/kiwigrid/k8s-sidecar
-              tag: 2.8.2@sha256:42a9553a353d98cb5b5c181e1c02dc4950a42785002becb30b1b755d05a146ad
+              tag: 2.10.1@sha256:7eac5c4fed714a18d038fc9fea57d8744d113367935dac0ea4eb6a87cef704a3
               # Issue with 2.x.x causing high RAM usage
               # Issue with 1.30.10+ https://github.com/kiwigrid/k8s-sidecar/issues/431
             env:
