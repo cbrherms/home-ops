@@ -11,7 +11,7 @@ spec:
   stopDelay: 300
   primaryUpdateStrategy: unsupervised
   storage:
-    size: 40Gi
+    size: 80Gi
     storageClass: longhorn
   superuserSecret:
     name: cloudnative-pg-secret
@@ -25,12 +25,12 @@ spec:
       maintenance_work_mem: "256MB"
       random_page_cost: "2.0"
       effective_io_concurrency: "50"
-      seq_page_cost:  "1.0"
+      seq_page_cost: "1.0"
       wal_buffers: "16MB"
       wal_compression: "on"
       checkpoint_completion_target: "0.9"
       max_wal_size: "4GB"
-      autovacuum_max_workers:  "4"
+      autovacuum_max_workers: "4"
       autovacuum_vacuum_scale_factor: "0.1"
   resources:
     requests:
@@ -61,14 +61,14 @@ spec:
         secretAccessKey:
           name: cloudnative-pg-secret
           key: aws-secret-access-key
-  # Note: previousCluster needs to be set to the name of the previous
-  # cluster when recovering from an existing cnpg cluster
-  # bootstrap:
-  #   recovery:
-  #     source: &previousCluster postgres16-v1
-  # # Note: externalClusters is needed when recovering from an existing cnpg cluster
-  # externalClusters:
-  #   - name: *previousCluster
-  #     barmanObjectStore:
-  #       <<: *barmanObjectStore
-  #       serverName: *previousCluster
+          # Note: previousCluster needs to be set to the name of the previous
+          # cluster when recovering from an existing cnpg cluster
+          # bootstrap:
+          #   recovery:
+          #     source: &previousCluster postgres16-v1
+          # # Note: externalClusters is needed when recovering from an existing cnpg cluster
+          # externalClusters:
+          #   - name: *previousCluster
+          #     barmanObjectStore:
+          #       <<: *barmanObjectStore
+          #       serverName: *previousCluster
