@@ -15,15 +15,14 @@ default:
 # TODO: add 'just volsync volsync suspend' here once volsync module is verified
 [private]
 _down:
-    echo "==> Waiting for all cluster jobs to complete..."
-    until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
+    echo "==> Waiting for all cluster jobs to complete (best effort, max 5m)..."
+    if ! timeout 5m bash -c 'until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=30s &>/dev/null; do sleep 5; done'; then echo "==> Timed out waiting for jobs; continuing" >&2; fi
 
 # Wait for all cluster jobs to settle after a disruptive operation
 # TODO: add 'just volsync volsync resume' here once volsync module is verified
 [private]
 _up:
-    echo "==> Waiting for cluster to settle..."
-    until kubectl wait jobs --all --all-namespaces --for=condition=complete --timeout=5m &>/dev/null; do sleep 5; done
+    echo "==> Skipping post-operation cluster settle wait"
 
 [doc('Show current TALOSCONFIG path')]
 test:
@@ -81,10 +80,12 @@ reboot-node node: _down
     echo "==> Rebooting ${node_name} (${node_ip})..."
     talosctl --nodes "${node_ip}" reboot
     sleep 15
-    echo "==> Waiting for ${node_name} to become healthy..."
-    talosctl --nodes "${node_ip}" health --wait-timeout=10m --server=false
+    echo "==> Waiting for ${node_name} to report Ready in Kubernetes..."
+    kubectl wait --for=condition=Ready "node/${node_name}" --timeout=10m
     echo "==> Uncordoning ${node_name}..."
     kubectl uncordon "${node_name}"
+    echo "==> Waiting for ${node_name} to become healthy..."
+    talosctl --nodes "${node_ip}" health --wait-timeout=10m --server=false
     just talos _up
 
 [doc('Upgrade Kubernetes across the cluster')]
