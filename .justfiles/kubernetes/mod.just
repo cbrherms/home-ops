@@ -61,7 +61,9 @@ kubeconform:
 [script]
 resources:
     for r in nodes gitrepositories kustomizations helmrepositories helmreleases certificates certificaterequests ingresses pods; do
+        echo "=== $r ==="
         kubectl get "$r" -A
+        echo
     done
 
 [doc('Upgrade ARC runner scale sets')]
@@ -71,5 +73,3 @@ upgrade-arc:
     sleep 5
     flux -n actions-runner-system reconcile hr gha-runner-scale-set-controller
     flux -n actions-runner-system reconcile hr gha-runner-scale-set
-
-
