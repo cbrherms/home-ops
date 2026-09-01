@@ -25,7 +25,7 @@ metadata:
 spec:
   interval: 30m
   path: ./kubernetes/shared
-  prune: true
+  prune: false # temporarily disabled during Phase 1b migration
   wait: true
   sourceRef:
     kind: GitRepository
