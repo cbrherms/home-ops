@@ -2,9 +2,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cluster-settings-main
+  name: cluster-settings
   namespace: flux-system
 data:
+  ## Shared
+  TIMEZONE: "Europe/London"
   ## Main
   CLUSTER: main
   PVC_VOLSYNC_STORAGECLASS: longhorn
