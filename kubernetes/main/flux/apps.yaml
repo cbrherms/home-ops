@@ -20,13 +20,7 @@ spec:
       - name: cluster-settings
         kind: ConfigMap
         optional: true
-      - name: cluster-settings-main
-        kind: ConfigMap
-        optional: true
       - name: cluster-secrets
-        kind: Secret
-        optional: true
-      - name: cluster-secrets-main
         kind: Secret
         optional: true
   patches:
@@ -45,13 +39,7 @@ spec:
               - name: cluster-settings
                 kind: ConfigMap
                 optional: true
-              - name: cluster-settings-main
-                kind: ConfigMap
-                optional: true
               - name: cluster-secrets
-                kind: Secret
-                optional: true
-              - name: cluster-secrets-main
                 kind: Secret
                 optional: true
       target:
