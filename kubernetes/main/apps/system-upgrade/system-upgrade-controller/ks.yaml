@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: node-feature-discovery-rules
   path: ./kubernetes/main/apps/system-upgrade/system-upgrade-controller/app
-  prune: true
+  prune: false # temporary for migration
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -43,7 +43,7 @@ spec:
       TALOS_VERSION: v1.10.7
       # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
       KUBERNETES_VERSION: v1.33.6
-  prune: true
+  prune: false # temporary for migration
   retryInterval: 1m
   sourceRef:
     kind: GitRepository
