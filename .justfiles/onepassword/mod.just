@@ -34,16 +34,16 @@ push: push-main
 # Push main cluster kubeconfig and talosconfig to 1Password
 [doc('Push main kubeconfig and talosconfig to 1Password')]
 push-main:
-    op item edit kubernetes KUBECONFIG_MAIN[text]="$(cat {{ justfile_directory() }}/kubernetes/main/kubeconfig)" &>/dev/null
-    op item edit kubernetes TALOSCONFIG_MAIN[text]="$(cat {{ justfile_directory() }}/kubernetes/main/bootstrap/talos/clusterconfig/talosconfig)" &>/dev/null
-    op item edit kubernetes TALOSCONFIG_MAIN_BASE64[text]="$(cat {{ justfile_directory() }}/kubernetes/main/bootstrap/talos/clusterconfig/talosconfig | base64 -w 0)" &>/dev/null
+    op item edit kubernetes KUBECONFIG_MAIN[text]="$(cat {{ justfile_directory() }}/kubeconfig)" &>/dev/null
+    op item edit kubernetes TALOSCONFIG_MAIN[text]="$(cat {{ justfile_directory() }}/bootstrap/talos/clusterconfig/talosconfig)" &>/dev/null
+    op item edit kubernetes TALOSCONFIG_MAIN_BASE64[text]="$(cat {{ justfile_directory() }}/bootstrap/talos/clusterconfig/talosconfig | base64 -w 0)" &>/dev/null
 
 # Pull main cluster kubeconfig and talosconfig from 1Password
 [doc('Pull kubeconfigs from 1Password')]
 pull:
     mkdir -p ~/.kube ~/.talos
-    op item get kubernetes --fields label=KUBECONFIG_MAIN | tr -d '"' > {{ justfile_directory() }}/kubernetes/main/kubeconfig
-    op item get kubernetes --fields label=TALOSCONFIG_MAIN | tr -d '"' > {{ justfile_directory() }}/kubernetes/main/bootstrap/talos/clusterconfig/talosconfig
+    op item get kubernetes --fields label=KUBECONFIG_MAIN | tr -d '"' > {{ justfile_directory() }}/kubeconfig
+    op item get kubernetes --fields label=TALOSCONFIG_MAIN | tr -d '"' > {{ justfile_directory() }}/bootstrap/talos/clusterconfig/talosconfig
     op item get kubernetes --fields label=KUBECONFIG | tr -d '"' > ~/.kube/config
     op item get kubernetes --fields label=TALOSCONFIG_MAIN | tr -d '"' > ~/.talos/config
-    talosctl config merge {{ justfile_directory() }}/kubernetes/main/bootstrap/talos/clusterconfig/talosconfig --talosconfig ~/.talos/config
+    talosctl config merge {{ justfile_directory() }}/bootstrap/talos/clusterconfig/talosconfig --talosconfig ~/.talos/config

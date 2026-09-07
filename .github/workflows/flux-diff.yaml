@@ -107,14 +107,20 @@ jobs:
           ref: ${{ github.event.repository.default_branch }}
           path: default
 
+      - name: Resolve Flux Paths
+        id: resolve-paths
+        run: |
+          [[ -d pull/kubernetes/flux ]] && echo "pull=/github/workspace/pull/kubernetes/flux" >> "$GITHUB_OUTPUT" || echo "pull=/github/workspace/pull/kubernetes/main/flux" >> "$GITHUB_OUTPUT"
+          [[ -d default/kubernetes/flux ]] && echo "default=/github/workspace/default/kubernetes/flux" >> "$GITHUB_OUTPUT" || echo "default=/github/workspace/default/kubernetes/main/flux" >> "$GITHUB_OUTPUT"
+
       - name: Diff Resources
         uses: docker://ghcr.io/allenporter/flux-local:v7.11.0@sha256:5e815fabc544d56adaed7b815c6243eca4776ef83b9a11bec370fd888196de03
         with:
           args: >-
             diff ${{ matrix.resources }}
             --unified 6
-            --path /github/workspace/pull/kubernetes/main/flux
-            --path-orig /github/workspace/default/kubernetes/main/flux
+            --path ${{ steps.resolve-paths.outputs.pull }}
+            --path-orig ${{ steps.resolve-paths.outputs.default }}
             --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
             --limit-bytes 10000
             --all-namespaces
@@ -125,6 +131,13 @@ jobs:
         id: diff
         run: |
           cat diff.patch;
+          # Cap the comment body — a huge diff (e.g. a structural path rename touching every
+          # Kustomization) can blow past argv/env limits when passed to the comment action.
+          if [[ $(wc -c < diff.patch) -gt 60000 ]]; then
+            head -c 60000 diff.patch > diff.patch.truncated
+            echo '... (diff truncated, see full output in the job log)' >> diff.patch.truncated
+            mv diff.patch.truncated diff.patch
+          fi
           {
               echo 'diff<<EOF'
               cat diff.patch
