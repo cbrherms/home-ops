@@ -131,6 +131,13 @@ jobs:
         id: diff
         run: |
           cat diff.patch;
+          # Cap the comment body — a huge diff (e.g. a structural path rename touching every
+          # Kustomization) can blow past argv/env limits when passed to the comment action.
+          if [[ $(wc -c < diff.patch) -gt 60000 ]]; then
+            head -c 60000 diff.patch > diff.patch.truncated
+            echo '... (diff truncated, see full output in the job log)' >> diff.patch.truncated
+            mv diff.patch.truncated diff.patch
+          fi
           {
               echo 'diff<<EOF'
               cat diff.patch
