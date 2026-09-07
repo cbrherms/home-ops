@@ -2,8 +2,8 @@ set quiet
 set script-interpreter := ['bash', '-euo', 'pipefail']
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
-_cluster_dir := justfile_directory() + "/kubernetes/main"
-_talos_dir := justfile_directory() + "/kubernetes/main/bootstrap/talos"
+_cluster_dir := justfile_directory() + "/kubernetes"
+_talos_dir := justfile_directory() + "/bootstrap/talos"
 _sops_age_key := justfile_directory() + "/age.key"
 
 [private]
@@ -85,8 +85,8 @@ secrets:
         fi
     done
 
-[doc('Post-bootstrap cleanup - removes template scaffolding (one-time operation)')]
 [confirm('This will delete CI test files and move bootstrap/makejinja artifacts to .private/. Continue?')]
+[doc('Post-bootstrap cleanup - removes template scaffolding (one-time operation)')]
 [script]
 clean:
     ts=$(date +%s)

@@ -1,16 +1,14 @@
 [env]
 _.python.venv = { path = "{{config_root}}/.venv", create = true }
-KUBECONFIG = "{{config_root}}/kubernetes/main/kubeconfig"
-TALOSCONFIG = "{{config_root}}/kubernetes/main/bootstrap/talos/clusterconfig/talosconfig"
+
+_.file = ["{{config_root}}/.secrets.env"]
+KUBECONFIG = "{{config_root}}/kubeconfig"
+TALOSCONFIG = "{{config_root}}/bootstrap/talos/clusterconfig/talosconfig"
 SOPS_CONFIG = "{{config_root}}/.sops.yaml"
 SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
 MINIJINJA_CONFIG_FILE = "{{config_root}}/.minijinja.toml"
 JUST_UNSTABLE = "1"
 LEFTHOOK_OUTPUT = "true"
-
-_.file = [
-  "{{config_root}}/.secrets.env",
-]
 
 [tools]
 python = "3.14.7"
@@ -29,14 +27,14 @@ python = "3.14.7"
 "aqua:helmfile/helmfile" = "1.7.4"
 "aqua:jqlang/jq" = "1.8.1"
 "aqua:koalaman/shellcheck" = "0.11.0"
-"aqua:kubernetes/kubectl" = "1.33.6"            # pinned to match cluster
+"aqua:kubernetes/kubectl" = "1.33.6"       # pinned to match cluster
 "aqua:kubernetes-sigs/kustomize" = "5.7.1"
 "aqua:mikefarah/yq" = "4.53.6"
 "aqua:casey/just" = "1.58.0"
 "aqua:helm/helm" = "4.2.4"
 "aqua:mitsuhiko/minijinja" = "2.24.0"
 "aqua:getsops/sops" = "3.13.3"
-"aqua:siderolabs/talos" = "1.14.0"              # pinned to match cluster
+"aqua:siderolabs/talos" = "1.14.0"         # pinned to match cluster
 "aqua:yannh/kubeconform" = "0.8.0"
 "aqua:zizmorcore/zizmor" = "1.30.0"
 "aqua:BurntSushi/ripgrep" = "15.2.0"

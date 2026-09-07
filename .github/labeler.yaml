@@ -23,8 +23,3 @@ area/justfile:
           - '.justfile'
           - '.justfiles/**/*'
           - '**/*.just'
-
-# Cluster
-cluster/main:
-  - changed-files:
-      - any-glob-to-any-file: 'kubernetes/main/**/*'

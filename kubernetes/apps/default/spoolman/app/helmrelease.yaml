@@ -1,0 +1,93 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: spoolman
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      spoolman:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.6.0@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
+            envFrom: &envFrom
+              - secretRef:
+                  name: spoolman-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/donkie/spoolman
+              tag: 0.26.1
+            env:
+              TZ: Europe/London
+              SPOOLMAN_DB_TYPE: postgres
+            envFrom: *envFrom
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+            resources:
+              requests:
+                cpu: 25m
+                memory: 500M
+                #            securityContext:
+                #              allowPrivilegeEscalation: false
+                #              readOnlyRootFilesystem: true
+                #              capabilities: { drop: ["ALL"] }
+                #    defaultPodOptions:
+                #      securityContext:
+                #        runAsNonRoot: true
+                #        runAsUser: 568
+                #        runAsGroup: 568
+                #        fsGroup: 568
+                #        fsGroupChangePolicy: OnRootMismatch
+                #        supplementalGroups: [10000]
+                #        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: spoolman
+        ports:
+          http:
+            port: 8000
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: &host spoolman.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host

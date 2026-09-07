@@ -3,9 +3,9 @@ set script-interpreter := ['bash', '-euo', 'pipefail']
 set shell := ['bash', '-euo', 'pipefail', '-c']
 
 [private]
-_cluster_dir := justfile_directory() + "/kubernetes/main"
+_cluster_dir := justfile_directory() + "/kubernetes"
 [private]
-_talos_dir := justfile_directory() + "/kubernetes/main/bootstrap/talos"
+_talos_dir := justfile_directory() + "/bootstrap/talos"
 
 [private]
 default:

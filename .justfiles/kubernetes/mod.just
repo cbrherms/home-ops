@@ -9,8 +9,8 @@ default:
 [doc('Apply local Flux Kustomization')]
 apply-ks ns ks:
     flux build --namespace {{ ns }} ks {{ ks }} \
-        --kustomization-file kubernetes/main/apps/{{ ns }}/{{ ks }}/ks.yaml \
-        --path kubernetes/main/apps/{{ ns }}/{{ ks }} \
+        --kustomization-file kubernetes/apps/{{ ns }}/{{ ks }}/ks.yaml \
+        --path kubernetes/apps/{{ ns }}/{{ ks }} \
         | yq 'with(select(.apiVersion == "kustomize.toolkit.fluxcd.io/v1" and .kind == "Kustomization"); .metadata.namespace = "{{ ns }}")' - \
         | kubectl apply --server-side --field-manager=kustomize-controller --filename -
 
@@ -55,7 +55,7 @@ sync resource:
 
 [doc('Validate Kubernetes manifests with kubeconform')]
 kubeconform:
-    bash scripts/kubeconform.sh kubernetes/main
+    bash scripts/kubeconform.sh kubernetes
 
 [doc('Gather common cluster resources')]
 [script]

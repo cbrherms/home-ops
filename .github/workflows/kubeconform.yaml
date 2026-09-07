@@ -10,7 +10,7 @@ on:
       - "kubernetes/**"
 
 env:
-  MAIN_CLUSTER_KUBERNETES_DIR: ./kubernetes/main
+  MAIN_CLUSTER_KUBERNETES_DIR: ./kubernetes
 
 jobs:
   kubeconform:
