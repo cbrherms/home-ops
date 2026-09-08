@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/default/cross-seed/app
-  prune: false # temporary for migration
+  prune: true
   components:
     - ../../../../components/volsync
   sourceRef:

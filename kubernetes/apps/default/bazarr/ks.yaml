@@ -14,7 +14,7 @@ spec:
     - name: external-secrets-stores
     - name: volsync
   path: ./kubernetes/apps/default/bazarr/app
-  prune: false # temporary for migration
+  prune: true
   components:
     - ../../../../components/gatus/guarded
     - ../../../../components/volsync

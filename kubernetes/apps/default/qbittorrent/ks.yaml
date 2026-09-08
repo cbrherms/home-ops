@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: volsync
   path: ./kubernetes/apps/default/qbittorrent/app
-  prune: false # temporary for migration
+  prune: true
   components:
     - ../../../../components/gatus/guarded
     - ../../../../components/volsync
@@ -43,7 +43,7 @@ spec:
     - name: longhorn
     - name: volsync
   path: ./kubernetes/apps/default/qbittorrent/qbit-02
-  prune: false # temporary for migration
+  prune: true
   components:
     - ../../../../components/gatus/guarded
     - ../../../../components/volsync
@@ -72,7 +72,7 @@ spec:
   dependsOn:
     - name: volsync
   path: ./kubernetes/apps/default/qbittorrent/mam-scripts
-  prune: false # temporary for migration
+  prune: true
   components:
     - ../../../../components/volsync
   sourceRef:

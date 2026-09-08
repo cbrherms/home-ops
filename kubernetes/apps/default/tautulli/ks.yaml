@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: volsync
   path: ./kubernetes/apps/default/tautulli/app
-  prune: false # temporary for migration
+  prune: true
   components:
     - ../../../../components/gatus/external
     - ../../../../components/volsync
