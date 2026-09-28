@@ -38,6 +38,7 @@ spec:
       guaranteedEngineManagerCPU: "20"
       guaranteedReplicaManagerCPU: "20"
       orphanAutoDeletion: true
+      nodeDrainPolicy: allow-if-replica-is-stopped
       replicaNodeLevelSoftAntiAffinity: true
       replicaZoneLevelSoftAntiAffinity: true
       defaultDataLocality: best-effort
