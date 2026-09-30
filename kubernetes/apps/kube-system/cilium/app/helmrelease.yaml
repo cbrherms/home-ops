@@ -26,6 +26,9 @@ spec:
   values:
     hubble:
       enabled: true
+      tls:
+        auto:
+          method: cronJob
       metrics:
         enabled:
           - dns:query
