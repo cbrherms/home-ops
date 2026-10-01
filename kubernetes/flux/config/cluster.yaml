@@ -1,30 +1,50 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
 metadata:
-  name: home-kubernetes
+  name: cluster-repos
   namespace: flux-system
 spec:
   interval: 30m
-  url: "https://github.com/cbrherms/home-ops.git"
-  ref:
-    branch: "main"
-  ignore: |
-    # exclude all
-    /*
-    # include kubernetes directory
-    !/kubernetes
+  path: ./kubernetes/flux/repos
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  timeout: 5m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster
+  name: cluster-settings
   namespace: flux-system
 spec:
   interval: 30m
-  path: ./kubernetes/flux
+  path: ./kubernetes/flux/settings
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  wait: true
+  timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps
+  namespace: flux-system
+spec:
+  interval: 30m
+  dependsOn:
+    - name: cluster-repos
+    - name: cluster-settings
+  path: ./kubernetes/apps
   prune: false # revert to true
-  wait: false
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -40,3 +60,26 @@ spec:
       - name: cluster-secrets
         kind: Secret
         optional: true
+  patches:
+    - patch: |-
+        apiVersion: kustomize.toolkit.fluxcd.io/v1
+        kind: Kustomization
+        metadata:
+          name: not-used
+        spec:
+          decryption:
+            provider: sops
+            secretRef:
+              name: sops-age
+          postBuild:
+            substituteFrom:
+              - name: cluster-settings
+                kind: ConfigMap
+                optional: true
+              - name: cluster-secrets
+                kind: Secret
+                optional: true
+      target:
+        group: kustomize.toolkit.fluxcd.io
+        kind: Kustomization
+        labelSelector: substitution.flux.home.arpa/disabled notin (true)
