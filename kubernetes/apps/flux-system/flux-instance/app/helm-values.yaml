@@ -15,7 +15,6 @@ instance:
     - notification-controller
   sync:
     kind: GitRepository
-    name: home-kubernetes
     url: https://github.com/cbrherms/home-ops.git
     ref: refs/heads/main
     path: kubernetes/flux/config
