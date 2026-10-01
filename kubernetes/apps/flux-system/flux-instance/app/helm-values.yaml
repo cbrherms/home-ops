@@ -1,7 +1,7 @@
 ---
 instance:
   distribution:
-    version: "2.9.x"
+    version: "2.8.x"
     registry: ghcr.io/fluxcd
   cluster:
     type: kubernetes
