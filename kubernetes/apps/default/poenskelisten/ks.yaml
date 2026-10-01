@@ -14,7 +14,7 @@ spec:
     - name: moco-cluster
     - name: volsync
   path: ./kubernetes/apps/default/poenskelisten/app
-  prune: true
+  prune: false # revert to true
   components:
     - ../../../../components/volsync
     - ../../../../components/gatus/external
