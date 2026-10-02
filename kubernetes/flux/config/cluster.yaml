@@ -10,7 +10,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
   wait: true
   timeout: 5m
 ---
@@ -25,7 +25,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
   decryption:
     provider: sops
     secretRef:
@@ -47,7 +47,7 @@ spec:
   prune: false # revert to true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: flux-system
   decryption:
     provider: sops
     secretRef:
