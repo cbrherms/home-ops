@@ -1,3 +1,21 @@
 ---
 serviceMonitor:
   create: true
+web:
+  ingress:
+    enabled: true
+    className: internal
+    annotations:
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/name: Flux Operator
+      gethomepage.dev/group: Observability
+      gethomepage.dev/description: FluxCD Kubernetes Operator
+      gethomepage.dev/icon: flux-operator.svg
+    hosts:
+      - host: &host flux.${SECRET_DOMAIN}
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - *host
