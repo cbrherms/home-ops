@@ -44,7 +44,7 @@ spec:
     - name: cluster-repos
     - name: cluster-settings
   path: ./kubernetes/apps
-  prune: false # revert to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system

@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/default/plex/app
-  prune: false # revert to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -32,7 +32,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/default/plex/kometa
-  prune: false # revert to true
+  prune: true
   components:
     - ../../../../components/volsync
   sourceRef:
@@ -61,7 +61,7 @@ spec:
   dependsOn:
     - name: volsync
   path: ./kubernetes/apps/default/plex/kometa-assets
-  prune: false # revert to true
+  prune: true
   components:
     - ../../../../components/volsync
   sourceRef:
@@ -89,7 +89,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/default/plex/plex-auto-languages
-  prune: false # revert to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -110,7 +110,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/default/plex/plex-filler-tagger
-  prune: false # revert to true
+  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
