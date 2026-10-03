@@ -11,7 +11,7 @@ JUST_UNSTABLE = "1"
 LEFTHOOK_OUTPUT = "true"
 
 [tools]
-python = "3.14.7"
+python = "3.14.8"
 "uv" = "0.12.19"
 "pipx:makejinja" = "2.9.1"
 "pipx:flux-local" = "8.4.0"
