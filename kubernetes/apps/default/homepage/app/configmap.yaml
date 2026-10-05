@@ -120,11 +120,6 @@ data:
         columns: 4
         icon: mdi-chart-line
   widgets.yaml: |-
-    - resources:
-        backend: kubernetes
-        cpu: true
-        expanded: true
-        memory: true
     - kubernetes:
         cluster:
           cpu: true
@@ -141,9 +136,6 @@ data:
         provider: [google, duckduckgo]
         focus: false
         target: _blank
-    - greeting:
-        text_size: xl
-        text: "Welcome!"
     - datetime:
         text_size: l
         format:
