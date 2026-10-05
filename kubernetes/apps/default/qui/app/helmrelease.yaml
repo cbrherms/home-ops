@@ -104,3 +104,9 @@ spec:
     persistence:
       config:
         existingClaim: *app
+      media:
+        type: nfs
+        server: unraid.lan.${SECRET_DOMAIN}
+        path: /mnt/user/data/Media
+        globalMounts:
+          - path: /media
