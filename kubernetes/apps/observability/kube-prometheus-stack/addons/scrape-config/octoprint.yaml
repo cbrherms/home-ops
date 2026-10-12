@@ -17,4 +17,4 @@ spec:
       targetLabel: job
   staticConfigs:
     - targets:
-        - "voronv2pi.local:5000"
+        - "voronv2pi.home.lan:5000"
