@@ -9,6 +9,8 @@ on:
     paths:
       - kubernetes/**
 
+permissions: {}
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
@@ -18,6 +20,7 @@ jobs:
     name: Flux Diff
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pull-requests: write
     strategy:
       matrix:
@@ -28,12 +31,12 @@ jobs:
       fail-fast: false
     steps:
       - name: Configure 1password
-        uses: 1password/load-secrets-action/configure@v3
+        uses: 1password/load-secrets-action/configure@dafbe7cb03502b260e2b2893c753c352eee545bf # v3
         with:
           service-account-token: ${{ secrets.ONEPASS_SA_TOKEN }}
 
       - name: Get Secrets
-        uses: 1password/load-secrets-action@v3
+        uses: 1password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3 # zizmor: ignore[unpinned-tools]
         with:
           export-env: true
         env:
@@ -41,24 +44,28 @@ jobs:
           BOT_APP_PRIVATE_KEY: op://Kubernetes/github-bot/BOT_APP_PRIVATE_KEY
 
       - name: Generate Token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2
         id: app-token
         with:
           app-id: ${{ env.BOT_APP_ID }}
           private-key: ${{ env.BOT_APP_PRIVATE_KEY }}
+          permission-contents: read
+          permission-pull-requests: write
 
       - name: Checkout Pull Request Branch
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: "${{ steps.app-token.outputs.token }}"
           path: pull
+          persist-credentials: false
 
       - name: Checkout Default Branch
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: ${{ steps.app-token.outputs.token }}
           ref: ${{ github.event.repository.default_branch }}
           path: default
+          persist-credentials: false
 
       - name: Diff Resources
         uses: docker://ghcr.io/allenporter/flux-local:v7.11.0@sha256:5e815fabc544d56adaed7b815c6243eca4776ef83b9a11bec370fd888196de03
@@ -99,7 +106,7 @@ jobs:
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add comment
-        uses: mshick/add-pr-comment@v3
+        uses: mshick/add-pr-comment@ec328af66588ab8f77cdeb2c264f14aba45bbf59 # v3
         with:
           repo-token: ${{ steps.app-token.outputs.token }}
           message-id: ${{ github.event.pull_request.number }}/flux-config/${{ matrix.resources }}
@@ -112,6 +119,7 @@ jobs:
   # Summarize matrix https://github.community/t/status-check-for-a-matrix-jobs/127354/7
   flux-diff-success:
     if: ${{ always() }}
+    permissions: {}
     needs:
       - "flux-diff"
     name: Flux Diff Successful

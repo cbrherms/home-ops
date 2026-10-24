@@ -5,7 +5,8 @@ name: "Labeler"
 on:
   workflow_dispatch:
   pull_request_target:
-    branches: ["main"]
+    branches:
+      - "main"
 
 jobs:
   labeler:
@@ -16,6 +17,6 @@ jobs:
       pull-requests: write
     steps:
       - name: Labeler
-        uses: actions/labeler@v7
+        uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7
         with:
           configuration-path: .github/labeler.yaml
