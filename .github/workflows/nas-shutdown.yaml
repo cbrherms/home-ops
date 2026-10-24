@@ -5,17 +5,22 @@ name: "NAS Shutdown - Scale Down"
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [nas-shutdown]
+    types:
+      - nas-shutdown
 
 jobs:
   scale-down:
     name: Scale Down NFS Deployments
-    runs-on: ["gha-runner-scale-set"]
+    runs-on:
+      - "gha-runner-scale-set"
+    permissions:
+      contents: read
     steps:
       - name: Get Secrets
-        uses: 1password/load-secrets-action@v3
+        uses: 1password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3
         with:
           export-env: true
+          version: 2.41.0
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.ONEPASS_SA_TOKEN }}
           BOT_APP_ID: op://Kubernetes/github-bot/BOT_APP_ID
@@ -23,19 +28,21 @@ jobs:
           KUBECONFIG: op://Kubernetes/kubernetes/KUBECONFIG_BASE64
 
       - name: Generate Token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2
         id: app-token
         with:
           app-id: ${{ env.BOT_APP_ID }}
           private-key: ${{ env.BOT_APP_PRIVATE_KEY }}
+          permission-contents: read
 
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
 
       - name: Setup Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@4790763c0a3ba4036f72634dc079c4a7dfcd4878 # 2026.10.19.1
 
       - name: Setup Workflow Tools
         shell: bash
@@ -43,7 +50,7 @@ jobs:
 
       - name: Write kubeconfig
         id: kubeconfig
-        uses: timheuer/base64-to-file@v2
+        uses: timheuer/base64-to-file@dfa5a5dd38803cb4f5c3a081eeb28e8362d43e9c # v2
         with:
           encodedString: ${{ env.KUBECONFIG }}
           fileName: kubeconfig
@@ -78,7 +85,7 @@ jobs:
         env:
           KUBECONFIG: ${{ steps.kubeconfig.outputs.filePath }}
         shell: bash
-        run: |
+        run: |-
           echo "Scaling down NFS-dependent deployments..."
 
           kubectl get deployments \
