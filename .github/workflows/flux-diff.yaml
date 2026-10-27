@@ -31,12 +31,12 @@ jobs:
       fail-fast: false
     steps:
       - name: Configure 1password
-        uses: 1password/load-secrets-action/configure@dafbe7cb03502b260e2b2893c753c352eee545bf # v3
+        uses: 1password/load-secrets-action/configure@70062d7a876d3eb6334754fa26efd2fbd90c32f2 # v5
         with:
           service-account-token: ${{ secrets.ONEPASS_SA_TOKEN }}
 
       - name: Get Secrets
-        uses: 1password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3 # zizmor: ignore[unpinned-tools]
+        uses: 1password/load-secrets-action@70062d7a876d3eb6334754fa26efd2fbd90c32f2 # v5 # zizmor: ignore[unpinned-tools]
         with:
           export-env: true
         env:
