@@ -6,14 +6,9 @@ metadata:
   name: &app authentik
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: authentik
-      version: 2025.8.4
-      sourceRef:
-        kind: HelmRepository
-        name: authentik
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: authentik
   install:
     remediation:
       retries: 3
