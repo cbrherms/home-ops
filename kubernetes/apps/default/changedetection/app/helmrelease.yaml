@@ -42,7 +42,7 @@ spec:
             image:
               pullPolicy: IfNotPresent
               repository: ghcr.io/browserless/chromium
-              tag: v2.57.2@sha256:7bc12b4978044715292cbe9da4bef8ffd09b4f702b35b84f78b2beaccd091ecd
+              tag: v2.59.0@sha256:ab62a8215f87b7252f6198dfc154f1546bc37dbda92d18106a679a6034548b45
             env:
               CONCURRENT: "10"
               DATA_DIR: /profile
