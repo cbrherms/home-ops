@@ -1,0 +1,168 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app romm
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: romm
+  install:
+    timeout: 20m
+    remediation:
+      retries: 3
+  upgrade:
+    # RomM runs forward-only DB migrations, so rolling the image back can leave
+    # it unable to read its own database. Fail forward instead of rolling back.
+    timeout: 20m
+    cleanupOnFail: true
+    remediation:
+      retries: 0
+  dependsOn:
+    - name: volsync
+      namespace: volsync-system
+  values:
+    controllers:
+      romm:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        labels:
+          nfsMount: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.6.0@sha256:87627baaddb0cabed4ebe033e75038e5c7b6b081c18e86514c99067179a90719
+            envFrom: &envFrom
+              - secretRef:
+                  name: romm-secret
+        containers:
+          app:
+            image:
+              repository: ghcr.io/rommapp/romm
+              tag: 5.4.1@sha256:8677fb7b81b1d3db20b849e989a1dadc2a11159e51eb34a2acdcb01102274edf
+            env:
+              TZ: "${TIMEZONE}"
+              ROMM_BASE_PATH: /romm
+              ROMM_BASE_URL: https://romm.${SECRET_DOMAIN}
+              ROMM_SESSION_SECURE_COOKIE: "true"
+              ROMM_PORT: &port 8080
+              ROMM_DB_DRIVER: postgresql
+              REDIS_HOST: romm-dragonfly
+              REDIS_PORT: "6379"
+              ENABLE_SCHEDULED_RESCAN: "true"
+              SCHEDULED_RESCAN_CRON: "0 3 * * *"
+              ENABLE_RESCAN_ON_FILESYSTEM_CHANGE: "true"
+              RESCAN_ON_FILESYSTEM_CHANGE_DELAY: "5"
+              ENABLE_SCHEDULED_CONVERT_IMAGES_TO_WEBP: "true"
+              ENABLE_SCHEDULED_UPDATE_SWITCH_TITLEDB: "false"
+              ENABLE_SCHEDULED_RETROACHIEVEMENTS_PROGRESS_SYNC: "true"
+              ENABLE_SCHEDULED_UPDATE_LAUNCHBOX_METADATA: "true"
+              HASHEOUS_API_ENABLED: "true"
+              PLAYMATCH_API_ENABLED: "true"
+              LAUNCHBOX_API_ENABLED: "true"
+              HLTB_API_ENABLED: "true"
+              DISABLE_USERPASS_LOGIN: "false"
+            envFrom: *envFrom
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/heartbeat
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 10
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
+            resources:
+              requests:
+                cpu: 25m
+                memory: 512Mi
+              limits:
+                memory: 4Gi
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: {type: RuntimeDefault}
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Media
+          gethomepage.dev/name: RomM
+          gethomepage.dev/icon: romm.png
+          gethomepage.dev/description: ROM Library Manager
+        hosts:
+          - host: &host "romm.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      assets:
+        existingClaim: *app
+        globalMounts:
+          - path: /romm/assets
+      resources:
+        existingClaim: romm-resources
+        globalMounts:
+          - path: /romm/resources
+      config-file:
+        type: configMap
+        name: romm-config
+        globalMounts:
+          - path: /romm/config/config.yml
+            subPath: config.yml
+            readOnly: true
+      library:
+        type: nfs
+        server: unraid.lan.${SECRET_DOMAIN}
+        path: /mnt/user/data/Media/Games
+        globalMounts:
+          - path: /romm/library
+      tmpfs:
+        type: emptyDir
+        globalMounts:
+          - path: /romm/config
+            subPath: config
+          - path: /etc/nginx/conf.d
+            subPath: nginx
+          - path: /home/romm
+            subPath: home
+          - path: /redis-data
+            subPath: redis-data
+          - path: /tmp
+            subPath: tmp

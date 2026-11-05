@@ -1,0 +1,25 @@
+---
+exclude:
+  platforms:
+    - "@eaDir"
+  roms:
+    single_file:
+      extensions:
+        - dat
+        - nfo
+        - txt
+        - xml
+      names:
+        - "._*"
+        - "@eaDir"
+    multi_file:
+      names:
+        - "@eaDir"
+filesystem:
+  structure:
+    default: "roms/{platform}/{game}"
+    firmware: "bios/{platform}"
+# Map folder names to RomM platform slugs where they don't auto-detect
+system:
+  platforms: {}
+  versions: {}
