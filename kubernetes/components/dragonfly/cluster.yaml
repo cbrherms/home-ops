@@ -22,4 +22,4 @@ spec:
       cpu: 25m
       memory: 256Mi
     limits:
-      memory: 768Mi
+      memory: ${DRAGONFLY_MEMORY_LIMIT:=768Mi}
