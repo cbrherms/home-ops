@@ -25,4 +25,5 @@ resources:
   - ./sonarr/ks.yaml
   - ./spoolman/ks.yaml
   - ./tautulli/ks.yaml
+  - ./thelounge/ks.yaml
   - ./tqm/ks.yaml
