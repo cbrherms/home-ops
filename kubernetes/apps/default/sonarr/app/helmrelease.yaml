@@ -49,6 +49,7 @@ spec:
               SONARR__LOG__LEVEL: info
               SONARR__SERVER__PORT: &port 80
               SONARR__UPDATE__BRANCH: develop
+              SONARR__SERVER__ALLOWEDHOSTS: sonarr.${SECRET_DOMAIN},sonarr.default.svc.cluster.local,localhost
               TZ: Europe/London
             envFrom: *envFrom
             probes:
@@ -59,6 +60,10 @@ spec:
                   httpGet:
                     path: /ping
                     port: *port
+                    # kubelet probes the pod IP, which Allowed Hosts rejects; loopback is always allowed
+                    httpHeaders:
+                      - name: Host
+                        value: localhost
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
