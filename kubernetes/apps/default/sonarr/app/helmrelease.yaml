@@ -96,6 +96,7 @@ spec:
       app:
         annotations:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media Management
           gethomepage.dev/name: Sonarr
