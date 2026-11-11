@@ -15,6 +15,20 @@ exclude:
     multi_file:
       names:
         - "@eaDir"
+scan:
+  priority:
+    metadata:
+      - "hasheous"
+      - "playmatch"
+      - "igdb"
+      - "launchbox"
+      - "ss"
+      - "ra"
+      - "hltb"
+    artwork:
+      - "ss"
+      - "launchbox"
+      - "igdb"
 filesystem:
   structure:
     default: "roms/{platform}/{game}"
