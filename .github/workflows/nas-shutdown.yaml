@@ -17,7 +17,7 @@ jobs:
       contents: read
     steps:
       - name: Get Secrets
-        uses: 1password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3 # zizmor: ignore[unpinned-tools]
+        uses: 1password/load-secrets-action@70062d7a876d3eb6334754fa26efd2fbd90c32f2 # v5 # zizmor: ignore[unpinned-tools]
         with:
           export-env: true
         env:
