@@ -36,7 +36,7 @@ python = "3.15.2"
 "aqua:getsops/sops" = "3.13.3"
 "aqua:siderolabs/talos" = "1.14.7"         # pinned to match cluster
 "aqua:yannh/kubeconform" = "0.8.0"
-"aqua:zizmorcore/zizmor" = "1.33.0"
+"aqua:zizmorcore/zizmor" = "1.33.1"
 "aqua:BurntSushi/ripgrep" = "15.2.0"
 
 [hooks]
